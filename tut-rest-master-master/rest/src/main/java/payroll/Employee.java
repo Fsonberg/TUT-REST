@@ -12,6 +12,7 @@ class Employee {
 //Hej venner
 	// hej Rasmus
 	// Hej Lohse
+	// blsblslblsbofj
 	private @Id @GeneratedValue Long id;
 	private String name;
 	private String role;
