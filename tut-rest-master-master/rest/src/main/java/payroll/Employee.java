@@ -9,19 +9,9 @@ import javax.persistence.Id;
 @Data
 @Entity
 class Employee {
-//Hej venner
-	// hej Rasmus
-	// Hej Lohse
 
-	//SÅ mangler vi jo kun rune
-
-	// blsblslblsbofj
-
-
-
-	// Kan du se denne her fede kommentar rune??
-	// yaaaaz!
 	private @Id @GeneratedValue Long id;
+
 	private String name;
 	private String role;
 
