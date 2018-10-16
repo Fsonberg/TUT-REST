@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/evolution/evolution.iml" filepath="$PROJECT_DIR$/evolution/evolution.iml" />
+      <module fileurl="file://$PROJECT_DIR$/links/links.iml" filepath="$PROJECT_DIR$/links/links.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nonrest/nonrest.iml" filepath="$PROJECT_DIR$/nonrest/nonrest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rest/rest.iml" filepath="$PROJECT_DIR$/rest/rest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tut-rest.iml" filepath="$PROJECT_DIR$/tut-rest.iml" />
+    </modules>
+  </component>
+</project>

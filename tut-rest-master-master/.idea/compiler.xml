@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="evolution" />
+        <module name="links" />
+        <module name="nonrest" />
+        <module name="rest" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="evolution" target="1.8" />
+      <module name="links" target="1.8" />
+      <module name="nonrest" target="1.8" />
+      <module name="rest" target="1.8" />
+      <module name="tut-rest" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

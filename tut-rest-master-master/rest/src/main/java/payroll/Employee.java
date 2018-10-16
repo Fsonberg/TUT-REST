@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Data
 @Entity
 class Employee {
-
+//Hej venner
 	private @Id @GeneratedValue Long id;
 	private String name;
 	private String role;
