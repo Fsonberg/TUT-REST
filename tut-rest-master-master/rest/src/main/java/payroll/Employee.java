@@ -17,6 +17,10 @@ class Employee {
 
 	// blsblslblsbofj
 
+
+
+	// Kan du se denne her fede kommentar rune??
+
 	private @Id @GeneratedValue Long id;
 	private String name;
 	private String role;
