@@ -10,6 +10,7 @@ import javax.persistence.Id;
 @Entity
 class Employee {
 //Hej venner
+	// hej Rasmus
 	private @Id @GeneratedValue Long id;
 	private String name;
 	private String role;
