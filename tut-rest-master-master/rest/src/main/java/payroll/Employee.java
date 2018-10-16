@@ -20,7 +20,7 @@ class Employee {
 
 
 	// Kan du se denne her fede kommentar rune??
-
+	// yaaaaz!
 	private @Id @GeneratedValue Long id;
 	private String name;
 	private String role;
