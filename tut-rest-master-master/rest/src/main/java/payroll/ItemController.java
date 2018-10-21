@@ -30,7 +30,7 @@ class ItemController {
 
     // tag::get-aggregate-root[]
 
-    // GETMAPPING FOR LOSTITEMS
+    ////////////////////////////////////////////////////// GETMAPPING FOR LOSTITEMS/////////////////////////////////////////////////////////////////////////
     @GetMapping("/lostItems")
     Resources<Resource<LostItem>> allLost() {
 
@@ -44,7 +44,7 @@ class ItemController {
                 linkTo(methodOn(ItemController.class).allLost()).withSelfRel());
     }
 
-    //GETMAPPING FOR FOUNDITEMS
+    //////////////////////////////////////////////////GETMAPPING FOR FOUNDITEMS///////////////////////////////////////////////////////////////////
 
     @GetMapping("/foundItems")
     Resources<Resource<LostItem>> allFound() {
@@ -62,7 +62,7 @@ class ItemController {
 
 
     // end::get-aggregate-root[]
-    // POSTMAPPING LOSTITEMS
+    //////////////////////////////////////////////////// POSTMAPPING LOSTITEMS /////////////////////////////////////////////////////////////////////////////////////////////
     @PostMapping("/lostItems")
     LostItem newItem(@RequestBody LostItem newItem) {
         System.out.println("inside post");
@@ -80,7 +80,7 @@ class ItemController {
 
         return new Resource<>(item,
                 linkTo(methodOn(ItemController.class).one(id)).withSelfRel(),
-                linkTo(methodOn(ItemController.class).allLost()).withRel("employees"));
+                linkTo(methodOn(ItemController.class).allLost()).withRel("lostItems"));
     }
 
     ////////////////////////////////////////////////////////POSTMAPPING FOUNDITEMS/////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,6 +105,21 @@ class ItemController {
                 linkTo(methodOn(ItemController.class).allFound()).withRel("foundItems"));
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     // end::get-single-item[]
 
