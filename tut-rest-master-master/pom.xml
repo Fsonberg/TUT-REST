@@ -50,7 +50,7 @@
 		<!-- ... possibly other repository elements ... -->
 		<repository>
 			<id>spring-snapshot</id>
-			<name>Spring Snapshot Repository</name>
+			<category>Spring Snapshot Repository</category>
 			<url>http://repo.spring.io/snapshot</url>
 		</repository>
 	</repositories>

@@ -28,9 +28,9 @@ class EmployeeController {
 
 	// tag::get-aggregate-root[]
 	@GetMapping("/employees")
-	Resources<Resource<Employee>> all() {
+	Resources<Resource<LostItem>> all() {
 
-		List<Resource<Employee>> employees = repository.findAll().stream()
+		List<Resource<LostItem>> employees = repository.findAll().stream()
 			.map(employee -> new Resource<>(employee,
 				linkTo(methodOn(EmployeeController.class).one(employee.getId())).withSelfRel(),
 				linkTo(methodOn(EmployeeController.class).all()).withRel("employees")))
@@ -42,7 +42,7 @@ class EmployeeController {
 	// end::get-aggregate-root[]
 
 	@PostMapping("/employees")
-	Employee newEmployee(@RequestBody Employee newEmployee) {
+	LostItem newEmployee(@RequestBody LostItem newEmployee) {
 		System.out.println("inside post");
 		return repository.save(newEmployee);
 	}
@@ -51,9 +51,9 @@ class EmployeeController {
 
 	// tag::get-single-item[]
 	@GetMapping("/employees/{id}")
-	Resource<Employee> one(@PathVariable Long id) {
+	Resource<LostItem> one(@PathVariable Long id) {
 		
-		Employee employee = repository.findById(id)
+		LostItem employee = repository.findById(id)
 			.orElseThrow(() -> new EmployeeNotFoundException(id));
 		
 		return new Resource<>(employee,
@@ -63,7 +63,7 @@ class EmployeeController {
 	// end::get-single-item[]
 
 	@PutMapping("/employees/{id}")
-	Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
+	LostItem replaceEmployee(@RequestBody LostItem newEmployee, @PathVariable Long id) {
 		
 		return repository.findById(id)
 			.map(employee -> {
