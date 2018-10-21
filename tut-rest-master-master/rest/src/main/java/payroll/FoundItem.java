@@ -13,11 +13,11 @@ class FoundItem {
     private @Id @GeneratedValue Long id;
 
     private String category;
-    private String role;
+    private String brand;
 
-    FoundItem(String name, String role) {
+    FoundItem(String name, String brand) {
         this.category = name;
-        this.role = role;
+        this.brand = brand;
     }
 
     public Long getId() {
@@ -36,11 +36,11 @@ class FoundItem {
         this.category = category;
     }
 
-    public String getRole() {
-        return role;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 }

@@ -71,7 +71,7 @@ Despite being small, this Java class contains much:
 
 * `@Data` is a Lombok annotation to create all the getters, setters, `equals`, `hash`, and `toString` methods, based on the fields.
 * `@Entity` is a JPA annotation to make this object ready for storage in a JPA-based data store.
-* `id`, `name`, and `role` are the attribute for our domain object, the first being marked with more JPA annotations to indicate it's the primary key and automatically populated by the JPA provider.
+* `id`, `category`, and `brand` are the attribute for our domain object, the first being marked with more JPA annotations to indicate it's the primary key and automatically populated by the JPA provider.
 * a custom constructor is created when we need to create a new instance, but don't yet have an id.
 
 With this domain object definition, we can now turn to https://spring.io/guides/gs/accessing-data-jpa/[Spring Data JPA] to handle the tedious database interactions.
@@ -124,8 +124,8 @@ Right-click and *Run* `PayRollApplication`, and this is what you get:
 
 ----
 ...
-2018-08-09 11:36:26.169  INFO 74611 --- [main] payroll.LoadDatabase : Preloading Employee(id=1, name=Bilbo Baggins, role=burglar)
-2018-08-09 11:36:26.174  INFO 74611 --- [main] payroll.LoadDatabase : Preloading Employee(id=2, name=Frodo Baggins, role=thief)
+2018-08-09 11:36:26.169  INFO 74611 --- [main] payroll.LoadDatabase : Preloading Employee(id=1, category=Bilbo Baggins, brand=burglar)
+2018-08-09 11:36:26.174  INFO 74611 --- [main] payroll.LoadDatabase : Preloading Employee(id=2, category=Frodo Baggins, brand=thief)
 ...
 ----
 
@@ -188,7 +188,7 @@ This will yield:
 < Date: Thu, 09 Aug 2018 17:58:00 GMT
 <
 * Connection #0 to host localhost left intact
-[{"id":1,"name":"Bilbo Baggins","role":"burglar"},{"id":2,"name":"Frodo Baggins","role":"thief"}]
+[{"id":1,"category":"Bilbo Baggins","brand":"burglar"},{"id":2,"category":"Frodo Baggins","brand":"thief"}]
 ----
 
 Here you can see the pre-loaded data, in a compacted format.
@@ -224,28 +224,28 @@ This message nicely shows an *HTTP 404* error with the custom message *Could not
 It's not hard to show the currently coded interactions...
 
 ----
-$ curl -X POST localhost:8080/employees -H 'Content-type:application/json' -d '{"name": "Samwise Gamgee", "role": "gardener"}'
+$ curl -X POST localhost:8080/employees -H 'Content-type:application/json' -d '{"category": "Samwise Gamgee", "brand": "gardener"}'
 ----
 
 Creates a new `Employee` record, and then sends the content back to us:
 
 ----
-{"id":3,"name":"Samwise Gamgee","role":"gardener"}
+{"id":3,"category":"Samwise Gamgee","brand":"gardener"}
 ----
 
 You can alter the user:
 
 ----
-$ curl -X PUT localhost:8080/employees/3 -H 'Content-type:application/json' -d '{"name": "Samwise Gamgee", "role": "ring bearer"}'
+$ curl -X PUT localhost:8080/employees/3 -H 'Content-type:application/json' -d '{"category": "Samwise Gamgee", "brand": "ring bearer"}'
 ----
 
 Updates the user:
 
 ----
-{"id":3,"name":"Samwise Gamgee","role":"ring bearer"}
+{"id":3,"category":"Samwise Gamgee","brand":"ring bearer"}
 ----
 
-WARNING: Depending on how you construct your service can have significant impacts. In this situation, *replace* is a better description than *update*. For example, if the name was NOT provided, it would instead get nulled out.
+WARNING: Depending on how you construct your service can have significant impacts. In this situation, *replace* is a better description than *update*. For example, if the category was NOT provided, it would instead get nulled out.
 
 And you can delete...
 
@@ -315,8 +315,8 @@ If you restart the application and query the employee record of *Bilbo*, you'll 
 ----
 {
   "id": 1,
-  "name": "Bilbo Baggins",
-  "role": "burglar",
+  "category": "Bilbo Baggins",
+  "brand": "burglar",
   "_links": {
     "self": {
       "href": "http://localhost:8080/employees/1"
@@ -328,7 +328,7 @@ If you restart the application and query the employee record of *Bilbo*, you'll 
 }
 ----
 
-This decompressed output shows not only the data elements you saw earlier (`id`, `name` and `role`), but also a `_links` entry containing two URIs. This entire document is formatted using http://stateless.co/hal_specification.html[HAL].
+This decompressed output shows not only the data elements you saw earlier (`id`, `category` and `brand`), but also a `_links` entry containing two URIs. This entire document is formatted using http://stateless.co/hal_specification.html[HAL].
 
 HAL is a lightweight https://tools.ietf.org/html/draft-kelly-json-hal-08[mediatype] that allows encoding not just data but also hypermedia controls, alerting consumers to other parts of the API they can navigate toward. In this case,
 there is a "self" link (kind of like a `this` statement in code) along with a link back to the *aggregate root*.
@@ -361,8 +361,8 @@ If you restart the application and fetch the aggregate root, you can see what th
     "employeeList": [
       {
         "id": 1,
-        "name": "Bilbo Baggins",
-        "role": "burglar",
+        "category": "Bilbo Baggins",
+        "brand": "burglar",
         "_links": {
           "self": {
             "href": "http://localhost:8080/employees/1"
@@ -374,8 +374,8 @@ If you restart the application and fetch the aggregate root, you can see what th
       },
       {
         "id": 2,
-        "name": "Frodo Baggins",
-        "role": "thief",
+        "category": "Frodo Baggins",
+        "brand": "thief",
         "_links": {
           "self": {
             "href": "http://localhost:8080/employees/2"
@@ -486,11 +486,11 @@ SOAP-based services and CORBA-based services were incredibly brittle. It was har
 clients. With REST-based practices, it's much easier. Especially using the Spring stack.
 
 Imagine this design problem: You've rolled out a system with this `Employee` -based record. The system is a major hit. You've sold
-your system to countless enterprises. Suddenly, the need for an employee's name to be split into `firstName` and `lastName` arises.
+your system to countless enterprises. Suddenly, the need for an employee's category to be split into `firstName` and `lastName` arises.
 
 Uh oh. Didn't think of that.
 
-Before you open up the `Employee` class and replace the single field `name` with `firstName` and `lastName`, stop and think for a second.
+Before you open up the `Employee` class and replace the single field `category` with `firstName` and `lastName`, stop and think for a second.
 Will that break any clients? How long will it take to upgrade them. Do you even control all the clients accessing your services?
 
 Downtime = lost money. Is management ready for that?
@@ -509,8 +509,8 @@ Add new fields to your JSON representations, but don't take any away. Like this:
   "id": 1,
   "firstName": "Bilbo",
   "lastName": "Baggins",
-  "role": "burglar",
-  "name": "Bilbo Baggins",
+  "brand": "burglar",
+  "category": "Bilbo Baggins",
   "_links": {
     "self": {
       "href": "http://localhost:8080/employees/1"
@@ -522,7 +522,7 @@ Add new fields to your JSON representations, but don't take any away. Like this:
 }
 ----
 
-Notice how this format shows `firstName`, `lastName`, AND `name`? While it sports duplication of information, the purpose is to support
+Notice how this format shows `firstName`, `lastName`, AND `category`? While it sports duplication of information, the purpose is to support
 both old and new clients. That means you can upgrade the server without requiring clients upgrade at the same time. A good move
 that should reduce downtime.
 
@@ -538,9 +538,9 @@ include::evolution/src/main/java/payroll/Employee.java[]
 
 This class is very similar to the previous version of `Employee`. Let's go over the changes:
 
-* Field `name` has been replaced by `firstName` and `lastName`. Lombok will generate getters and setters for those.
-* A "virtual" getter for the old `name` property, `getName()` is defined. It uses the `firstName` and `lastName` fields to produce a value.
-* A "virtual" setter for the old `name` property is also defined, `setName()`. It parses an incoming string and stores it into the proper fields.
+* Field `category` has been replaced by `firstName` and `lastName`. Lombok will generate getters and setters for those.
+* A "virtual" getter for the old `category` property, `getName()` is defined. It uses the `firstName` and `lastName` fields to produce a value.
+* A "virtual" setter for the old `category` property is also defined, `setName()`. It parses an incoming string and stores it into the proper fields.
 
 Of course not EVERY change to your API is as simple as splitting a string or merging two strings. But it's surely not impossible
 to come up with a set of transforms for most scenarios, ehh?
@@ -556,10 +556,10 @@ include::evolution/src/main/java/payroll/EmployeeController.java[tag=post]
 * Spring MVC's `ResponseEntity` is used to create an *HTTP 201 Created* status message. This type of response typically includes a *Location* response header, and we use the newly formed link.
 * Additionally, return the resource-based version of the saved object.
 
-With this tweak in place, you can use the same endpoint to create a new employee resource, and use the legacy `name` field:
+With this tweak in place, you can use the same endpoint to create a new employee resource, and use the legacy `category` field:
 
 ----
-$ curl -v -X POST localhost:8080/employees -H 'Content-Type:application/json' -d '{"name": "Samwise Gamgee", "role": "gardener"}'
+$ curl -v -X POST localhost:8080/employees -H 'Content-Type:application/json' -d '{"category": "Samwise Gamgee", "brand": "gardener"}'
 ----
 
 The output is shown below:
@@ -581,8 +581,8 @@ The output is shown below:
   "id": 3,
   "firstName": "Samwise",
   "lastName": "Gamgee",
-  "role": "gardener",
-  "name": "Samwise Gamgee",
+  "brand": "gardener",
+  "category": "Samwise Gamgee",
   "_links": {
     "self": {
       "href": "http://localhost:8080/employees/3"
@@ -594,7 +594,7 @@ The output is shown below:
 }
 ----
 
-This not only has the resulting object rendered in HAL (both `name` as well as `firstName`/`lastName`), but also the *Location* header populated with `http://localhost:8080/employees/3`.
+This not only has the resulting object rendered in HAL (both `category` as well as `firstName`/`lastName`), but also the *Location* header populated with `http://localhost:8080/employees/3`.
 A hypermedia powered client could opt to "surf" to this new resource and proceed to interact with it.
 
 The PUT controller method needs similar tweaks:
@@ -617,7 +617,7 @@ data type (which no client should), but instead, the URI for it. And don't confu
 It's debatable if *HTTP 201 Created* carries the right semantics since we aren't necessarily "creating" a new resource. But it comes pre-loaded with a *Location* response header, so run with it.
 
 ----
-$ curl -v -X PUT localhost:8080/employees/3 -H 'Content-Type:application/json' -d '{"name": "Samwise Gamgee", "role": "ring bearer"}'
+$ curl -v -X PUT localhost:8080/employees/3 -H 'Content-Type:application/json' -d '{"category": "Samwise Gamgee", "brand": "ring bearer"}'
 
 * TCP_NODELAY set
 * Connected to localhost (::1) port 8080 (#0)
@@ -637,8 +637,8 @@ $ curl -v -X PUT localhost:8080/employees/3 -H 'Content-Type:application/json' -
 	"id": 3,
 	"firstName": "Samwise",
 	"lastName": "Gamgee",
-	"role": "ring bearer",
-	"name": "Samwise Gamgee",
+	"brand": "ring bearer",
+	"category": "Samwise Gamgee",
 	"_links": {
 		"self": {
 			"href": "http://localhost:8080/employees/3"
@@ -700,7 +700,7 @@ As a first step, define an `Order` record:
 include::links/src/main/java/payroll/Order.java[]
 ----
 
-* The class requires a JPA `@Table` annotation changing the table's name to `CUSTOMER_ORDER` because `ORDER` is not a valid name for table.
+* The class requires a JPA `@Table` annotation changing the table's category to `CUSTOMER_ORDER` because `ORDER` is not a valid category for table.
 * It includes a `description` field as well as a `status` field.
 
 Orders must go through a certain series of state transitions from the time a customer submits an order and it is either
@@ -743,7 +743,7 @@ But that would be wrong.
 
 What happens when you introduce a new state in this flow? The placement of various buttons on the UI would probably be erroneous.
 
-What if you changed the name of each state, perhaps while coding international support and showing locale-specific text for each state?
+What if you changed the category of each state, perhaps while coding international support and showing locale-specific text for each state?
 That would most likely break all the clients.
 
 Enter *HATEOAS* or *Hypermedia as the Engine of Application State*. Instead of clients parsing the payload, give them links
