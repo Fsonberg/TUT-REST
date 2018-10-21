@@ -11,10 +11,13 @@ import org.springframework.context.annotation.Configuration;
 class LoadDatabase {
 
 	@Bean
-	CommandLineRunner initDatabase(EmployeeRepository repository) {
+	CommandLineRunner initDatabase(LostItemRepository repository) {
 		return args -> {
 			System.out.println("Preloading " + repository.save(new LostItem("Electronics", "Apple")));
 			System.out.println("Preloading " + repository.save(new LostItem("Clothes", "Gucci")));
+
+
+			System.out.println("preloading " + repository.save(new FoundItem("Electronic", "Apple")));
 		};
 	}
 }

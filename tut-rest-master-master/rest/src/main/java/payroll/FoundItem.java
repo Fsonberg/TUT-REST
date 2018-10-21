@@ -15,8 +15,8 @@ class FoundItem {
     private String category;
     private String brand;
 
-    FoundItem(String name, String brand) {
-        this.category = name;
+    FoundItem(String category, String brand) {
+        this.category = category;
         this.brand = brand;
     }
 
