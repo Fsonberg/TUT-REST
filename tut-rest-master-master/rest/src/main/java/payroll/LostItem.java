@@ -12,12 +12,12 @@ class LostItem {
 
 	private @Id @GeneratedValue Long id;
 
-	private String name;
-	private String role;
+	private String category;
+	private String brand;
 
-	LostItem(String name, String role) {
-		this.name = name;
-		this.role = role;
+	LostItem(String category, String brand) {
+		this.category = category;
+		this.brand = brand;
 	}
 
 	public Long getId() {
@@ -28,19 +28,19 @@ class LostItem {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
-	public String getRole() {
-		return role;
+	public String getBrand() {
+		return brand;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 }
