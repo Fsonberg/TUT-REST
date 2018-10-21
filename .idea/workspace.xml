@@ -41,6 +41,15 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-146374599">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -92,45 +101,39 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="TUT-REST" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
             <path>
               <item name="TUT-REST" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="TUT-REST" type="2674bda8:ScopeViewTreeModel$GroupNode" />
             </path>
             <path>
               <item name="TUT-REST" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="TUT-REST" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name=".idea" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="TUT-REST" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="TUT-REST" type="2674bda8:ScopeViewTreeModel$GroupNode" />
               <item name="tut-rest-master-master" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="TUT-REST" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="TUT-REST" type="2674bda8:ScopeViewTreeModel$GroupNode" />
               <item name="tut-rest-master-master" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="rest" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="TUT-REST" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="TUT-REST" type="2674bda8:ScopeViewTreeModel$GroupNode" />
               <item name="tut-rest-master-master" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="rest" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="TUT-REST" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="TUT-REST" type="2674bda8:ScopeViewTreeModel$GroupNode" />
               <item name="tut-rest-master-master" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="rest" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
@@ -138,7 +141,7 @@
             </path>
             <path>
               <item name="TUT-REST" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="TUT-REST" type="2674bda8:ScopeViewTreeModel$GroupNode" />
               <item name="tut-rest-master-master" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="rest" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
@@ -147,7 +150,7 @@
             </path>
             <path>
               <item name="TUT-REST" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="TUT-REST" type="2674bda8:ScopeViewTreeModel$GroupNode" />
               <item name="tut-rest-master-master" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="rest" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
@@ -160,13 +163,23 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="TUT-REST" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tut-rest-master-master/pom.xml" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -192,17 +205,17 @@
       <updated>1539677577433</updated>
       <workItem from="1539677579061" duration="658000" />
       <workItem from="1539678272743" duration="18000" />
+      <workItem from="1540145395947" duration="45000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="676000" />
+    <option name="totallyTimeSpent" value="721000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25302014" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25637585" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
