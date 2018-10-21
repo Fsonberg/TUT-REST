@@ -16,69 +16,69 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-class EmployeeController {
+class ItemController {
 
 	private final EmployeeRepository repository;
 
-	EmployeeController(EmployeeRepository repository) {
+	ItemController(EmployeeRepository repository) {
 		this.repository = repository;
 	}
 
 	// Aggregate root
 
 	// tag::get-aggregate-root[]
-	@GetMapping("/employees")
+	@GetMapping("/lostItems")
 	Resources<Resource<LostItem>> all() {
 
-		List<Resource<LostItem>> employees = repository.findAll().stream()
-			.map(employee -> new Resource<>(employee,
-				linkTo(methodOn(EmployeeController.class).one(employee.getId())).withSelfRel(),
-				linkTo(methodOn(EmployeeController.class).all()).withRel("employees")))
+		List<Resource<LostItem>> lostItems = repository.findAll().stream()
+			.map(item -> new Resource<>(item,
+				linkTo(methodOn(ItemController.class).one(item.getId())).withSelfRel(),
+				linkTo(methodOn(ItemController.class).all()).withRel("lostItems")))
 			.collect(Collectors.toList());
 		
-		return new Resources<>(employees,
-			linkTo(methodOn(EmployeeController.class).all()).withSelfRel());
+		return new Resources<>(lostItems,
+			linkTo(methodOn(ItemController.class).all()).withSelfRel());
 	}
 	// end::get-aggregate-root[]
 
-	@PostMapping("/employees")
-	LostItem newEmployee(@RequestBody LostItem newEmployee) {
+	@PostMapping("/lostItems")
+	LostItem newItem(@RequestBody LostItem newItem) {
 		System.out.println("inside post");
-		return repository.save(newEmployee);
+		return repository.save(newItem);
 	}
 
 	// Single item
 
 	// tag::get-single-item[]
-	@GetMapping("/employees/{id}")
+	@GetMapping("/lostItems/{id}")
 	Resource<LostItem> one(@PathVariable Long id) {
 		
-		LostItem employee = repository.findById(id)
-			.orElseThrow(() -> new EmployeeNotFoundException(id));
+		LostItem item = repository.findById(id)
+			.orElseThrow(() -> new EmployeeNotFoundException(id)); //Exception skal ændres..!
 		
-		return new Resource<>(employee,
-			linkTo(methodOn(EmployeeController.class).one(id)).withSelfRel(),
-			linkTo(methodOn(EmployeeController.class).all()).withRel("employees"));
+		return new Resource<>(item,
+			linkTo(methodOn(ItemController.class).one(id)).withSelfRel(),
+			linkTo(methodOn(ItemController.class).all()).withRel("employees"));
 	}
 	// end::get-single-item[]
 
-	@PutMapping("/employees/{id}")
-	LostItem replaceEmployee(@RequestBody LostItem newEmployee, @PathVariable Long id) {
+	@PutMapping("/lostItems/{id}")
+	LostItem replaceItem(@RequestBody LostItem newItem, @PathVariable Long id) {
 		
 		return repository.findById(id)
 			.map(employee -> {
-				employee.setCategory(newEmployee.getCategory());
-				employee.setBrand(newEmployee.getBrand());
+				employee.setCategory(newItem.getCategory());
+				employee.setBrand(newItem.getBrand());
 				return repository.save(employee);
 			})
 			.orElseGet(() -> {
-				newEmployee.setId(id);
-				return repository.save(newEmployee);
+				newItem.setId(id);
+				return repository.save(newItem);
 			});
 	}
 
-	@DeleteMapping("/employees/{id}")
-	void deleteEmployee(@PathVariable Long id) {
+	@DeleteMapping("/lostItems/{id}")
+	void deleteItem(@PathVariable Long id) {
 		repository.deleteById(id);
 	} // set til invalid i stedet
 }

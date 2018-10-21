@@ -13,8 +13,8 @@ class LoadDatabase {
 	@Bean
 	CommandLineRunner initDatabase(EmployeeRepository repository) {
 		return args -> {
-			System.out.println("Preloading " + repository.save(new LostItem("Bilbo Baggins", "burglar")));
-			System.out.println("Preloading " + repository.save(new LostItem("Frodo Baggins", "thief")));
+			System.out.println("Preloading " + repository.save(new LostItem("Electronics", "Apple")));
+			System.out.println("Preloading " + repository.save(new LostItem("Clothes", "Gucci")));
 		};
 	}
 }
