@@ -105,15 +105,28 @@ class ItemController {
                 linkTo(methodOn(ItemController.class).allFound()).withRel("foundItems"));
     }
 
-    @RequestMapping(value="foundItems/search", method = RequestMethod.GET)
-    FoundItem getItem(@RequestParam("brand") String strBrand){
+    @GetMapping("/foundItems/brand/")
+    Resource<FoundItem> getItem (@PathVariable String strBrand){
 
-        FoundItem item = foundRepo.findByBrand(strBrand).get(0);
-               // .orElseThrow(() -> new EmployeeNotFoundException(new Long(0))); //Exception skal ændres..!
+        FoundItem foundItem = foundRepo.findByBrand(strBrand)
+                .orElseThrow(()-> new EmployeeNotFoundException(new Long(0)));
 
-            return item;
 
+
+        return new Resource<>(foundItem);
     }
+
+   /* @RequestMapping(value="foundItems/search/brand/", method = RequestMethod.GET)
+    Resource<FoundItem> getItem(@RequestParam("brand") String strBrand){
+
+
+        FoundItem item = foundRepo.findByBrand(strBrand).get();
+                //.orElseThrow(() -> new EmployeeNotFoundException(new Long(0))); //Exception skal ændres..!
+
+            return new Resource<>(item,linkTo(methodOn(ItemController.class).getItem(strBrand)).withSelfRel(),
+                linkTo(methodOn(ItemController.class).allFound()).withRel("brand"));
+
+    } */
 
 
 
