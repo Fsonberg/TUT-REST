@@ -107,6 +107,7 @@ class ItemController {
 
     @RequestMapping(value="foundItems/search", method = RequestMethod.GET)
     FoundItem getItem(@RequestParam("brand") String strBrand){
+
         FoundItem item = foundRepo.findByBrand(strBrand).get(0);
                // .orElseThrow(() -> new EmployeeNotFoundException(new Long(0))); //Exception skal ændres..!
 
