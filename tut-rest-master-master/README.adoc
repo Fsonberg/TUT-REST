@@ -77,7 +77,7 @@ Despite being small, this Java class contains much:
 With this domain object definition, we can now turn to https://spring.io/guides/gs/accessing-data-jpa/[Spring Data JPA] to handle the tedious database interactions.
 Spring Data repositories are interfaces with methods supporting reading, updating, deleting, and creating records against a back end data store. Some repositories also support data paging, and sorting, where appropriate. Spring Data synthesizes implementations based on conventions found in the naming of the methods in the interface.
 
-NOTE: There are multiple repository implementations besides JPA. You can use Spring Data MongoDB, Spring Data GemFire, Spring Data Cassandra, etc. For this tutorial, we'll stick with JPA.
+NOTE: There are multiple lostRepo implementations besides JPA. You can use Spring Data MongoDB, Spring Data GemFire, Spring Data Cassandra, etc. For this tutorial, we'll stick with JPA.
 
 `nonrest/src/main/java/payroll/EmployeeRepository.java`
 [source,java]
@@ -92,7 +92,7 @@ This interface extends Spring Data JPA's `JpaRepository`, specifying the domain 
 * Deleting
 * Finding (one, all, by simple or complex properties)
 
-Spring Data's https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories[repository solution] makes it possible to sidestep data store specifics and instead solve a majority of problems using domain-specific terminology.
+Spring Data's https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories[lostRepo solution] makes it possible to sidestep data store specifics and instead solve a majority of problems using domain-specific terminology.
 
 Believe it or not, this is enough to launch an application! A Spring Boot application is, at a minimum, a `public static void main` entry-point and the `@SpringBootApplication` annotation. This tells Spring Boot to help out, wherever possible.
 
@@ -133,7 +133,7 @@ This isn't the *whole* log, but just the key bits of preloading data. (Indeed, c
 
 == HTTP is the Platform
 
-To wrap your repository with a web layer, you must turn to Spring MVC. Thanks to Spring Boot, there is little in infrastructure to code. Instead, we can focus on actions:
+To wrap your lostRepo with a web layer, you must turn to Spring MVC. Thanks to Spring Boot, there is little in infrastructure to code. Instead, we can focus on actions:
 
 `nonrest/src/main/java/payroll/EmployeeController.java`
 [source,java]
@@ -340,7 +340,7 @@ To make the aggregate root ALSO more RESTful, you want to include top level link
 include::rest/src/main/java/payroll/EmployeeController.java[tag=get-aggregate-root]
 ----
 
-Wow! That method, which used to just be `repository.findAll()` has grown big! Let's unpack it.
+Wow! That method, which used to just be `lostRepo.findAll()` has grown big! Let's unpack it.
 
 `Resources<>` is another Spring HATEOAS container aimed at encapsulating collections. It, too, also lets you include links.
 Don't let that first statement slip by. When does "encapsulating collections" mean? Collections of employees?
@@ -713,7 +713,7 @@ include::links/src/main/java/payroll/Status.java[]
 
 This `enum` captures the various states an `Order` can occupy. For this tutorial, let's keep it simple.
 
-To support interacting with orders in the database, you must define a corresponding Spring Data repository:
+To support interacting with orders in the database, you must define a corresponding Spring Data lostRepo:
 
 [source,java]
 ----

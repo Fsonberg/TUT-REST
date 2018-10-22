@@ -47,12 +47,12 @@
 	</dependencies>
 
 	<repositories>
-		<!-- ... possibly other repository elements ... -->
-		<repository>
+		<!-- ... possibly other lostRepo elements ... -->
+		<lostRepo>
 			<id>spring-snapshot</id>
 			<category>Spring Snapshot Repository</category>
 			<url>http://repo.spring.io/snapshot</url>
-		</repository>
+		</lostRepo>
 	</repositories>
 
 </project>
