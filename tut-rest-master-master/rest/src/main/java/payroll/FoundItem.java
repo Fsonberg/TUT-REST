@@ -14,10 +14,12 @@ class FoundItem {
 
     private String category;
     private String brand;
+    private String color;
 
-    FoundItem(String category, String brand) {
+    FoundItem(String category, String brand, String color) {
         this.category = category;
         this.brand = brand;
+        this.color = color;
     }
 
     public Long getId() {
@@ -42,5 +44,13 @@ class FoundItem {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
     }
 }

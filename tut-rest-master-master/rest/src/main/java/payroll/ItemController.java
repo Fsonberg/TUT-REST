@@ -69,16 +69,18 @@ class ItemController {
 
    @GetMapping("/lostItems/search")
     List<LostItem> lostTwo(@RequestParam(value = "brand", defaultValue = "%%") String strLostBrand,
-                           @RequestParam(value = "category", defaultValue = "%%") String strLostCategory){
+                           @RequestParam(value = "category", defaultValue = "%%") String strLostCategory,
+                           @RequestParam(value = "color", defaultValue = "%%") String strLostColor){
 // Like + %% kommer fra https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
-        return lostRepo.findAllByBrandLikeAndCategoryLikeAllIgnoreCase(strLostBrand, strLostCategory);
+        return lostRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase(strLostBrand, strLostCategory, strLostColor);
     }
 
     @GetMapping("/foundItems/search")
     List<FoundItem> foundTwo(@RequestParam(value = "brand", defaultValue = "%%") String strFoundBrand,
-                           @RequestParam(value = "category", defaultValue = "%%") String strFoundCategory){
+                             @RequestParam(value = "category", defaultValue = "%%") String strFoundCategory,
+                             @RequestParam(value = "color", defaultValue = "%%") String strFoundColor){
 // Like + %% kommer fra https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
-        return foundRepo.findAllByBrandLikeAndCategoryLikeAllIgnoreCase(strFoundBrand, strFoundCategory);
+        return foundRepo.findAllByBrandLikeAndCategoryLikeAndColorAllIgnoreCase(strFoundBrand, strFoundCategory,strFoundColor);
 
 
     }

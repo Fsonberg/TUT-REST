@@ -14,10 +14,13 @@ class LostItem {
 
 	private String category;
 	private String brand;
+	private String color;
 
-	LostItem(String category, String brand) {
+	LostItem(String category, String brand, String color) {
 		this.category = category;
 		this.brand = brand;
+		this.color = color;
+
 	}
 
 	public Long getId() {
@@ -42,5 +45,12 @@ class LostItem {
 
 	public void setBrand(String brand) {
 		this.brand = brand;
+	}
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 }
