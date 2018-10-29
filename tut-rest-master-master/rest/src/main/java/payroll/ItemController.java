@@ -70,8 +70,8 @@ class ItemController {
    @GetMapping("/lostItems/search")
     List<LostItem> lostTwo(@RequestParam(value = "brand", defaultValue = "%%") String strLostBrand,
                            @RequestParam(value = "category", defaultValue = "%%") String strLostCategory){
-
-        return lostRepo.findAllByBrandAndCategoryLike(strLostBrand, strLostCategory);
+// Like + %% kommer fra https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
+        return lostRepo.findAllByBrandLikeAndCategoryLikeAllIgnoreCase(strLostBrand, strLostCategory);
     }
 
     @GetMapping("/foundItems/search")
