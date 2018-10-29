@@ -19,9 +19,9 @@ class LoadDatabase {
 			System.out.println("Preloading " + lostRepo.save(new LostItem("Clothes", "Gucci")));
 
 
-			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronic", "Apple")));
-			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronic", "Apple")));
-			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronic","Samsung")));
+			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple")));
+			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple")));
+			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics","Samsung")));
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Clothes","Gucci")));
 
 		};
