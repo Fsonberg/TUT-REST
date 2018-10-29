@@ -14,11 +14,14 @@ class LoadDatabase {
 	CommandLineRunner initDatabase(LostItemRepository lostRepo, FoundItemRepository foundRepo) {
 		return args -> {
 			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple")));
+            System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Android")));
 			System.out.println("Preloading " + lostRepo.save(new LostItem("Clothes", "Gucci")));
 
 
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronic", "Apple")));
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronic", "Apple")));
+			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronic","Samsung")));
+			System.out.println("preloading " + foundRepo.save(new FoundItem("Clothes","Gucci")));
 
 		};
 	}

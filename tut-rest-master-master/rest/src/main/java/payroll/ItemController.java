@@ -1,13 +1,15 @@
 package payroll;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.Resources;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.*;
+
+
+//FIX MATCH MELLEM TABELLER + BRAND QUERIES
+
+@EnableJpaRepositories
+class Config{}
 
 @RestController
 class ItemController {
@@ -26,132 +28,69 @@ class ItemController {
 
     // Aggregate root
 
-    // tag::get-aggregate-root[]
-
-    ////////////////////////////////////////////////////// GETMAPPING FOR LOSTITEMS/////////////////////////////////////////////////////////////////////////
     @GetMapping("/lostItems")
-    Resources<Resource<LostItem>> allLost() {
-
-        List<Resource<LostItem>> lostItems = lostRepo.findAll().stream()
-                .map(item -> new Resource<>(item,
-                        linkTo(methodOn(ItemController.class).one(item.getId())).withSelfRel(),
-                        linkTo(methodOn(ItemController.class).allLost()).withRel("lostItems")))
-                .collect(Collectors.toList());
-
-
-
-        return new Resources<>(lostItems,
-                linkTo(methodOn(ItemController.class).allLost()).withSelfRel());
+    List<LostItem> allLost() {
+        return lostRepo.findAll();
     }
 
-    //////////////////////////////////////////////////GETMAPPING FOR FOUNDITEMS///////////////////////////////////////////////////////////////////
-
-    @GetMapping("/foundItems")
-    Resources<Resource<FoundItem>> allFound() {
-
-        List<Resource<FoundItem>> foundItems = foundRepo.findAll().stream()
-                .map(item -> new Resource<>(item,
-                        linkTo(methodOn(ItemController.class).two(item.getId())).withSelfRel(),
-                        linkTo(methodOn(ItemController.class).allFound()).withRel("foundItems")))
-                .collect(Collectors.toList());
-
-        return new Resources<>(foundItems,
-                linkTo(methodOn(ItemController.class).allFound()).withSelfRel());
-
-    }
-
-
-    // end::get-aggregate-root[]
-    //////////////////////////////////////////////////// POSTMAPPING LOSTITEMS /////////////////////////////////////////////////////////////////////////////////////////////
     @PostMapping("/lostItems")
     LostItem newItem(@RequestBody LostItem newItem) {
-        System.out.println("inside post");
         return lostRepo.save(newItem);
     }
 
-    // Single item
-
-    // tag::get-single-item[]
-    @GetMapping("/lostItems/{id}")
-    Resource<LostItem> one(@PathVariable Long id) {
-
-        LostItem item = lostRepo.findById(id)
-                .orElseThrow(() -> new EmployeeNotFoundException(id)); //Exception skal ændres..!
-
-        return new Resource<>(item,
-                linkTo(methodOn(ItemController.class).one(id)).withSelfRel(),
-                linkTo(methodOn(ItemController.class).allLost()).withRel("lostItems"));
-    }
-
-    ////////////////////////////////////////////////////////POSTMAPPING FOUNDITEMS/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @GetMapping("/foundItems")
+    List<FoundItem> allFound(){return foundRepo.findAll();}
 
     @PostMapping("/foundItems")
-    FoundItem newFoundItem(@RequestBody FoundItem newFoundItem) {
-        System.out.println("inside post");
-        return foundRepo.save(newFoundItem);
-    }
+    FoundItem newFoundItem(@RequestBody FoundItem newFoundItem){return foundRepo.save(newFoundItem);}
 
     // Single item
 
-    // tag::get-single-item[]
+    @GetMapping("/lostItems/{id}")
+    LostItem one(@PathVariable Long id) {
+
+        return lostRepo.findById(id)
+                .orElseThrow(() -> new LostItemIdNotFoundException(id));
+    }
+
     @GetMapping("/foundItems/{id}")
-    Resource<FoundItem> two(@PathVariable Long id) {
+    FoundItem foundOne(@PathVariable Long id){
 
-        FoundItem item = foundRepo.findById(id)
-                .orElseThrow(() -> new EmployeeNotFoundException(id)); //Exception skal ændres..!
-
-        return new Resource<>(item,
-                linkTo(methodOn(ItemController.class).two(id)).withSelfRel(),
-                linkTo(methodOn(ItemController.class).allFound()).withRel("foundItems"));
+        return foundRepo.findById(id).orElseThrow(() -> new LostItemIdNotFoundException(id));
     }
 
-    @GetMapping("/foundItems/brand/")
-    Resource<FoundItem> getItem (@PathVariable String strBrand){
+   /* @GetMapping
+        public Page<LostItem> findLostItemByBrand(@RequestParam("brand")String strLostBrand, Pageable pageable){
 
-        FoundItem foundItem = foundRepo.findByBrand(strBrand)
-                .orElseThrow(()-> new EmployeeNotFoundException(new Long(0)));
+        if(strLostBrand == null){
+            return lostRepo.findAll(pageable);
+        }else{return (Page<LostItem>) lostRepo.findByBrand(strLostBrand, pageable);}
+    }*/
 
+   @GetMapping("/lostItems/search")
+    List<LostItem> lostTwo(@RequestParam(value = "brand", defaultValue = "") String strLostBrand, @RequestParam(value = "category", defaultValue = "") String strLostCategory){
 
-
-        return new Resource<>(foundItem);
+        return lostRepo.findAllByBrandAndCategory(strLostBrand, strLostCategory);
     }
 
-   /* @RequestMapping(value="foundItems/search/brand/", method = RequestMethod.GET)
-    Resource<FoundItem> getItem(@RequestParam("brand") String strBrand){
+    @GetMapping("/foundItems/search")
+    List<FoundItem> foundTwo(@RequestParam("brand") String strFoundBrand){
 
-
-        FoundItem item = foundRepo.findByBrand(strBrand).get();
-                //.orElseThrow(() -> new EmployeeNotFoundException(new Long(0))); //Exception skal ændres..!
-
-            return new Resource<>(item,linkTo(methodOn(ItemController.class).getItem(strBrand)).withSelfRel(),
-                linkTo(methodOn(ItemController.class).allFound()).withRel("brand"));
-
-    } */
+        return foundRepo.findByBrand(strFoundBrand);
 
 
 
+                //.orElseThrow(()->new LostItemBrandNotFoundException(brand);
+    }
 
-
-
-
-
-
-//////////////////////////////////////////////////////////// PUTMAPPING LOSTITEMS////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-    // end::get-single-item[]
-
-    @PutMapping("/lostItems/{id}")
+    @PutMapping("/items/{id}")
     LostItem replaceItem(@RequestBody LostItem newItem, @PathVariable Long id) {
 
         return lostRepo.findById(id)
-                .map(employee -> {
-                    employee.setCategory(newItem.getCategory());
-                    employee.setBrand(newItem.getBrand());
-                    return lostRepo.save(employee);
+                .map(item -> {
+                    item.setCategory(newItem.getCategory());
+                    item.setBrand(newItem.getBrand());
+                    return lostRepo.save(item);
                 })
                 .orElseGet(() -> {
                     newItem.setId(id);
@@ -159,8 +98,8 @@ class ItemController {
                 });
     }
 
-    @DeleteMapping("/lostItems/{id}")
+    @DeleteMapping("/items/{id}")
     void deleteItem(@PathVariable Long id) {
         lostRepo.deleteById(id);
-    } // set til invalid i stedet
+    }
 }
