@@ -75,13 +75,12 @@ class ItemController {
     }
 
     @GetMapping("/foundItems/search")
-    List<FoundItem> foundTwo(@RequestParam("brand") String strFoundBrand){
+    List<FoundItem> foundTwo(@RequestParam(value = "brand", defaultValue = "%%") String strFoundBrand,
+                           @RequestParam(value = "category", defaultValue = "%%") String strFoundCategory){
+// Like + %% kommer fra https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
+        return foundRepo.findAllByBrandLikeAndCategoryLikeAllIgnoreCase(strFoundBrand, strFoundCategory);
 
-        return foundRepo.findByBrand(strFoundBrand);
 
-
-
-                //.orElseThrow(()->new LostItemBrandNotFoundException(brand);
     }
 
     @PutMapping("/items/{id}")
