@@ -8,7 +8,7 @@ import java.util.List;
 interface LostItemRepository extends JpaRepository<LostItem, Long> {
 
 
-    List<LostItem> findAllByBrandAndCategory(String strLostBrand, String strLostCategory);
+    List<LostItem> findAllByBrandAndCategoryLike(String strLostBrand, String strLostCategory);
 
 
 }
