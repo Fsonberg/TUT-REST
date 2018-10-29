@@ -68,7 +68,7 @@ class ItemController {
     }*/
 
    @GetMapping("/lostItems/search")
-    List<LostItem> lostTwo(@RequestParam(value = "brand", defaultValue = "") String strLostBrand, @RequestParam(value = "category", defaultValue = "") String strLostCategory){
+    List<LostItem> lostTwo(@RequestParam(value = "brand", defaultValue = "%:category%") String strLostBrand, @RequestParam(value = "category", defaultValue = "") String strLostCategory){
 
         return lostRepo.findAllByBrandAndCategory(strLostBrand, strLostCategory);
     }
