@@ -48,6 +48,9 @@ class ItemController {
     @PostMapping("/foundItems")
      FoundItem newFoundItem(@RequestBody FoundItem newFoundItem) {
 
+        /**
+         * Forsøg på Match funktion.. virker ikke på nuværende tidspunkt. evt HJÆLP RUBY.
+         */
         if(newFoundItem.getCategory() == newItem((LostItem) lostTwo("%%","%%", "%%")).getCategory()){
 
             return lostRepo.findAllById("%%");
