@@ -2,6 +2,7 @@ package payroll;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Conditional;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +19,12 @@ class ItemController {
 
     private final FoundItemRepository foundRepo;
 
-    ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo) {
+    private final MatchRepository matchRepo;
+
+    ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo, MatchRepository matchRepo) {
         this.lostRepo = lostRepo;
         this.foundRepo = foundRepo;
+        this.matchRepo = matchRepo;
     }
 
 
@@ -42,7 +46,17 @@ class ItemController {
     List<FoundItem> allFound(){return foundRepo.findAll();}
 
     @PostMapping("/foundItems")
-    FoundItem newFoundItem(@RequestBody FoundItem newFoundItem){return foundRepo.save(newFoundItem);}
+     FoundItem newFoundItem(@RequestBody FoundItem newFoundItem) {
+
+        if(newFoundItem.getCategory() == newItem((LostItem) lostTwo("%%","%%", "%%")).getCategory()){
+
+            return lostRepo.findAllById("%%");
+
+        }
+        return foundRepo.save(newFoundItem);}
+
+
+
 
     // Single item
 
@@ -59,13 +73,7 @@ class ItemController {
         return foundRepo.findById(id).orElseThrow(() -> new LostItemIdNotFoundException(id));
     }
 
-   /* @GetMapping
-        public Page<LostItem> findLostItemByBrand(@RequestParam("brand")String strLostBrand, Pageable pageable){
 
-        if(strLostBrand == null){
-            return lostRepo.findAll(pageable);
-        }else{return (Page<LostItem>) lostRepo.findByBrand(strLostBrand, pageable);}
-    }*/
 
    @GetMapping("/lostItems/search")
     List<LostItem> lostTwo(@RequestParam(value = "brand", defaultValue = "%%") String strLostBrand,
@@ -84,6 +92,9 @@ class ItemController {
 
 
     }
+
+
+
 
     @PutMapping("/items/{id}")
     LostItem replaceItem(@RequestBody LostItem newItem, @PathVariable Long id) {
@@ -104,4 +115,7 @@ class ItemController {
     void deleteItem(@PathVariable Long id) {
         lostRepo.deleteById(id);
     }
+
+
+
 }
