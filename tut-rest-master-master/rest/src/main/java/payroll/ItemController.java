@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.*;
 
 
-//FIX MATCH MELLEM TABELLER + BRAND QUERIES
+//FIX MATCH MELLEM TABELLER
 
 @EnableJpaRepositories
 class Config{}
@@ -19,13 +19,13 @@ class ItemController {
 
     private final FoundItemRepository foundRepo;
 
-    private final MatchRepository matchRepo;
+   // private final MatchRepository matchRepo;
 
-    ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo, MatchRepository matchRepo) {
+    ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo) {
         this.lostRepo = lostRepo;
         this.foundRepo = foundRepo;
-        this.matchRepo = matchRepo;
-    }
+
+}
 
 
 
@@ -47,22 +47,37 @@ class ItemController {
 
     @PostMapping("/foundItems")
      FoundItem newFoundItem(@RequestBody FoundItem newFoundItem) {
+        FoundItem savedFoundItem = foundRepo.save(newFoundItem);
+
 
         /**
          * Forsøg på Match funktion.. virker ikke på nuværende tidspunkt. evt HJÆLP RUBY.
          */
-        if(newFoundItem.getCategory() == newItem((LostItem) lostTwo("%%","%%", "%%")).getCategory()){
+        for (int i = 0; i < allLost().size() ; i++) {
 
-            return lostRepo.findAllById("%%");
+
+            if(savedFoundItem.getCategory().equals(allLost().get(i).getCategory())){
+
+                System.out.println("Inde i match - category");
+            }
+
 
         }
-        return foundRepo.save(newFoundItem);}
+
+
+
+        return savedFoundItem;
+    }
 
 
 
 
     // Single item
 
+    /**
+     * @param id
+     * @return
+     */
     @GetMapping("/lostItems/{id}")
     LostItem one(@PathVariable Long id) {
 
@@ -70,27 +85,45 @@ class ItemController {
                 .orElseThrow(() -> new LostItemIdNotFoundException(id));
     }
 
+    /**
+     * @param id
+     * @return
+     */
     @GetMapping("/foundItems/{id}")
     FoundItem foundOne(@PathVariable Long id){
 
         return foundRepo.findById(id).orElseThrow(() -> new LostItemIdNotFoundException(id));
     }
 
-
+    /**
+     * @param strLostBrand
+     * @param strLostCategory
+     * @param strLostColor
+     * @return
+     * Like + %% kommer fra https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
+     */
 
    @GetMapping("/lostItems/search")
     List<LostItem> lostTwo(@RequestParam(value = "brand", defaultValue = "%%") String strLostBrand,
                            @RequestParam(value = "category", defaultValue = "%%") String strLostCategory,
                            @RequestParam(value = "color", defaultValue = "%%") String strLostColor){
-// Like + %% kommer fra https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
+
         return lostRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase(strLostBrand, strLostCategory, strLostColor);
     }
+
+    /**
+     * @param strFoundBrand
+     * @param strFoundCategory
+     * @param strFoundColor
+     * @return
+     * // Like + %% kommer fra https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
+     */
 
     @GetMapping("/foundItems/search")
     List<FoundItem> foundTwo(@RequestParam(value = "brand", defaultValue = "%%") String strFoundBrand,
                              @RequestParam(value = "category", defaultValue = "%%") String strFoundCategory,
                              @RequestParam(value = "color", defaultValue = "%%") String strFoundColor){
-// Like + %% kommer fra https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
+
         return foundRepo.findAllByBrandLikeAndCategoryLikeAndColorAllIgnoreCase(strFoundBrand, strFoundCategory,strFoundColor);
 
 
@@ -106,6 +139,7 @@ class ItemController {
                 .map(item -> {
                     item.setCategory(newItem.getCategory());
                     item.setBrand(newItem.getBrand());
+                    item.setColor(newItem.getColor());
                     return lostRepo.save(item);
                 })
                 .orElseGet(() -> {
@@ -117,6 +151,7 @@ class ItemController {
     @DeleteMapping("/items/{id}")
     void deleteItem(@PathVariable Long id) {
         lostRepo.deleteById(id);
+
     }
 
 
