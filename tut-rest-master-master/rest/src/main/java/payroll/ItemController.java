@@ -54,23 +54,13 @@ class ItemController {
          * Forsøg på Match funktion.. virker ikke på nuværende tidspunkt. evt HJÆLP RUBY.
          */
         for (int i = 0; i < allLost().size() ; i++) {
-
-
             if(savedFoundItem.getCategory().equals(allLost().get(i).getCategory())){
 
                 System.out.println("Inde i match - category");
             }
-
-
         }
-
-
-
         return savedFoundItem;
     }
-
-
-
 
     // Single item
 
