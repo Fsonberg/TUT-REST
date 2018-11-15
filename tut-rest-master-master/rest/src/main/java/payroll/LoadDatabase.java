@@ -27,6 +27,7 @@ class LoadDatabase {
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "black")));
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics","Android", "yellow")));
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Clothes","Gucci", "green")));
+			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "Blue")));
 
 		};
 	}

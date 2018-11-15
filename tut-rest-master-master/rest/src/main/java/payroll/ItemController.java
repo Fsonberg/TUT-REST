@@ -81,41 +81,36 @@ class ItemController {
      * @return
      */
     @GetMapping("/match")
-    List<FoundItem> match(){
+    List<Match> match(){
 
         for (int i = 0; i <allFound().size() ; i++) {
             for (int j = 0; j <allLost().size() ; j++) {
-                if(allFound().get(i).getCategory().equals(allLost().get(j).getCategory())
-                        && allLost().get(j).getCategory().equals(allFound().get(i).getCategory())){
+                if(allFound().get(i).equals(allLost().get(j).getCategory())
+                        ){
 
                    // System.out.println("Inde i match - category");
                     // System.out.println("Category: "+allLost().get(i).getCategory());
 
                     if(allFound().get(i).getBrand().equals(allLost().get(j).getBrand())
-                            && allLost().get(j).getBrand().equals(allFound().get(i).getBrand())){
+                            ){
 
                         //System.out.println("inde i match - brand");
                         //System.out.println("Brand: "+allLost().get(i).getBrand());
 
                         if (allFound().get(i).getColor().equals(allLost().get(j).getColor())
-                                && allLost().get(j).getColor().equals(allFound().get(i).getColor())){
+                                ){
                            // System.out.println("inde i match - color");
                             // System.out.println("Color: "+allLost().get(i).getColor());
                             System.out.println("ID-LostItem: "+allLost().get(j).getId());
                             System.out.println("ID-FoundItem: "+allFound().get(i).getId());
+                            
 
                         }
                     }
                 }
-
-
             }
-
         }
-
-
-
-        return foundRepo.findAll();
+        return match();
     }
 
 
