@@ -13,12 +13,16 @@ class LoadDatabase {
 	@Bean
 	CommandLineRunner initDatabase(LostItemRepository lostRepo, FoundItemRepository foundRepo) {
 		return args -> {
+			//LOST REPOSITORY
+			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue")));
+			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue")));
+			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue")));
 			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue")));
 			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "yellow")));
             System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Android", "black")));
-			System.out.println("Preloading " + lostRepo.save(new LostItem("Clothes", "Gucci", "red")));
+			System.out.println("Preloading " + lostRepo.save(new LostItem("Clothes", "Gucci", "green	")));
 
-
+			//FOUND REPOSITORY
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "")));
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "black")));
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics","Android", "yellow")));
