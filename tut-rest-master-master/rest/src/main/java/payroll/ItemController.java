@@ -68,10 +68,16 @@ class ItemController {
                        // System.out.println("Color: "+allLost().get(i).getColor());
                         System.out.println("ID-LostItem: "+allLost().get(i).getId());
                         System.out.println("ID-FoundItem: "+savedFoundItem.getId());
-                        
+
+                    }else{
+                        System.out.println("No Color was found");
                     }
+                } else{
+                    System.out.println("No Brand was found");
                 }
-             }
+             }else{
+                System.out.println("No Category was found");
+            }
         }
         return savedFoundItem;
     }
