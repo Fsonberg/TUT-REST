@@ -14,10 +14,7 @@ class Match {
     @GeneratedValue
     Long id;
 
-
-
-
-    Match(Long FoundID, Long LostID) {
+    Match() {
         this.foundID = foundID;
         this.lostID = lostID;
 

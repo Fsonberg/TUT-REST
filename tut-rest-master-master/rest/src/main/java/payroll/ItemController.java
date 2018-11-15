@@ -85,32 +85,30 @@ class ItemController {
 
         for (int i = 0; i <allFound().size() ; i++) {
             for (int j = 0; j <allLost().size() ; j++) {
-                if(allFound().get(i).equals(allLost().get(j).getCategory())
-                        ){
+                if(allFound().get(i).equals(allLost().get(j).getCategory())){
 
                    // System.out.println("Inde i match - category");
                     // System.out.println("Category: "+allLost().get(i).getCategory());
 
-                    if(allFound().get(i).getBrand().equals(allLost().get(j).getBrand())
-                            ){
+                    if(allFound().get(i).getBrand().equals(allLost().get(j).getBrand())){
 
                         //System.out.println("inde i match - brand");
                         //System.out.println("Brand: "+allLost().get(i).getBrand());
 
-                        if (allFound().get(i).getColor().equals(allLost().get(j).getColor())
-                                ){
+                        if (allFound().get(i).getColor().equals(allLost().get(j).getColor())){
                            // System.out.println("inde i match - color");
                             // System.out.println("Color: "+allLost().get(i).getColor());
                             System.out.println("ID-LostItem: "+allLost().get(j).getId());
                             System.out.println("ID-FoundItem: "+allFound().get(i).getId());
-                            
+
+
 
                         }
                     }
                 }
             }
         }
-        return match();
+        return match(); //Giver Exception.......
     }
 
 
