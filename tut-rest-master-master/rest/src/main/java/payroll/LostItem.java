@@ -11,7 +11,6 @@ import javax.persistence.Id;
 class LostItem {
 
 	private @Id @GeneratedValue Long id;
-
 	private String category;
 	private String brand;
 	private String color;
@@ -20,7 +19,6 @@ class LostItem {
 		this.category = category;
 		this.brand = brand;
 		this.color = color;
-
 	}
 
 	public Long getId() {

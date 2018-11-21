@@ -17,22 +17,15 @@ class Config{}
 class ItemController {
 
     private final LostItemRepository lostRepo;
-
     private final FoundItemRepository foundRepo;
-
    // private final MatchRepository matchRepo;
 
     ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo) {
         this.lostRepo = lostRepo;
         this.foundRepo = foundRepo;
-
 }
 
-
-
-
     // Aggregate root
-
     @GetMapping("/lostItems")
     List<LostItem> allLost() {
         return lostRepo.findAll();
@@ -49,7 +42,6 @@ class ItemController {
     @PostMapping("/foundItems")
      FoundItem newFoundItem(@RequestBody FoundItem newFoundItem) {
         FoundItem savedFoundItem = foundRepo.save(newFoundItem);
-
 
         /**
          * Forsøg på Match funktion.. virker ikke på nuværende tidspunkt.
@@ -125,7 +117,6 @@ class ItemController {
      */
     @GetMapping("/lostItems/{id}")
     LostItem one(@PathVariable Long id) {
-
         return lostRepo.findById(id)
                 .orElseThrow(() -> new LostItemIdNotFoundException(id));
     }
@@ -136,7 +127,6 @@ class ItemController {
      */
     @GetMapping("/foundItems/{id}")
     FoundItem foundOne(@PathVariable Long id){
-
         return foundRepo.findById(id).orElseThrow(() -> new LostItemIdNotFoundException(id));
     }
 
@@ -170,12 +160,7 @@ class ItemController {
                              @RequestParam(value = "color", defaultValue = "%%") String strFoundColor){
 
         return foundRepo.findAllByBrandLikeAndCategoryLikeAndColorAllIgnoreCase(strFoundBrand, strFoundCategory,strFoundColor);
-
-
     }
-
-
-
 
     @PutMapping("/items/{id}")
     LostItem replaceItem(@RequestBody LostItem newItem, @PathVariable Long id) {
@@ -196,9 +181,5 @@ class ItemController {
     @DeleteMapping("/items/{id}")
     void deleteItem(@PathVariable Long id) {
         lostRepo.deleteById(id);
-
     }
-
-
-
 }
