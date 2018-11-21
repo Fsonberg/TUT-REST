@@ -1,5 +1,6 @@
 package payroll;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.annotation.Conditional;
@@ -82,18 +83,22 @@ class ItemController {
      */
     @GetMapping("/match")
     List<Match> match(){
+        ArrayList<Match> l = new ArrayList<>();
 
+        System.out.println("inde i match");
         for (int i = 0; i <allFound().size() ; i++) {
             for (int j = 0; j <allLost().size() ; j++) {
-                if(allFound().get(i).equals(allLost().get(j).getCategory())){
+                Match match = new Match();
+                System.out.println("inde i match - inde i løkke");
+                if(allFound().get(i).getCategory().equals(allLost().get(j).getCategory())){
 
-                   // System.out.println("Inde i match - category");
-                    // System.out.println("Category: "+allLost().get(i).getCategory());
+                   System.out.println("Inde i match - category");
+                   System.out.println("Category: "+allLost().get(i).getCategory());
 
                     if(allFound().get(i).getBrand().equals(allLost().get(j).getBrand())){
 
-                        //System.out.println("inde i match - brand");
-                        //System.out.println("Brand: "+allLost().get(i).getBrand());
+                        System.out.println("inde i match - brand");
+                        System.out.println("Brand: "+allLost().get(i).getBrand());
 
                         if (allFound().get(i).getColor().equals(allLost().get(j).getColor())){
                            // System.out.println("inde i match - color");
@@ -101,17 +106,16 @@ class ItemController {
                             System.out.println("ID-LostItem: "+allLost().get(j).getId());
                             System.out.println("ID-FoundItem: "+allFound().get(i).getId());
 
-
-
+                            match.setLostID(allLost().get(j).getId());
+                            match.setFoundID(allFound().get(i).getId());
+                            l.add(match);
                         }
                     }
                 }
             }
         }
-        return null; //Giver Exception.......
+        return l; //Giver Exception.......
     }
-
-
 
     // Single item
 

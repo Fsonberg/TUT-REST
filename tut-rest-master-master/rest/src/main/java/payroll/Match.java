@@ -15,8 +15,8 @@ class Match {
     Long id;
 
     Match() {
-        this.foundID = foundID;
         this.lostID = lostID;
+        this.foundID = foundID;
 
     }
     public Long getId() {
