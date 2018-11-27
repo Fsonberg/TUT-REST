@@ -14,20 +14,20 @@ class LoadDatabase {
 	CommandLineRunner initDatabase(LostItemRepository lostRepo, FoundItemRepository foundRepo, LostUserRepository userRepo) {
 		return args -> {
 			//LOST REPOSITORY
-			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue")));
-			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue")));
-			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue")));
-			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue")));
-			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "yellow")));
-            System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Android", "black")));
-			System.out.println("Preloading " + lostRepo.save(new LostItem("Clothes", "Gucci", "green")));
+			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue", false)));
+			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue", false)));
+			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue", false)));
+			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue", false)));
+			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "yellow", true)));
+            System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Android", "black", true)));
+			System.out.println("Preloading " + lostRepo.save(new LostItem("Clothes", "Gucci", "green", true)));
 
 			//FOUND REPOSITORY
-			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "")));
-			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "black" )));
-			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics","Android", "yellow" )));
-			System.out.println("preloading " + foundRepo.save(new FoundItem("Clothes","Gucci", "green")));
-			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "blue")));
+			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "", true)));
+			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "black", true )));
+			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics","Android", "yellow", true )));
+			System.out.println("preloading " + foundRepo.save(new FoundItem("Clothes","Gucci", "green", true)));
+			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "blue", true)));
 
 			//USER REPOSITORY
 			System.out.println("preloading " + userRepo.save(new Users("Frederik", "Sonberg", "Ishøj", "50520020")));

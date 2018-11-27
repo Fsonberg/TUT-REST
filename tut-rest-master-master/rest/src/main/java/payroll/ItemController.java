@@ -56,7 +56,9 @@ class ItemController {
         for (int i = 0; i < allLost().size(); i++) {
             if (savedFoundItem.getCategory().equals(allLost().get(i).getCategory())
                     && savedFoundItem.getBrand().equals(allLost().get(i).getBrand())
-                    && savedFoundItem.getColor().equals(allLost().get(i).getColor())) {
+                    && savedFoundItem.getColor().equals(allLost().get(i).getColor())
+                    && allLost().get(i).isActive()) {
+
                 Match m = new Match();
                 m.setFoundID(savedFoundItem.getId());
                 m.setLostID(allLost().get(i).getId());
@@ -66,44 +68,28 @@ class ItemController {
         return postMatches;
     }
 
-    /**
-     * Match funktion.... virker ikke
-     * @return
-     */
     @GetMapping("/match")
-    List<Match> match(){
-        ArrayList<Match> l = new ArrayList<>();
+    List<Match> matchLostFound(){
+        ArrayList<Match> getMatches = new ArrayList<>();
 
-        System.out.println("inde i match");
         for (int i = 0; i <allFound().size() ; i++) {
             for (int j = 0; j <allLost().size() ; j++) {
-                Match match = new Match();
-                System.out.println("inde i match - inde i løkke");
-                if(allFound().get(i).getCategory().equals(allLost().get(j).getCategory())){
+                if(allFound().get(i).getCategory().equals(allLost().get(j).getCategory())
+                        && allFound().get(i).getBrand().equals(allLost().get(j).getBrand())
+                        && allFound().get(i).getColor().equals(allLost().get(j).getColor())
+                        && allFound().get(i).isActive()
+                        && allLost().get(j).isActive()){
 
-                   System.out.println("Inde i match - category");
-                   System.out.println("Category: "+allLost().get(i).getCategory());
-
-                    if(allFound().get(i).getBrand().equals(allLost().get(j).getBrand())){
-
-                        System.out.println("inde i match - brand");
-                        System.out.println("Brand: "+allLost().get(i).getBrand());
-
-                        if (allFound().get(i).getColor().equals(allLost().get(j).getColor())){
-                           // System.out.println("inde i match - color");
-                            // System.out.println("Color: "+allLost().get(i).getColor());
-                            System.out.println("ID-LostItem: "+allLost().get(j).getId());
-                            System.out.println("ID-FoundItem: "+allFound().get(i).getId());
-
-                            match.setLostID(allLost().get(j).getId());
-                            match.setFoundID(allFound().get(i).getId());
-                            l.add(match);
-                        }
-                    }
+                    Match m = new Match();
+                    System.out.println("ID-LostItem: "+allLost().get(j).getId());
+                    System.out.println("ID-FoundItem: "+allFound().get(i).getId());
+                    m.setLostID(allLost().get(j).getId());
+                    m.setFoundID(allFound().get(i).getId());
+                    getMatches.add(m);
                 }
             }
         }
-        return l; //Giver Exception.......
+        return getMatches; //
     }
 
     // Single item
