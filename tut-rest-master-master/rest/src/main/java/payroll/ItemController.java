@@ -40,43 +40,45 @@ class ItemController {
     List<FoundItem> allFound(){return foundRepo.findAll();}
 
     @PostMapping("/foundItems")
-    List<Match> newFoundItem(@RequestBody FoundItem newFoundItem) {
+    FoundItem newFoundItem(@RequestBody FoundItem newFoundItem) {
         FoundItem savedFoundItem = foundRepo.save(newFoundItem);
-        ArrayList<Match> t = new ArrayList<>();
 
-        /**
+        return savedFoundItem;
+    }
+
+    /*   ArrayList<Match> t = new ArrayList<>();
+
+
          * Forsøg på Match funktion.. virker ikke på nuværende tidspunkt.
          * Der skal oprettes flere parametre i (if) statement. --> Color, Brand m.m. Dette skal addes til en liste, som skal være retur form
-         */
+
         for (int i = 0; i < allLost().size() ; i++) {
-            Match match = new Match();
-            if(savedFoundItem.getCategory().equals(allLost().get(i).getCategory())){
-                System.out.println("Inde i match - category");
-               // System.out.println("Category: "+allLost().get(i).getCategory());
+        Match match = new Match();
+        if(savedFoundItem.getCategory().equals(allLost().get(i).getCategory())){
+            System.out.println("Inde i match - category");
+            // System.out.println("Category: "+allLost().get(i).getCategory());
 
-                if(savedFoundItem.getBrand().equals(allLost().get(i).getBrand())){
-                    System.out.println("inde i match - brand");
-                    //System.out.println("Brand: "+allLost().get(i).getBrand());
+            if(savedFoundItem.getBrand().equals(allLost().get(i).getBrand())){
+                System.out.println("inde i match - brand");
+                //System.out.println("Brand: "+allLost().get(i).getBrand());
 
-                    if (savedFoundItem.getColor().equals(allLost().get(i).getColor())){
-                        System.out.println("inde i match - color");
-                       // System.out.println("Color: "+allLost().get(i).getColor());
-                        System.out.println("ID-LostItem: "+allLost().get(i).getId());
-                        System.out.println("ID-FoundItem: "+savedFoundItem.getId());
-                        match.setFoundID(savedFoundItem.getId());
-                        match.setLostID(allLost().get(i).getId());
-                        t.add(match);
+                if (savedFoundItem.getColor().equals(allLost().get(i).getColor())){
+                    System.out.println("inde i match - color");
+                    // System.out.println("Color: "+allLost().get(i).getColor());
+                    System.out.println("ID-LostItem: "+allLost().get(i).getId());
+                    System.out.println("ID-FoundItem: "+savedFoundItem.getId());
+                    match.setFoundID(savedFoundItem.getId());
+                    match.setLostID(allLost().get(i).getId());
+                    t.add(match);
 
-                    }
                 }
-            } else {
-                match.setFoundID(savedFoundItem.getId());
-                t.add(match);
             }
+        } else {
+            match.setFoundID(savedFoundItem.getId());
+            t.add(match);
         }
-        return  t;
-        //return savedFoundItem;
     }
+        return  t; */
 
     /**
      * Match funktion.... virker ikke
