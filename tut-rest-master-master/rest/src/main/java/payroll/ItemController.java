@@ -18,11 +18,13 @@ class ItemController {
 
     private final LostItemRepository lostRepo;
     private final FoundItemRepository foundRepo;
+    private final LostUserRepository userRepo;
    // private final MatchRepository matchRepo;
 
-    ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo) {
+    ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo, LostUserRepository userRepo) {
         this.lostRepo = lostRepo;
         this.foundRepo = foundRepo;
+        this.userRepo = userRepo;
 }
 
     // Aggregate root
@@ -35,6 +37,12 @@ class ItemController {
     LostItem newItem(@RequestBody LostItem newItem) {
         return lostRepo.save(newItem);
     }
+
+    @GetMapping("/users")
+    List<Users> allUsers() {return userRepo.findAll();}
+
+    @PostMapping ("/users")
+    Users newUser (@RequestBody Users newUser) {return userRepo.save(newUser);}
 
     @GetMapping("/foundItems")
     List<FoundItem> allFound(){return foundRepo.findAll();}
