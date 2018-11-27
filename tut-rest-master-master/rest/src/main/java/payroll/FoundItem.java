@@ -16,21 +16,11 @@ class FoundItem {
     private String brand;
     private String color;
 
-    private boolean active;
 
-    FoundItem(String category, String brand, String color, boolean active) {
+    FoundItem(String category, String brand, String color) {
         this.category = category;
         this.brand = brand;
         this.color = color;
-        this.active = active;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     public Long getId() {
