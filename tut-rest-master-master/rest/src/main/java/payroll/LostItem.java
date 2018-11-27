@@ -14,18 +14,28 @@ class LostItem {
 	private String category;
 	private String brand;
 	private String color;
+	private String user;
 
 	private boolean active;
 
 
-	LostItem(String category, String brand, String color, boolean active) {
+	LostItem(String category, String brand, String color, String user, boolean active) {
 		this.category = category;
 		this.brand = brand;
 		this.color = color;
 		this.active = active;
+		this.user = user;
 	}
 
-    public boolean isActive() {
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public boolean isActive() {
         return active;
     }
 

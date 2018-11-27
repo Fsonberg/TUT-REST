@@ -128,6 +128,14 @@ class ItemController {
 
         return lostRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase(strLostBrand, strLostCategory, strLostColor);
     }
+    @GetMapping("/users/search")
+    List<Users> userTwo(@RequestParam(value = "firstName", defaultValue = "%%")String strFirstName,
+                        @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
+                        @RequestParam(value = "address", defaultValue = "%%")String strAddress,
+                        @RequestParam(value = "phoneNumber", defaultValue = "%%")String strPhoneNumber){
+
+       return userRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAllIgnoreCase(strFirstName,strLastName,strAddress,strPhoneNumber);
+    }
 
     /**
      * @param strFoundBrand
