@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 interface LostUserRepository extends JpaRepository<User, String> {
-
-//    List<User> findAllByFirst
+    List<User> findAllBy
 
 }
