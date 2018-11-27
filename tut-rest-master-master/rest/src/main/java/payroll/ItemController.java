@@ -40,10 +40,9 @@ class ItemController {
     List<FoundItem> allFound(){return foundRepo.findAll();}
 
     @PostMapping("/foundItems")
-     FoundItem newFoundItem(@RequestBody FoundItem newFoundItem) {
+    List<Match> newFoundItem(@RequestBody FoundItem newFoundItem) {
         FoundItem savedFoundItem = foundRepo.save(newFoundItem);
         ArrayList<Match> t = new ArrayList<>();
-        boolean matchFound = false;
 
         /**
          * Forsøg på Match funktion.. virker ikke på nuværende tidspunkt.
@@ -60,8 +59,6 @@ class ItemController {
                     //System.out.println("Brand: "+allLost().get(i).getBrand());
 
                     if (savedFoundItem.getColor().equals(allLost().get(i).getColor())){
-                        matchFound = true;
-                        if (matchFound == true ){
                         System.out.println("inde i match - color");
                        // System.out.println("Color: "+allLost().get(i).getColor());
                         System.out.println("ID-LostItem: "+allLost().get(i).getId());
@@ -69,14 +66,16 @@ class ItemController {
                         match.setFoundID(savedFoundItem.getId());
                         match.setLostID(allLost().get(i).getId());
                         t.add(match);
-                        return t;
-                        }
 
                     }
                 }
-             }
+            } else {
+                match.setFoundID(savedFoundItem.getId());
+                t.add(match);
+            }
         }
-        return savedFoundItem;
+        return  t;
+        //return savedFoundItem;
     }
 
     /**
