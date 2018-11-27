@@ -47,16 +47,14 @@ class ItemController {
 
         for (int i = 0; i < allLost().size(); i++) {
             if (savedFoundItem.getCategory().equals(allLost().get(i).getCategory())
-                 && savedFoundItem.getBrand().equals(allLost().get(i).getBrand())
+                    && savedFoundItem.getBrand().equals(allLost().get(i).getBrand())
                     && savedFoundItem.getColor().equals(allLost().get(i).getColor())) {
-                        Match m = new Match();
-                        m.setFoundID(savedFoundItem.getId());
-                        m.setLostID(allLost().get(i).getId());
-                        postMatches.add(m);
-                    }
-                }
-
-
+                Match m = new Match();
+                m.setFoundID(savedFoundItem.getId());
+                m.setLostID(allLost().get(i).getId());
+                postMatches.add(m);
+            }
+        }
         return postMatches;
     }
 
