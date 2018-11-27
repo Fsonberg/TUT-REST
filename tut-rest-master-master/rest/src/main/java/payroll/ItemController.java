@@ -46,15 +46,13 @@ class ItemController {
         ArrayList<Match> postMatches = new ArrayList<>();
 
         for (int i = 0; i < allLost().size(); i++) {
-            if (savedFoundItem.getCategory().equals(allLost().get(i).getCategory())) {
-                if (savedFoundItem.getBrand().equals(allLost().get(i).getBrand())) {
-                    if (savedFoundItem.getColor().equals(allLost().get(i).getColor())) {
-                        Match m = new Match();
-                        m.setFoundID(savedFoundItem.getId());
-                        m.setLostID(allLost().get(i).getId());
-                        postMatches.add(m);
-                    }
-                }
+            if (savedFoundItem.getCategory().equals(allLost().get(i).getCategory())
+                    && savedFoundItem.getBrand().equals(allLost().get(i).getBrand())
+                    && savedFoundItem.getColor().equals(allLost().get(i).getColor())) {
+                Match m = new Match();
+                m.setFoundID(savedFoundItem.getId());
+                m.setLostID(allLost().get(i).getId());
+                postMatches.add(m);
             }
         }
         return postMatches;
