@@ -42,12 +42,15 @@ class ItemController {
     @PostMapping("/foundItems")
      FoundItem newFoundItem(@RequestBody FoundItem newFoundItem) {
         FoundItem savedFoundItem = foundRepo.save(newFoundItem);
+        ArrayList<Match> t = new ArrayList<>();
+        boolean matchFound = false;
 
         /**
          * Forsøg på Match funktion.. virker ikke på nuværende tidspunkt.
          * Der skal oprettes flere parametre i (if) statement. --> Color, Brand m.m. Dette skal addes til en liste, som skal være retur form
          */
         for (int i = 0; i < allLost().size() ; i++) {
+            Match match = new Match();
             if(savedFoundItem.getCategory().equals(allLost().get(i).getCategory())){
                 System.out.println("Inde i match - category");
                // System.out.println("Category: "+allLost().get(i).getCategory());
@@ -57,10 +60,17 @@ class ItemController {
                     //System.out.println("Brand: "+allLost().get(i).getBrand());
 
                     if (savedFoundItem.getColor().equals(allLost().get(i).getColor())){
+                        matchFound = true;
+                        if (matchFound == true ){
                         System.out.println("inde i match - color");
                        // System.out.println("Color: "+allLost().get(i).getColor());
                         System.out.println("ID-LostItem: "+allLost().get(i).getId());
                         System.out.println("ID-FoundItem: "+savedFoundItem.getId());
+                        match.setFoundID(savedFoundItem.getId());
+                        match.setLostID(allLost().get(i).getId());
+                        t.add(match);
+                        return t;
+                        }
 
                     }
                 }
