@@ -19,12 +19,12 @@ class LostItem {
 	private boolean active;
 
 
-	LostItem(String category, String brand, String color, Long user, boolean active) {
+	LostItem(String category, String brand, String color, boolean active) {
 		this.category = category;
 		this.brand = brand;
 		this.color = color;
 		this.active = active;
-		this.user = user;
+
 	}
 
 	public Long getUser() {
