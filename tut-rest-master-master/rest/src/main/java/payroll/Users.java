@@ -15,12 +15,22 @@ public class Users {
     private String lastName;
     private String address;
     private String phoneNumber;
+    private String email;
 
-    public Users(String firstName, String lastName, String address, String phoneNumber) {
+    public Users(String firstName, String lastName, String address, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Long getId() {
