@@ -40,7 +40,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.87441236">
+    <splitter split-orientation="horizontal" split-proportion="0.63825506">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="337">
           <file pinned="false" current-in-tab="false">
@@ -56,7 +56,7 @@
             <entry file="file://$PROJECT_DIR$/src/main/java/payroll/FoundItem.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="189">
-                  <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+                  <caret line="18" selection-start-line="18" selection-end-line="18" />
                 </state>
               </provider>
             </entry>
@@ -64,8 +64,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/payroll/ItemController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="136" column="158" selection-start-line="136" selection-start-column="158" selection-end-line="136" selection-end-column="158" />
+                <state relative-caret-position="2193">
+                  <caret line="138" selection-start-line="138" selection-end-line="138" />
                   <folding>
                     <element signature="e#6021#6022#0" expanded="true" />
                     <element signature="e#6060#6061#0" expanded="true" />
@@ -124,7 +124,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/payroll/LoadDatabase.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="36">
+                <state relative-caret-position="84">
                   <caret line="16" column="113" lean-forward="true" selection-start-line="16" selection-start-column="113" selection-end-line="16" selection-end-column="113" />
                 </state>
               </provider>
@@ -164,7 +164,7 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="76">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/payroll/LostItemRepository.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="34">
@@ -176,7 +176,7 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/payroll/Users.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="1037">
@@ -242,10 +242,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="90" />
-    <option name="y" value="-20" />
-    <option name="width" value="1365" />
-    <option name="height" value="730" />
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="1614" />
+    <option name="height" value="878" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -301,8 +301,8 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543323296076" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543401499600" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/BranchTest" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -343,7 +343,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4226000" />
+    <option name="totallyTimeSpent" value="5210000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -474,14 +474,17 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/payroll/FoundItem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/payroll/LostItemRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="77" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="77" />
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -520,7 +523,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/payroll/LoadDatabase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
+        <state relative-caret-position="84">
           <caret line="16" column="113" lean-forward="true" selection-start-line="16" selection-start-column="113" selection-end-line="16" selection-end-column="113" />
         </state>
       </provider>
@@ -547,8 +550,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/payroll/ItemController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="136" column="158" selection-start-line="136" selection-start-column="158" selection-end-line="136" selection-end-column="158" />
+        <state relative-caret-position="2193">
+          <caret line="138" selection-start-line="138" selection-end-line="138" />
           <folding>
             <element signature="e#6021#6022#0" expanded="true" />
             <element signature="e#6060#6061#0" expanded="true" />
