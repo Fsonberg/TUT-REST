@@ -14,12 +14,12 @@ class LostItem {
 	private String category;
 	private String brand;
 	private String color;
-	private String user;
+	private Long user;
 
 	private boolean active;
 
 
-	LostItem(String category, String brand, String color, String user, boolean active) {
+	LostItem(String category, String brand, String color, Long user, boolean active) {
 		this.category = category;
 		this.brand = brand;
 		this.color = color;
@@ -27,11 +27,11 @@ class LostItem {
 		this.user = user;
 	}
 
-	public String getUser() {
+	public Long getUser() {
 		return user;
 	}
 
-	public void setUser(String user) {
+	public void setUser(Long user) {
 		this.user = user;
 	}
 
