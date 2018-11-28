@@ -133,6 +133,11 @@ class ItemController {
 
         return lostRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase(strLostBrand, strLostCategory, strLostColor);
     }
+
+    @GetMapping ("/users/{id}")
+    Users usersOne (@PathVariable Long id){
+       return userRepo.findById(id).orElseThrow(()-> new LostItemIdNotFoundException(id));
+    }
     @GetMapping("/users/search")
     List<Users> userTwo(@RequestParam(value = "firstName", defaultValue = "%%")String strFirstName,
                         @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
