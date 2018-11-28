@@ -15,6 +15,7 @@ class FoundItem {
     private String category;
     private String brand;
     private String color;
+    private Long empID;
 
     private boolean active;
 
@@ -24,6 +25,14 @@ class FoundItem {
         this.brand = brand;
         this.color = color;
         this.active = active;
+    }
+
+    public Long getEmpID() {
+        return empID;
+    }
+
+    public void setEmpID(Long empID) {
+        this.empID = empID;
     }
 
     public boolean isActive() {

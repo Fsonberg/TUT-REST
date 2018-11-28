@@ -12,18 +12,21 @@ class Config{}
 @RestController
 class ItemController {
 
-    private Long activeUser = 13L;
+    private Long activeCustomer = 13L;
+    private Long activeEmp = 18L;
     private final LostItemRepository lostRepo;
     private final FoundItemRepository foundRepo;
     private final LostUserRepository userRepo;
+    private final EmployeeRepository empRepo;
     //private final IssuedMatchRepository issuedMatchRepo;
    // private final MatchRepository matchRepo;
 
     ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo,
-                   LostUserRepository userRepo/*, IssuedMatchRepository issuedMatchRepo*/) {
+                   LostUserRepository userRepo, EmployeeRepository empRepo) {
         this.lostRepo = lostRepo;
         this.foundRepo = foundRepo;
         this.userRepo = userRepo;
+        this.empRepo = empRepo;
         //this.issuedMatchRepo = issuedMatchRepo;
 }
 
@@ -69,6 +72,7 @@ class ItemController {
         FoundItem savedFoundItem = foundRepo.save(newFoundItem);
         savedFoundItem.setActive(true);
         ArrayList<Match> postMatches = new ArrayList<>();
+        savedFoundItem.setEmpID(activeEmp);
 
         for (int i = 0; i < allLost().size(); i++) {
             if (savedFoundItem.getCategory().equals(allLost().get(i).getCategory())
@@ -85,6 +89,7 @@ class ItemController {
         }
         if (postMatches.size() == 0) {
             ArrayList postedItemNoMatch = new ArrayList();
+
             postedItemNoMatch.add(savedFoundItem);
             return postedItemNoMatch;
         } else {
@@ -118,7 +123,7 @@ class ItemController {
 
     @PostMapping("/lostItems")
     LostItem newItem(@RequestBody LostItem newItem) {
-        newItem.setUserID(activeUser);
+        newItem.setUserID(activeCustomer);
 
         return lostRepo.save(newItem);
     }
@@ -168,6 +173,7 @@ class ItemController {
                     m.setLostID(allLost().get(j).getLostItemID());
                     m.setFoundID(allFound().get(i).getFoundItemID());
                     m.setUserID(allLost().get(j).getUserID());
+                    m.setEmpID(allFound().get(i).getEmpID());
                     getMatches.add(m);
                 }
             }

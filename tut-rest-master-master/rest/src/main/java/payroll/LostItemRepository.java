@@ -7,7 +7,8 @@ import java.util.List;
 
 interface LostItemRepository extends JpaRepository<LostItem, Long> {
 
-    List<LostItem> findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase(String strLostBrand, String strLostCategory, String strLostColor);
+    List<LostItem> findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase
+            (String strLostBrand, String strLostCategory, String strLostColor);
 }
 
 
