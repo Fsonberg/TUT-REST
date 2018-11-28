@@ -3,7 +3,6 @@ package payroll;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.context.annotation.Conditional;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +15,7 @@ class Config{}
 @RestController
 class ItemController {
 
+    private Long activeUser = 13L;
     private final LostItemRepository lostRepo;
     private final FoundItemRepository foundRepo;
     private final LostUserRepository userRepo;
@@ -37,6 +37,8 @@ class ItemController {
 
     @PostMapping("/lostItems")
     LostItem newItem(@RequestBody LostItem newItem) {
+        newItem.setUser(activeUser);
+
         return lostRepo.save(newItem);
     }
 
