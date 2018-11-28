@@ -30,8 +30,8 @@ class LoadDatabase {
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "blue", true)));
 
 			//USER REPOSITORY
-			System.out.println("preloading " + userRepo.save(new Users("Frederik", "Sonberg", "Ishøj", "50520020")));
-			System.out.println("preloading " + userRepo.save(new Users("Rune", "Riber", "Roskilde", "1823713913")));
+			System.out.println("preloading " + userRepo.save(new Users("Frederik", "Sonberg", "Ishøj", "50520020", "getGit@iasjd.aijs")));
+			System.out.println("preloading " + userRepo.save(new Users("Rune", "Riber", "Roskilde", "1823713913", "getGit@iasjd.aijs")));
 		};
 	}
 }
