@@ -6,9 +6,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.*;
 
-
-//FIX MATCH MELLEM TABELLER
-
 @EnableJpaRepositories
 class Config{}
 
@@ -22,42 +19,55 @@ class ItemController {
     //private final IssuedMatchRepository issuedMatchRepo;
    // private final MatchRepository matchRepo;
 
-    ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo, LostUserRepository userRepo/*, IssuedMatchRepository issuedMatchRepo*/) {
+    ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo,
+                   LostUserRepository userRepo/*, IssuedMatchRepository issuedMatchRepo*/) {
         this.lostRepo = lostRepo;
         this.foundRepo = foundRepo;
         this.userRepo = userRepo;
         //this.issuedMatchRepo = issuedMatchRepo;
 }
 
-    // Aggregate root
-    @GetMapping("/lostItems")
-    List<LostItem> allLost() {
-        return lostRepo.findAll();
-    }
+    /**
+     * Users Post
+     */
 
-    @PostMapping("/lostItems")
-    LostItem newItem(@RequestBody LostItem newItem) {
-        newItem.setUser(activeUser);
+    @PostMapping ("/users")
+    Users newUser (@RequestBody Users newUser) {return userRepo.save(newUser);}
 
-        return lostRepo.save(newItem);
-    }
+
+    /**
+     * Users Get
+     */
 
     @GetMapping("/users")
     List<Users> allUsers() {
         ArrayList users = new ArrayList();
 
-        return userRepo.findAll();}
+        return userRepo.findAll();
+    }
 
-    @PostMapping ("/users")
-    Users newUser (@RequestBody Users newUser) {return userRepo.save(newUser);}
+    @GetMapping ("/users/{id}")
+    Users singleUserID (@PathVariable Long id){
+        return userRepo.findById(id).orElseThrow(()-> new LostItemIdNotFoundException(id));
+    }
 
-    @GetMapping("/foundItems")
-    List<FoundItem> allFound(){return foundRepo.findAll();}
+    @GetMapping("/users/search")
+    List<Users> oneOrMoreUsers (@RequestParam(value = "firstName", defaultValue = "%%")String strFirstName,
+                        @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
+                        @RequestParam(value = "address", defaultValue = "%%")String strAddress,
+                        @RequestParam(value = "phoneNumber", defaultValue = "%%")String strPhoneNumber){
+
+        return userRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAllIgnoreCase(strFirstName,strLastName,strAddress,strPhoneNumber);
+    }
+
+    /**
+     * FoundItem Post
+     */
 
     @PostMapping("/foundItems")
-    List<Match> newFoundItem(@RequestBody FoundItem newFoundItem) {
+    List newFoundItem(@RequestBody FoundItem newFoundItem) {
         FoundItem savedFoundItem = foundRepo.save(newFoundItem);
-
+        savedFoundItem.setActive(true);
         ArrayList<Match> postMatches = new ArrayList<>();
 
         for (int i = 0; i < allLost().size(); i++) {
@@ -72,8 +82,72 @@ class ItemController {
                 postMatches.add(m);
             }
         }
-        return postMatches;
+        if (postMatches.size() == 0) {
+            ArrayList postedItemNoMatch = new ArrayList();
+            postedItemNoMatch.add(savedFoundItem);
+            return postedItemNoMatch;
+        } else {
+            return postMatches;
+        }
     }
+
+    /**
+     * FoundItem Get
+     */
+
+    @GetMapping("/foundItems")
+    List<FoundItem> allFound(){return foundRepo.findAll();}
+
+    @GetMapping("/foundItems/{id}")
+    FoundItem foundOne(@PathVariable Long id){
+        return foundRepo.findById(id).orElseThrow(() -> new LostItemIdNotFoundException(id));
+    }
+
+    @GetMapping("/foundItems/search")
+    List<FoundItem> foundTwo(@RequestParam(value = "brand", defaultValue = "%%") String strFoundBrand,
+                             @RequestParam(value = "category", defaultValue = "%%") String strFoundCategory,
+                             @RequestParam(value = "color", defaultValue = "%%") String strFoundColor){
+
+        return foundRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase(strFoundBrand, strFoundCategory,strFoundColor);
+    }
+
+    /**
+     * LostItem Post
+     */
+
+    @PostMapping("/lostItems")
+    LostItem newItem(@RequestBody LostItem newItem) {
+        newItem.setUser(activeUser);
+
+        return lostRepo.save(newItem);
+    }
+
+    /**
+     * LostItem Get
+     */
+
+    @GetMapping("/lostItems")
+    List<LostItem> allLost() {
+        return lostRepo.findAll();
+    }
+
+    @GetMapping("/lostItems/{id}")
+    LostItem one(@PathVariable Long id) {
+        return lostRepo.findById(id)
+                .orElseThrow(() -> new LostItemIdNotFoundException(id));
+    }
+
+    @GetMapping("/lostItems/search")
+    List<LostItem> lostTwo(@RequestParam(value = "brand", defaultValue = "%%") String strLostBrand,
+                           @RequestParam(value = "category", defaultValue = "%%") String strLostCategory,
+                           @RequestParam(value = "color", defaultValue = "%%") String strLostColor){
+
+        return lostRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase(strLostBrand, strLostCategory, strLostColor);
+    }
+
+    /**
+     * Match
+     */
 
     @GetMapping("/match")
     List<Match> matchLostFound(){
@@ -99,72 +173,13 @@ class ItemController {
         return getMatches; //
     }
 
-    // Single item
-
-    /**
-     * @param id
-     * @return
-     */
-    @GetMapping("/lostItems/{id}")
-    LostItem one(@PathVariable Long id) {
-        return lostRepo.findById(id)
-                .orElseThrow(() -> new LostItemIdNotFoundException(id));
-    }
-
-    /**
-     * @param id
-     * @return
-     */
-    @GetMapping("/foundItems/{id}")
-    FoundItem foundOne(@PathVariable Long id){
-        return foundRepo.findById(id).orElseThrow(() -> new LostItemIdNotFoundException(id));
-    }
-
-    /**
-     * @param strLostBrand
-     * @param strLostCategory
-     * @param strLostColor
-     * @return
-     * Like + %% kommer fra https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
-     */
-
-   @GetMapping("/lostItems/search")
-    List<LostItem> lostTwo(@RequestParam(value = "brand", defaultValue = "%%") String strLostBrand,
-                           @RequestParam(value = "category", defaultValue = "%%") String strLostCategory,
-                           @RequestParam(value = "color", defaultValue = "%%") String strLostColor){
-
-        return lostRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase(strLostBrand, strLostCategory, strLostColor);
-    }
-
-    @GetMapping ("/users/{id}")
-    Users usersOne (@PathVariable Long id){
-       return userRepo.findById(id).orElseThrow(()-> new LostItemIdNotFoundException(id));
-    }
-    @GetMapping("/users/search")
-    List<Users> userTwo(@RequestParam(value = "firstName", defaultValue = "%%")String strFirstName,
-                        @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
-                        @RequestParam(value = "address", defaultValue = "%%")String strAddress,
-                        @RequestParam(value = "phoneNumber", defaultValue = "%%")String strPhoneNumber){
-
-       return userRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAllIgnoreCase(strFirstName,strLastName,strAddress,strPhoneNumber);
-    }
-
-    /**
-     * @param strFoundBrand
-     * @param strFoundCategory
-     * @param strFoundColor
-     * @return
-     * // Like + %% kommer fra https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
-     */
-
-    @GetMapping("/foundItems/search")
-    List<FoundItem> foundTwo(@RequestParam(value = "brand", defaultValue = "%%") String strFoundBrand,
-                             @RequestParam(value = "category", defaultValue = "%%") String strFoundCategory,
-                             @RequestParam(value = "color", defaultValue = "%%") String strFoundColor){
-
-        return foundRepo.findAllByBrandLikeAndCategoryLikeAndColorAllIgnoreCase(strFoundBrand, strFoundCategory,strFoundColor);
-    }
-
+    /*
+    ############################################################################################
+    ############################################################################################
+    ############################################################################################
+    ############################################################################################
+    ############################################################################################
+    */
     @PutMapping("/items/{id}")
     LostItem replaceItem(@RequestBody LostItem newItem, @PathVariable Long id) {
 
