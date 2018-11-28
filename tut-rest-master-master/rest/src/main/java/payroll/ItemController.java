@@ -30,6 +30,7 @@ class ItemController {
     // Aggregate root
     @GetMapping("/lostItems")
     List<LostItem> allLost() {
+
         return lostRepo.findAll();
     }
 
@@ -39,7 +40,10 @@ class ItemController {
     }
 
     @GetMapping("/users")
-    List<Users> allUsers() {return userRepo.findAll();}
+    List<Users> allUsers() {
+        ArrayList users = new ArrayList();
+
+        return userRepo.findAll();}
 
     @PostMapping ("/users")
     Users newUser (@RequestBody Users newUser) {return userRepo.save(newUser);}
