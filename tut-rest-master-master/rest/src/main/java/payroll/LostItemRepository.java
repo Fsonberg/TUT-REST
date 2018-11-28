@@ -11,3 +11,4 @@ interface LostItemRepository extends JpaRepository<LostItem, Long> {
 }
 
 
+

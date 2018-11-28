@@ -19,18 +19,19 @@ class ItemController {
     private final LostItemRepository lostRepo;
     private final FoundItemRepository foundRepo;
     private final LostUserRepository userRepo;
+    //private final IssuedMatchRepository issuedMatchRepo;
    // private final MatchRepository matchRepo;
 
-    ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo, LostUserRepository userRepo) {
+    ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo, LostUserRepository userRepo/*, IssuedMatchRepository issuedMatchRepo*/) {
         this.lostRepo = lostRepo;
         this.foundRepo = foundRepo;
         this.userRepo = userRepo;
+        //this.issuedMatchRepo = issuedMatchRepo;
 }
 
     // Aggregate root
     @GetMapping("/lostItems")
     List<LostItem> allLost() {
-
         return lostRepo.findAll();
     }
 
