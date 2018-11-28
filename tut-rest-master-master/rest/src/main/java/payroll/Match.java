@@ -13,11 +13,24 @@ class Match {
     private @Id
     @GeneratedValue
     Long id;
+    private Long foundID;
+    private Long lostID;
+    private Long userID;
 
     Match() {
         this.lostID = lostID;
         this.foundID = foundID;
+        this.userID = userID;
     }
+
+    public Long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Long userID) {
+        this.userID = userID;
+    }
+
     public Long getId() {
         return id;
     }
@@ -42,6 +55,5 @@ class Match {
         this.lostID = lostID;
     }
 
-    private Long foundID;
-    private Long lostID;
+
 }

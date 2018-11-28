@@ -10,7 +10,7 @@ import javax.persistence.Id;
 @Entity
 class FoundItem {
 
-    private @Id @GeneratedValue Long id;
+    private @Id @GeneratedValue Long foundItemID;
 
     private String category;
     private String brand;
@@ -34,12 +34,12 @@ class FoundItem {
         this.active = active;
     }
 
-    public Long getId() {
-        return id;
+    public Long getFoundItemID() {
+        return foundItemID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setFoundItemID(Long foundItemID) {
+        this.foundItemID = foundItemID;
     }
 
     public String getCategory() {

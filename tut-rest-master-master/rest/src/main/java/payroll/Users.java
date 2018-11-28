@@ -10,7 +10,7 @@ import javax.persistence.Id;
 @Entity
 public class Users {
 
-    private @Id @GeneratedValue Long id;
+    private @Id @GeneratedValue Long userID;
     private String firstName;
     private String lastName;
     private String address;
@@ -33,12 +33,12 @@ public class Users {
         this.email = email;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserID() {
+        return userID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 
     public String getFirstName() {

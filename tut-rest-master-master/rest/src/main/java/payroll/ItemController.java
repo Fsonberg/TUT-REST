@@ -77,8 +77,9 @@ class ItemController {
                     && allLost().get(i).isActive()) {
 
                 Match m = new Match();
-                m.setFoundID(savedFoundItem.getId());
-                m.setLostID(allLost().get(i).getId());
+                m.setFoundID(savedFoundItem.getFoundItemID());
+                m.setLostID(allLost().get(i).getLostItemID());
+                m.setUserID(allLost().get(i).getUserID());
                 postMatches.add(m);
             }
         }
@@ -117,7 +118,7 @@ class ItemController {
 
     @PostMapping("/lostItems")
     LostItem newItem(@RequestBody LostItem newItem) {
-        newItem.setUser(activeUser);
+        newItem.setUserID(activeUser);
 
         return lostRepo.save(newItem);
     }
@@ -162,10 +163,11 @@ class ItemController {
                         && allLost().get(j).isActive()){
 
                     Match m = new Match();
-                    System.out.println("ID-LostItem: "+allLost().get(j).getId());
-                    System.out.println("ID-FoundItem: "+allFound().get(i).getId());
-                    m.setLostID(allLost().get(j).getId());
-                    m.setFoundID(allFound().get(i).getId());
+                    System.out.println("ID-LostItem: "+allLost().get(j).getLostItemID());
+                    System.out.println("ID-FoundItem: "+allFound().get(i).getFoundItemID());
+                    m.setLostID(allLost().get(j).getLostItemID());
+                    m.setFoundID(allFound().get(i).getFoundItemID());
+                    m.setUserID(allLost().get(j).getUserID());
                     getMatches.add(m);
                 }
             }
@@ -176,7 +178,7 @@ class ItemController {
     /*
     ############################################################################################
     ############################################################################################
-    ############################################################################################
+    ############################################ FIX EN DAG ################################################
     ############################################################################################
     ############################################################################################
     */
@@ -191,7 +193,7 @@ class ItemController {
                     return lostRepo.save(item);
                 })
                 .orElseGet(() -> {
-                    newItem.setId(id);
+                    newItem.setLostItemID(id);
                     return lostRepo.save(newItem);
                 });
     }

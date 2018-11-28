@@ -10,11 +10,11 @@ import javax.persistence.Id;
 @Entity
 class LostItem {
 
-	private @Id @GeneratedValue Long id;
+	private @Id @GeneratedValue Long lostItemID;
 	private String category;
 	private String brand;
 	private String color;
-	private Long user;
+	private Long userID; // FOREIGN KEY FRA USER.JAVA
 
 	private boolean active;
 
@@ -27,12 +27,12 @@ class LostItem {
 
 	}
 
-	public Long getUser() {
-		return user;
+	public Long getUserID() {
+		return userID;
 	}
 
-	public void setUser(Long user) {
-		this.user = user;
+	public void setUserID(Long userID) {
+		this.userID = userID;
 	}
 
 	public boolean isActive() {
@@ -43,12 +43,12 @@ class LostItem {
         this.active = active;
     }
 
-    public Long getId() {
-		return id;
+    public Long getLostItemID() {
+		return lostItemID;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setLostItemID(Long lostItemID) {
+		this.lostItemID = lostItemID;
 	}
 
 	public String getCategory() {

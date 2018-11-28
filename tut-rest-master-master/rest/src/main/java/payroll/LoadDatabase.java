@@ -14,16 +14,16 @@ class LoadDatabase {
 	CommandLineRunner initDatabase(LostItemRepository lostRepo, FoundItemRepository foundRepo, LostUserRepository userRepo) {
 		return args -> {
 			//LOST REPOSITORY
-			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue",false)));
-			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue",false)));
-			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue",false)));
-			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue", false)));
+			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue",true)));
+			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue",true)));
+			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue",true)));
+			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue", true)));
 			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "yellow", true)));
             System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Android", "black",true)));
 			System.out.println("Preloading " + lostRepo.save(new LostItem("Clothes", "Gucci", "green", true)));
 
 			//FOUND REPOSITORY
-			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "", true)));
+			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "blue", true)));
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "black", true )));
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics","Android", "yellow", true )));
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Clothes","Gucci", "green", true)));
