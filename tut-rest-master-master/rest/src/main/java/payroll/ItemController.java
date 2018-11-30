@@ -132,6 +132,9 @@ class ItemController {
         return foundRepo.findById(id).orElseThrow(() -> new LostItemIdNotFoundException(id));
     }
 
+    // LAV SØGE MULIGEHEDER I DIABLED OG ACTIVE ITEMS!!
+    // LAV SØGE MULIGEHEDER I DIABLED OG ACTIVE ITEMS!!
+
     @GetMapping("/foundItems/search")
     List<FoundItem> foundTwo(@RequestParam(value = "brand", defaultValue = "%%") String strFoundBrand,
                              @RequestParam(value = "category", defaultValue = "%%") String strFoundCategory,
@@ -186,7 +189,7 @@ class ItemController {
 
 
     @GetMapping("/lostItems/{id}")
-    LostItem one(@PathVariable Long id) {
+    LostItem lostOne (@PathVariable Long id) {
         return lostRepo.findById(id)
                 .orElseThrow(() -> new LostItemIdNotFoundException(id));
     }
