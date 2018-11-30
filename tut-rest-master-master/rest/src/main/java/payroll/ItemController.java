@@ -18,16 +18,17 @@ class ItemController {
     private final FoundItemRepository foundRepo;
     private final LostUserRepository userRepo;
     private final EmployeeRepository empRepo;
-    //private final IssuedMatchRepository issuedMatchRepo;
+    private final IssuedMatchRepository issuedMatchRepo;
    // private final MatchRepository matchRepo;
 
     ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo,
-                   LostUserRepository userRepo, EmployeeRepository empRepo) {
+                   LostUserRepository userRepo, EmployeeRepository empRepo,
+                   IssuedMatchRepository issuedMatchRepo) {
         this.lostRepo = lostRepo;
         this.foundRepo = foundRepo;
         this.userRepo = userRepo;
         this.empRepo = empRepo;
-        //this.issuedMatchRepo = issuedMatchRepo;
+        this.issuedMatchRepo = issuedMatchRepo;
 }
 
     /**
@@ -180,6 +181,27 @@ class ItemController {
         }
         return getMatches; //
     }
+
+   @PostMapping ("/issuedMatch")
+    IssuedMatch ism (@RequestBody IssuedMatch ism) {
+        IssuedMatch savedIssuedMatch = issuedMatchRepo.save(ism);
+
+        savedIssuedMatch.setEmpID(activeEmp);
+        for (int i = 0; i < allLost().size(); i++) {
+           if (allLost().get(i).getLostItemID() == savedIssuedMatch.getLostID()) {
+               allLost().get(i).setActive(false);
+               //LostItem l = new LostItem();
+           }
+        }
+
+        for (int i = 0; i < allFound().size(); i++) {
+           if (allFound().get(i).getFoundItemID() == savedIssuedMatch.getFoundID()) {
+               allFound().get(i).setActive(false);
+           }
+        }
+
+        return savedIssuedMatch;
+   }
 
     /*
     ############################################################################################

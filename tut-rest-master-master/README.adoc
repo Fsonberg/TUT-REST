@@ -71,8 +71,8 @@ Despite being small, this Java class contains much:
 
 * `@Data` is a Lombok annotation to create all the getters, setters, `equals`, `hash`, and `toString` methods, based on the fields.
 * `@Entity` is a JPA annotation to make this object ready for storage in a JPA-based data store.
-* `id`, `category`, and `brand` are the attribute for our domain object, the first being marked with more JPA annotations to indicate it's the primary key and automatically populated by the JPA provider.
-* a custom constructor is created when we need to create a new instance, but don't yet have an id.
+* `issuedMatchID`, `category`, and `brand` are the attribute for our domain object, the first being marked with more JPA annotations to indicate it's the primary key and automatically populated by the JPA provider.
+* a custom constructor is created when we need to create a new instance, but don't yet have an issuedMatchID.
 
 With this domain object definition, we can now turn to https://spring.io/guides/gs/accessing-data-jpa/[Spring Data JPA] to handle the tedious database interactions.
 Spring Data repositories are interfaces with methods supporting reading, updating, deleting, and creating records against a back end data store. Some repositories also support data paging, and sorting, where appropriate. Spring Data synthesizes implementations based on conventions found in the naming of the methods in the interface.
@@ -85,7 +85,7 @@ NOTE: There are multiple lostRepo implementations besides JPA. You can use Sprin
 include::nonrest/src/main/java/payroll/EmployeeRepository.java[]
 ----
 
-This interface extends Spring Data JPA's `JpaRepository`, specifying the domain type as `Employee` and the id type as `Long`. This interface, though empty on the surface, packs a punch given it supports:
+This interface extends Spring Data JPA's `JpaRepository`, specifying the domain type as `Employee` and the issuedMatchID type as `Long`. This interface, though empty on the surface, packs a punch given it supports:
 
 * Creating new instances
 * Updating existing ones
@@ -124,8 +124,8 @@ Right-click and *Run* `PayRollApplication`, and this is what you get:
 
 ----
 ...
-2018-08-09 11:36:26.169  INFO 74611 --- [main] payroll.LoadDatabase : Preloading Employee(id=1, category=Bilbo Baggins, brand=burglar)
-2018-08-09 11:36:26.174  INFO 74611 --- [main] payroll.LoadDatabase : Preloading Employee(id=2, category=Frodo Baggins, brand=thief)
+2018-08-09 11:36:26.169  INFO 74611 --- [main] payroll.LoadDatabase : Preloading Employee(issuedMatchID=1, category=Bilbo Baggins, brand=burglar)
+2018-08-09 11:36:26.174  INFO 74611 --- [main] payroll.LoadDatabase : Preloading Employee(issuedMatchID=2, category=Frodo Baggins, brand=thief)
 ...
 ----
 
@@ -188,7 +188,7 @@ This will yield:
 < Date: Thu, 09 Aug 2018 17:58:00 GMT
 <
 * Connection #0 to host localhost left intact
-[{"id":1,"category":"Bilbo Baggins","brand":"burglar"},{"id":2,"category":"Frodo Baggins","brand":"thief"}]
+[{"issuedMatchID":1,"category":"Bilbo Baggins","brand":"burglar"},{"issuedMatchID":2,"category":"Frodo Baggins","brand":"thief"}]
 ----
 
 Here you can see the pre-loaded data, in a compacted format.
@@ -230,7 +230,7 @@ $ curl -X POST localhost:8080/employees -H 'Content-type:application/json' -d '{
 Creates a new `Employee` record, and then sends the content back to us:
 
 ----
-{"id":3,"category":"Samwise Gamgee","brand":"gardener"}
+{"issuedMatchID":3,"category":"Samwise Gamgee","brand":"gardener"}
 ----
 
 You can alter the user:
@@ -242,7 +242,7 @@ $ curl -X PUT localhost:8080/employees/3 -H 'Content-type:application/json' -d '
 Updates the user:
 
 ----
-{"id":3,"category":"Samwise Gamgee","brand":"ring bearer"}
+{"issuedMatchID":3,"category":"Samwise Gamgee","brand":"ring bearer"}
 ----
 
 WARNING: Depending on how you construct your service can have significant impacts. In this situation, *replace* is a better description than *update*. For example, if the category was NOT provided, it would instead get nulled out.
@@ -299,7 +299,7 @@ include::rest/src/main/java/payroll/EmployeeController.java[tag=get-single-item]
 This is very similar to what we had before, but a few things have changed:
 
 * The return type of the method has changed from `Employee` to `Resource<Employee>`. `Resource<T>` is a generic container from Spring HATEOAS that includes not only the data but a collection of links.
-* `linkTo(methodOn(EmployeeController.class).one(id)).withSelfRel()` asks that Spring HATEOAS build a link to the `EmployeeController` 's `one()` method, and flag it as a https://www.iana.org/assignments/link-relations/link-relations.xhtml[self] link.
+* `linkTo(methodOn(EmployeeController.class).one(issuedMatchID)).withSelfRel()` asks that Spring HATEOAS build a link to the `EmployeeController` 's `one()` method, and flag it as a https://www.iana.org/assignments/link-relations/link-relations.xhtml[self] link.
 * `linkTo(methodOn(EmployeeController.class).all()).withRel("employees")` asks Spring HATEOAS to build a link to the aggregate root, `all()`, and call it "employees".
 
 What do we mean by "build a link"? One of Spring HATEOAS's core types is `Link`. It includes a *URI* and a *rel* (relation).
@@ -314,7 +314,7 @@ If you restart the application and query the employee record of *Bilbo*, you'll 
 [source,javascript]
 ----
 {
-  "id": 1,
+  "issuedMatchID": 1,
   "category": "Bilbo Baggins",
   "brand": "burglar",
   "_links": {
@@ -328,7 +328,7 @@ If you restart the application and query the employee record of *Bilbo*, you'll 
 }
 ----
 
-This decompressed output shows not only the data elements you saw earlier (`id`, `category` and `brand`), but also a `_links` entry containing two URIs. This entire document is formatted using http://stateless.co/hal_specification.html[HAL].
+This decompressed output shows not only the data elements you saw earlier (`issuedMatchID`, `category` and `brand`), but also a `_links` entry containing two URIs. This entire document is formatted using http://stateless.co/hal_specification.html[HAL].
 
 HAL is a lightweight https://tools.ietf.org/html/draft-kelly-json-hal-08[mediatype] that allows encoding not just data but also hypermedia controls, alerting consumers to other parts of the API they can navigate toward. In this case,
 there is a "self" link (kind of like a `this` statement in code) along with a link back to the *aggregate root*.
@@ -360,7 +360,7 @@ If you restart the application and fetch the aggregate root, you can see what th
   "_embedded": {
     "employeeList": [
       {
-        "id": 1,
+        "issuedMatchID": 1,
         "category": "Bilbo Baggins",
         "brand": "burglar",
         "_links": {
@@ -373,7 +373,7 @@ If you restart the application and fetch the aggregate root, you can see what th
         }
       },
       {
-        "id": 2,
+        "issuedMatchID": 2,
         "category": "Frodo Baggins",
         "brand": "thief",
         "_links": {
@@ -506,7 +506,7 @@ Add new fields to your JSON representations, but don't take any away. Like this:
 [source,javascript]
 ----
 {
-  "id": 1,
+  "issuedMatchID": 1,
   "firstName": "Bilbo",
   "lastName": "Baggins",
   "brand": "burglar",
@@ -578,7 +578,7 @@ The output is shown below:
 < Date: Fri, 10 Aug 2018 19:44:43 GMT
 <
 {
-  "id": 3,
+  "issuedMatchID": 3,
   "firstName": "Samwise",
   "lastName": "Gamgee",
   "brand": "gardener",
@@ -611,7 +611,7 @@ static method `created()` where we can plug in the resource's URI.
 By grabbing the `resource` you can fetch it's "self" link via the `getId()` method call. This method yields a `Link` which you can
 turn into a Java `URI`. To tie things up nicely, you inject the `resource` itself into the `body()` method.
 
-IMPORTANT: In REST, a resource's *id* is the URI of that resource. Hence, Spring HATEOAS doesn't hand you the `id` field of the underlying
+IMPORTANT: In REST, a resource's *issuedMatchID* is the URI of that resource. Hence, Spring HATEOAS doesn't hand you the `issuedMatchID` field of the underlying
 data type (which no client should), but instead, the URI for it. And don't confuse `ResourceSupport.getId()` with `Employee.getId()`.
 
 It's debatable if *HTTP 201 Created* carries the right semantics since we aren't necessarily "creating" a new resource. But it comes pre-loaded with a *Location* response header, so run with it.
@@ -634,7 +634,7 @@ $ curl -v -X PUT localhost:8080/employees/3 -H 'Content-Type:application/json' -
 < Transfer-Encoding: chunked
 < Date: Fri, 10 Aug 2018 19:52:56 GMT
 {
-	"id": 3,
+	"issuedMatchID": 3,
 	"firstName": "Samwise",
 	"lastName": "Gamgee",
 	"brand": "ring bearer",
@@ -762,7 +762,7 @@ include::links/src/main/java/payroll/OrderResourceAssembler.java[]
 ----
 
 This resource assembler always includes the *self* link to the single-item resource as well as a link back to the aggregate root.
-But it also includes two conditional links to `OrderController.cancel(id)` as well as `OrderController.complete(id)` (not yet defined). These
+But it also includes two conditional links to `OrderController.cancel(issuedMatchID)` as well as `OrderController.complete(issuedMatchID)` (not yet defined). These
 links are ONLY shown when the order's status is `Status.IN_PROGRESS`.
 
 If clients can adopt HAL and the ability to read links instead of simply reading the data of plain old JSON, they can trade
@@ -806,7 +806,7 @@ $ curl -v http://localhost:8080/orders
   "_embedded": {
     "orderList": [
       {
-        "id": 3,
+        "issuedMatchID": 3,
         "description": "MacBook Pro",
         "status": "COMPLETED",
         "_links": {
@@ -819,7 +819,7 @@ $ curl -v http://localhost:8080/orders
         }
       },
       {
-        "id": 4,
+        "issuedMatchID": 4,
         "description": "iPhone",
         "status": "IN_PROGRESS",
         "_links": {
@@ -868,7 +868,7 @@ $ curl -v -X DELETE http://localhost:8080/orders/4/cancel
 < Date: Mon, 27 Aug 2018 15:02:10 GMT
 <
 {
-  "id": 4,
+  "issuedMatchID": 4,
   "description": "iPhone",
   "status": "CANCELLED",
   "_links": {

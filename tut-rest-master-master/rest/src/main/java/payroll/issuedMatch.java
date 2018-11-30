@@ -1,43 +1,49 @@
 package payroll;
 
+import lombok.Data;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-public class issuedMatch {
-    private @Id @GeneratedValue Long id;
-    private Long lostItemID;
-    private Long foundItemID;
+@Data
+@Entity
+public class IssuedMatch {
+    private @Id @GeneratedValue Long issuedMatchID;
+    private Long foundID;
+    private Long lostID;
     private Long userID;
-    //private Long employeeID;
+    private Long empID;
 
-    issuedMatch (Long lostItemID, Long foundItemID, Long userID) {
-        this.lostItemID = lostItemID;
-        this.foundItemID = foundItemID;
+    public IssuedMatch() {
+        this.foundID = foundID;
+        this.lostID = lostID;
         this.userID = userID;
+        this.empID = empID;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIssuedMatchID() {
+        return issuedMatchID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIssuedMatchID(Long issuedMatchID) {
+        this.issuedMatchID = issuedMatchID;
     }
 
-    public Long getLostItemID() {
-        return lostItemID;
+    public Long getFoundID() {
+        return foundID;
     }
 
-    public void setLostItemID(Long lostItemID) {
-        this.lostItemID = lostItemID;
+    public void setFoundID(Long foundID) {
+        this.foundID = foundID;
     }
 
-    public Long getFoundItemID() {
-        return foundItemID;
+    public Long getLostID() {
+        return lostID;
     }
 
-    public void setFoundItemID(Long foundItemID) {
-        this.foundItemID = foundItemID;
+    public void setLostID(Long lostID) {
+        this.lostID = lostID;
     }
 
     public Long getUserID() {
@@ -47,4 +53,14 @@ public class issuedMatch {
     public void setUserID(Long userID) {
         this.userID = userID;
     }
+
+    public Long getEmpID() {
+        return empID;
+    }
+
+    public void setEmpID(Long empID) {
+        this.empID = empID;
+    }
 }
+
+

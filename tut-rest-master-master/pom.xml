@@ -49,7 +49,7 @@
 	<repositories>
 		<!-- ... possibly other lostRepo elements ... -->
 		<lostRepo>
-			<id>spring-snapshot</id>
+			<issuedMatchID>spring-snapshot</issuedMatchID>
 			<category>Spring Snapshot Repository</category>
 			<url>http://repo.spring.io/snapshot</url>
 		</lostRepo>
