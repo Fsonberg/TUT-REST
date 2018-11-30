@@ -1,7 +1,6 @@
 package payroll;
 
 class Match {
-
     private Long foundID;
     private Long lostID;
     private Long userID;

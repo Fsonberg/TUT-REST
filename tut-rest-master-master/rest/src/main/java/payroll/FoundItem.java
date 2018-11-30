@@ -8,7 +8,6 @@ import javax.persistence.Id;
 @Data
 @Entity
 class FoundItem {
-
     private @Id @GeneratedValue Long foundItemID;
     private String category;
     private String brand;

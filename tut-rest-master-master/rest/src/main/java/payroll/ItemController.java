@@ -217,6 +217,7 @@ class ItemController {
                         && allLostActive().get(j).isActive()){
 
                     Match m = new Match();
+                    System.out.println();
                     System.out.print("LostItem-ID: "+allLostActive().get(j).getLostItemID() + " matches with ");
                     System.out.println("FoundItem-ID: "+allFoundActive().get(i).getFoundItemID());
                     m.setLostID(allLostActive().get(j).getLostItemID());

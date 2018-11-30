@@ -8,14 +8,12 @@ import javax.persistence.Id;
 @Data
 @Entity
 class LostItem {
-
 	private @Id @GeneratedValue Long lostItemID;
 	private String category;
 	private String brand;
 	private String color;
 	private Long userID; // FOREIGN KEY FRA USER.JAVA
 	private boolean active;
-
 
 	LostItem(String category, String brand, String color, boolean active) {
 		this.category = category;
