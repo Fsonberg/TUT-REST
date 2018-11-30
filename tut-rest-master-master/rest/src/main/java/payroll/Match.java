@@ -1,18 +1,7 @@
 package payroll;
 
-import lombok.Data;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-@Data
-@Entity
 class Match {
 
-    private @Id
-    @GeneratedValue
-    Long matchID;
     private Long foundID;
     private Long lostID;
     private Long userID;
@@ -39,14 +28,6 @@ class Match {
 
     public void setUserID(Long userID) {
         this.userID = userID;
-    }
-
-    public Long getMatchID() {
-        return matchID;
-    }
-
-    public void setMatchID(Long matchID) {
-        this.matchID = matchID;
     }
 
     public Long getFoundID() {
