@@ -1,7 +1,6 @@
 package payroll;
 
 import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,8 +14,6 @@ public class Employee {
     private String address;
     private String phoneNumber;
     private String email;
-
-
 
     public Employee(String firstName, String lastName, String address, String phoneNumber, String email) {
         this.firstName = firstName;

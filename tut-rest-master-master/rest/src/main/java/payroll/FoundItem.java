@@ -1,7 +1,6 @@
 package payroll;
 
 import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,12 +10,10 @@ import javax.persistence.Id;
 class FoundItem {
 
     private @Id @GeneratedValue Long foundItemID;
-
     private String category;
     private String brand;
     private String color;
     private Long empID;
-
     private boolean active;
 
 

@@ -2,6 +2,7 @@ package payroll;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.LongToIntFunction;
 
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.*;
@@ -38,20 +39,19 @@ class ItemController {
     @PostMapping ("/users")
     Users newUser (@RequestBody Users newUser) {return userRepo.save(newUser);}
 
-
     /**
      * Users Get
      */
 
     @GetMapping("/users")
-    List<Users> allUsers() {
-        ArrayList users = new ArrayList();
-
-        return userRepo.findAll();
-    }
+    List<Users> allUsers() {return userRepo.findAll();}
 
     @GetMapping ("/users/{id}")
     Users singleUserID (@PathVariable Long id){
+        // FIX EXEPTIONS!!!
+        // FIX EXEPTIONS!!!
+        // FIX EXEPTIONS!!!
+        // FIX EXEPTIONS!!!
         return userRepo.findById(id).orElseThrow(()-> new LostItemIdNotFoundException(id));
     }
 
@@ -72,26 +72,25 @@ class ItemController {
     @PostMapping("/foundItems")
     List newFoundItem(@RequestBody FoundItem newFoundItem) {
         FoundItem savedFoundItem = foundRepo.save(newFoundItem);
-        savedFoundItem.setActive(true);
         ArrayList<Match> postMatches = new ArrayList<>();
+        savedFoundItem.setActive(true);
         savedFoundItem.setEmpID(activeEmp);
 
-        for (int i = 0; i < allLost().size(); i++) {
-            if (savedFoundItem.getCategory().equals(allLost().get(i).getCategory())
-                    && savedFoundItem.getBrand().equals(allLost().get(i).getBrand())
-                    && savedFoundItem.getColor().equals(allLost().get(i).getColor())
-                    && allLost().get(i).isActive()) {
+        for (int i = 0; i < allFoundActive().size(); i++) {
+            if (savedFoundItem.getCategory().equals(allLostActive().get(i).getCategory())
+                    && savedFoundItem.getBrand().equals(allLostActive().get(i).getBrand())
+                    && savedFoundItem.getColor().equals(allLostActive().get(i).getColor())
+                    && allLostActive().get(i).isActive()) {
 
                 Match m = new Match();
                 m.setFoundID(savedFoundItem.getFoundItemID());
-                m.setLostID(allLost().get(i).getLostItemID());
-                m.setUserID(allLost().get(i).getUserID());
+                m.setLostID(allLostActive().get(i).getLostItemID());
+                m.setUserID(allLostActive().get(i).getUserID());
                 postMatches.add(m);
             }
         }
         if (postMatches.size() == 0) {
             ArrayList postedItemNoMatch = new ArrayList();
-
             postedItemNoMatch.add(savedFoundItem);
             return postedItemNoMatch;
         } else {
@@ -138,7 +137,8 @@ class ItemController {
                              @RequestParam(value = "category", defaultValue = "%%") String strFoundCategory,
                              @RequestParam(value = "color", defaultValue = "%%") String strFoundColor){
 
-        return foundRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase(strFoundBrand, strFoundCategory,strFoundColor);
+        return foundRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase
+                (strFoundBrand, strFoundCategory,strFoundColor);
     }
 
     /**
@@ -148,6 +148,7 @@ class ItemController {
     @PostMapping("/lostItems")
     LostItem newItem(@RequestBody LostItem newItem) {
         newItem.setUserID(activeCustomer);
+        newItem.setActive(true);
 
         return lostRepo.save(newItem);
     }
@@ -161,6 +162,29 @@ class ItemController {
         return lostRepo.findAll();
     }
 
+    @GetMapping("/lostItemsA")
+    List<LostItem> allLostActive() {
+        ArrayList<LostItem> ala = new ArrayList<>();
+        for (int i = 0; i < allLost().size(); i++) {
+            if (allLost().get(i).isActive()) {
+                ala.add(allLost().get(i));
+            }
+        }
+        return ala;
+    }
+
+    @GetMapping("/lostItemsD")
+    List<LostItem> allLostDisabled() {
+        ArrayList<LostItem> ald = new ArrayList<>();
+        for (int i = 0; i < allLost().size(); i++) {
+            if (!allLost().get(i).isActive()) {
+                ald.add(allLost().get(i));
+            }
+        }
+        return ald;
+    }
+
+
     @GetMapping("/lostItems/{id}")
     LostItem one(@PathVariable Long id) {
         return lostRepo.findById(id)
@@ -172,7 +196,8 @@ class ItemController {
                            @RequestParam(value = "category", defaultValue = "%%") String strLostCategory,
                            @RequestParam(value = "color", defaultValue = "%%") String strLostColor){
 
-        return lostRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase(strLostBrand, strLostCategory, strLostColor);
+        return lostRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase
+                (strLostBrand, strLostCategory, strLostColor);
     }
 
     /**
@@ -184,19 +209,19 @@ class ItemController {
         ArrayList<Match> getMatches = new ArrayList<>();
 
         for (int i = 0; i <allFoundActive().size() ; i++) {
-            for (int j = 0; j <allLost().size() ; j++) {
-                if(allFoundActive().get(i).getCategory().equals(allLost().get(j).getCategory())
-                        && allFoundActive().get(i).getBrand().equals(allLost().get(j).getBrand())
-                        && allFoundActive().get(i).getColor().equals(allLost().get(j).getColor())
+            for (int j = 0; j <allLostActive().size() ; j++) {
+                if(allFoundActive().get(i).getCategory().equals(allLostActive().get(j).getCategory())
+                        && allFoundActive().get(i).getBrand().equals(allLostActive().get(j).getBrand())
+                        && allFoundActive().get(i).getColor().equals(allLostActive().get(j).getColor())
                         && allFoundActive().get(i).isActive()
-                        && allLost().get(j).isActive()){
+                        && allLostActive().get(j).isActive()){
 
                     Match m = new Match();
-                    System.out.print("LostItem-ID: "+allLost().get(j).getLostItemID() + " matches with ");
-                    System.out.println("FoundItem-ID: "+allFound().get(i).getFoundItemID());
-                    m.setLostID(allLost().get(j).getLostItemID());
+                    System.out.print("LostItem-ID: "+allLostActive().get(j).getLostItemID() + " matches with ");
+                    System.out.println("FoundItem-ID: "+allFoundActive().get(i).getFoundItemID());
+                    m.setLostID(allLostActive().get(j).getLostItemID());
                     m.setFoundID(allFoundActive().get(i).getFoundItemID());
-                    m.setUserID(allLost().get(j).getUserID());
+                    m.setUserID(allLostActive().get(j).getUserID());
                     m.setEmpID(allFoundActive().get(i).getEmpID());
                     getMatches.add(m);
                 }
@@ -204,32 +229,35 @@ class ItemController {
         }
         return getMatches; //
     }
+/*
 
-   @PostMapping ("/issuedMatch")
-    IssuedMatch ism (@RequestBody IssuedMatch ism) {
-        IssuedMatch savedIssuedMatch = issuedMatchRepo.save(ism);
+  */
+   @PostMapping ("/issueAMatch")
+    IssuedMatch issueAMatch(@RequestBody IssuedMatch issueAMatch) {
+        IssuedMatch savedIssuedMatch = issueAMatch;
 
         savedIssuedMatch.setEmpID(activeEmp);
-        for (int i = 0; i < allLost().size(); i++) {
-           if (allLost().get(i).getLostItemID() == savedIssuedMatch.getLostID()) {
-               allLost().get(i).setActive(false);
-               //LostItem l = new LostItem();
+        for (int i = 0; i < allLostActive().size(); i++) {
+           if (savedIssuedMatch.getLostID().equals(allLostActive().get(i).getLostItemID())) {
+               allLostActive().get(i).setActive(false);
            }
         }
 
         for (int i = 0; i < allFoundActive().size(); i++) {
-           if (allFoundActive().get(i).getFoundItemID() == savedIssuedMatch.getFoundID()) {
+           if (savedIssuedMatch.getFoundID().equals(allFoundActive().get(i).getFoundItemID())) {
                allFoundActive().get(i).setActive(false);
            }
         }
-
-        return savedIssuedMatch;
+        return issuedMatchRepo.save(savedIssuedMatch);
    }
+
+   @GetMapping ("/issuedMatches")
+   List<IssuedMatch> issuedMatches() {return issuedMatchRepo.findAll(); }
 
     /*
     ############################################################################################
     ############################################################################################
-    ############################################ FIX EN DAG ################################################
+    ############################################ FIX EN DAG ####################################
     ############################################################################################
     ############################################################################################
     */

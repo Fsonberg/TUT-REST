@@ -1,7 +1,6 @@
 package payroll;
 
 import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,7 +14,6 @@ class LostItem {
 	private String brand;
 	private String color;
 	private Long userID; // FOREIGN KEY FRA USER.JAVA
-
 	private boolean active;
 
 
