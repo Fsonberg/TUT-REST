@@ -8,7 +8,7 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-public class IssuedMatch {
+class IssuedMatch {
     private @Id @GeneratedValue Long issuedMatchID;
     private Long foundID;
     private Long lostID;

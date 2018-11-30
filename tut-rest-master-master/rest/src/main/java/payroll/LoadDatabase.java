@@ -27,7 +27,7 @@ class LoadDatabase {
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "black", true )));
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics","Android", "yellow", true )));
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Clothes","Gucci", "green", true)));
-			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "blue", true)));
+			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "blue", false)));
 
 			//USER REPOSITORY
 			System.out.println("preloading " + userRepo.save(new Users("Frederik", "Sonberg", "Ishøj", "50520020", "getGit@iasjd.aijs")));

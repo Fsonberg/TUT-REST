@@ -61,7 +61,8 @@ class ItemController {
                         @RequestParam(value = "address", defaultValue = "%%")String strAddress,
                         @RequestParam(value = "phoneNumber", defaultValue = "%%")String strPhoneNumber){
 
-        return userRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAllIgnoreCase(strFirstName,strLastName,strAddress,strPhoneNumber);
+        return userRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAllIgnoreCase
+                (strFirstName,strLastName,strAddress,strPhoneNumber);
     }
 
     /**
@@ -104,6 +105,28 @@ class ItemController {
 
     @GetMapping("/foundItems")
     List<FoundItem> allFound(){return foundRepo.findAll();}
+
+    @GetMapping("/foundItemsA")
+    List<FoundItem> allFoundActive() {
+        ArrayList afa = new ArrayList();
+        for (int i = 0; i < allFound().size(); i++) {
+            if (allFound().get(i).isActive()) {
+                afa.add(allFound().get(i));
+            }
+        }
+        return afa;
+    }
+
+    @GetMapping("/foundItemsD")
+    List<FoundItem> allFoundDisabled() {
+        ArrayList afd = new ArrayList();
+        for (int i = 0; i < allFound().size(); i++) {
+            if (!allFound().get(i).isActive()) {
+                afd.add(allFound().get(i));
+            }
+        }
+        return afd;
+    }
 
     @GetMapping("/foundItems/{id}")
     FoundItem foundOne(@PathVariable Long id){
@@ -160,21 +183,21 @@ class ItemController {
     List<Match> matchLostFound(){
         ArrayList<Match> getMatches = new ArrayList<>();
 
-        for (int i = 0; i <allFound().size() ; i++) {
+        for (int i = 0; i <allFoundActive().size() ; i++) {
             for (int j = 0; j <allLost().size() ; j++) {
-                if(allFound().get(i).getCategory().equals(allLost().get(j).getCategory())
-                        && allFound().get(i).getBrand().equals(allLost().get(j).getBrand())
-                        && allFound().get(i).getColor().equals(allLost().get(j).getColor())
-                        && allFound().get(i).isActive()
+                if(allFoundActive().get(i).getCategory().equals(allLost().get(j).getCategory())
+                        && allFoundActive().get(i).getBrand().equals(allLost().get(j).getBrand())
+                        && allFoundActive().get(i).getColor().equals(allLost().get(j).getColor())
+                        && allFoundActive().get(i).isActive()
                         && allLost().get(j).isActive()){
 
                     Match m = new Match();
-                    System.out.println("ID-LostItem: "+allLost().get(j).getLostItemID());
-                    System.out.println("ID-FoundItem: "+allFound().get(i).getFoundItemID());
+                    System.out.print("LostItem-ID: "+allLost().get(j).getLostItemID() + " matches with ");
+                    System.out.println("FoundItem-ID: "+allFound().get(i).getFoundItemID());
                     m.setLostID(allLost().get(j).getLostItemID());
-                    m.setFoundID(allFound().get(i).getFoundItemID());
+                    m.setFoundID(allFoundActive().get(i).getFoundItemID());
                     m.setUserID(allLost().get(j).getUserID());
-                    m.setEmpID(allFound().get(i).getEmpID());
+                    m.setEmpID(allFoundActive().get(i).getEmpID());
                     getMatches.add(m);
                 }
             }
@@ -194,9 +217,9 @@ class ItemController {
            }
         }
 
-        for (int i = 0; i < allFound().size(); i++) {
-           if (allFound().get(i).getFoundItemID() == savedIssuedMatch.getFoundID()) {
-               allFound().get(i).setActive(false);
+        for (int i = 0; i < allFoundActive().size(); i++) {
+           if (allFoundActive().get(i).getFoundItemID() == savedIssuedMatch.getFoundID()) {
+               allFoundActive().get(i).setActive(false);
            }
         }
 
