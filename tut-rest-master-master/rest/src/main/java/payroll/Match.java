@@ -3,13 +3,13 @@ package payroll;
 class Match {
     private Long foundID;
     private Long lostID;
-    private Long userID;
+    private Long customerID;
     private Long empID;
 
     Match() {
         this.lostID = lostID;
         this.foundID = foundID;
-        this.userID = userID;
+        this.customerID = customerID;
         this.empID = empID;
     }
 
@@ -21,12 +21,12 @@ class Match {
         this.empID = empID;
     }
 
-    public Long getUserID() {
-        return userID;
+    public Long getCustomerID() {
+        return customerID;
     }
 
-    public void setUserID(Long userID) {
-        this.userID = userID;
+    public void setCustomerID(Long customerID) {
+        this.customerID = customerID;
     }
 
     public Long getFoundID() {

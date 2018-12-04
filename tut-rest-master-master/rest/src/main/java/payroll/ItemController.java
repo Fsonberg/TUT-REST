@@ -2,7 +2,6 @@ package payroll;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.LongToIntFunction;
 
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.*;
@@ -17,51 +16,51 @@ class ItemController {
     private Long activeEmp = 18L;
     private final LostItemRepository lostRepo;
     private final FoundItemRepository foundRepo;
-    private final LostUserRepository userRepo;
+    private final CustomerRepository CustomerRepo;
     private final EmployeeRepository empRepo;
     private final IssuedMatchRepository issuedMatchRepo;
    // private final MatchRepository matchRepo;
 
     ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo,
-                   LostUserRepository userRepo, EmployeeRepository empRepo,
+                   CustomerRepository CustomerRepo, EmployeeRepository empRepo,
                    IssuedMatchRepository issuedMatchRepo) {
         this.lostRepo = lostRepo;
         this.foundRepo = foundRepo;
-        this.userRepo = userRepo;
+        this.CustomerRepo = CustomerRepo;
         this.empRepo = empRepo;
         this.issuedMatchRepo = issuedMatchRepo;
 }
 
     /**
-     * Users Post
+     * Customer Post
      */
 
-    @PostMapping ("/users")
-    Users newUser (@RequestBody Users newUser) {return userRepo.save(newUser);}
+    @PostMapping ("/customer")
+    Customer newCustomer (@RequestBody Customer newCustomer) {return CustomerRepo.save(newCustomer);}
 
     /**
-     * Users Get
+     * Customer Get
      */
 
-    @GetMapping("/users")
-    List<Users> allUsers() {return userRepo.findAll();}
+    @GetMapping("/customers")
+    List<Customer> allCustomers() {return CustomerRepo.findAll();}
 
-    @GetMapping ("/users/{id}")
-    Users singleUserID (@PathVariable Long id){
+    @GetMapping ("/customers/{id}")
+    Customer singleCustomerID (@PathVariable Long id){
         // FIX EXEPTIONS!!!
         // FIX EXEPTIONS!!!
         // FIX EXEPTIONS!!!
         // FIX EXEPTIONS!!!
-        return userRepo.findById(id).orElseThrow(()-> new LostItemIdNotFoundException(id));
+        return CustomerRepo.findById(id).orElseThrow(()-> new LostItemIdNotFoundException(id));
     }
 
-    @GetMapping("/users/search")
-    List<Users> oneOrMoreUsers (@RequestParam(value = "firstName", defaultValue = "%%")String strFirstName,
-                        @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
-                        @RequestParam(value = "address", defaultValue = "%%")String strAddress,
-                        @RequestParam(value = "phoneNumber", defaultValue = "%%")String strPhoneNumber){
+    @GetMapping("/customers/search")
+    List<Customer> oneOrMoreCustomers (@RequestParam(value = "firstName", defaultValue = "%%")String strFirstName,
+                                   @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
+                                   @RequestParam(value = "address", defaultValue = "%%")String strAddress,
+                                   @RequestParam(value = "phoneNumber", defaultValue = "%%")String strPhoneNumber){
 
-        return userRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAllIgnoreCase
+        return CustomerRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAllIgnoreCase
                 (strFirstName,strLastName,strAddress,strPhoneNumber);
     }
 
@@ -85,7 +84,7 @@ class ItemController {
                 Match m = new Match();
                 m.setFoundID(savedFoundItem.getFoundItemID());
                 m.setLostID(allLostActive().get(i).getLostItemID());
-                m.setUserID(allLostActive().get(i).getUserID());
+                m.setCustomerID(allLostActive().get(i).getCustomerID());
                 postMatches.add(m);
             }
         }
@@ -150,7 +149,7 @@ class ItemController {
 
     @PostMapping("/lostItems")
     LostItem newItem(@RequestBody LostItem newItem) {
-        newItem.setUserID(activeCustomer);
+        newItem.setCustomerID(activeCustomer);
         newItem.setActive(true);
 
         return lostRepo.save(newItem);
@@ -225,7 +224,7 @@ class ItemController {
                     System.out.println("FoundItem-ID: "+allFoundActive().get(i).getFoundItemID());
                     m.setLostID(allLostActive().get(j).getLostItemID());
                     m.setFoundID(allFoundActive().get(i).getFoundItemID());
-                    m.setUserID(allLostActive().get(j).getUserID());
+                    m.setCustomerID(allLostActive().get(j).getCustomerID());
                     m.setEmpID(allFoundActive().get(i).getEmpID());
                     getMatches.add(m);
                 }

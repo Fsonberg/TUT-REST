@@ -12,13 +12,13 @@ class IssuedMatch {
     private @Id @GeneratedValue Long issuedMatchID;
     private Long foundID;
     private Long lostID;
-    private Long userID;
+    private Long customerID;
     private Long empID;
 
     public IssuedMatch() {
         this.foundID = foundID;
         this.lostID = lostID;
-        this.userID = userID;
+        this.customerID = customerID;
         this.empID = empID;
     }
 
@@ -46,12 +46,12 @@ class IssuedMatch {
         this.lostID = lostID;
     }
 
-    public Long getUserID() {
-        return userID;
+    public Long getCustomerID() {
+        return customerID;
     }
 
-    public void setUserID(Long userID) {
-        this.userID = userID;
+    public void setCustomerID(Long customerID) {
+        this.customerID = customerID;
     }
 
     public Long getEmpID() {

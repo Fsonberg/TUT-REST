@@ -12,7 +12,7 @@ class LostItem {
 	private String category;
 	private String brand;
 	private String color;
-	private Long userID; // FOREIGN KEY FRA USER.JAVA
+	private Long customerID; // FOREIGN KEY FRA CUSTOMER.JAVA
 	private boolean active;
 
 	LostItem(String category, String brand, String color, boolean active) {
@@ -23,12 +23,12 @@ class LostItem {
 
 	}
 
-	public Long getUserID() {
-		return userID;
+	public Long getCustomerID() {
+		return customerID;
 	}
 
-	public void setUserID(Long userID) {
-		this.userID = userID;
+	public void setCustomerID(Long customerID) {
+		this.customerID = customerID;
 	}
 
 	public boolean isActive() {

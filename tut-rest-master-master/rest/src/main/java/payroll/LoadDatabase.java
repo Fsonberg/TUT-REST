@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 class LoadDatabase {
 
 	@Bean
-	CommandLineRunner initDatabase(LostItemRepository lostRepo, FoundItemRepository foundRepo, LostUserRepository userRepo) {
+	CommandLineRunner initDatabase(LostItemRepository lostRepo, FoundItemRepository foundRepo, CustomerRepository customerRepo) {
 		return args -> {
 			//LOST REPOSITORY
 			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue",true)));
@@ -29,9 +29,9 @@ class LoadDatabase {
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Clothes","Gucci", "green", true)));
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "blue", false)));
 
-			//USER REPOSITORY
-			System.out.println("preloading " + userRepo.save(new Users("Frederik", "Sonberg", "Ishøj", "50520020", "getGit@iasjd.aijs")));
-			System.out.println("preloading " + userRepo.save(new Users("Rune", "Riber", "Roskilde", "1823713913", "getGit@iasjd.aijs")));
+			//CUSTOMER REPOSITORY
+			System.out.println("preloading " + customerRepo.save(new Customer("Frederik", "Sonberg", "Ishøj", "50520020", "getGit@iasjd.aijs")));
+			System.out.println("preloading " + customerRepo.save(new Customer("Rune", "Riber", "Roskilde", "1823713913", "getGit@iasjd.aijs")));
 		};
 	}
 }

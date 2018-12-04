@@ -7,15 +7,15 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-public class Users {
-    private @Id @GeneratedValue Long userID;
+public class Customer {
+    private @Id @GeneratedValue Long CustomerID;
     private String firstName;
     private String lastName;
     private String address;
     private String phoneNumber;
     private String email;
 
-    public Users(String firstName, String lastName, String address, String phoneNumber, String email) {
+    public Customer(String firstName, String lastName, String address, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -31,12 +31,12 @@ public class Users {
         this.email = email;
     }
 
-    public Long getUserID() {
-        return userID;
+    public Long getCustomerID() {
+        return CustomerID;
     }
 
-    public void setUserID(Long userID) {
-        this.userID = userID;
+    public void setCustomerID(Long CustomerID) {
+        this.CustomerID = CustomerID;
     }
 
     public String getFirstName() {
