@@ -30,8 +30,8 @@ class LoadDatabase {
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "blue", false)));
 
 			//CUSTOMER REPOSITORY
-			System.out.println("preloading " + customerRepo.save(new Customer("Frederik", "Sonberg", "Ishøj", "50520020", "getGit@iasjd.aijs")));
-			System.out.println("preloading " + customerRepo.save(new Customer("Rune", "Riber", "Roskilde", "1823713913", "getGit@iasjd.aijs")));
+			System.out.println("preloading " + customerRepo.save(new Customer("Frederik", "Sonberg", "Ishøj", 50520020, "sonber@tændstik.dk")));
+			System.out.println("preloading " + customerRepo.save(new Customer("Rune", "Riber", "Roskilde", 20944162, "runeriber@gmail.com")));
 		};
 	}
 }
