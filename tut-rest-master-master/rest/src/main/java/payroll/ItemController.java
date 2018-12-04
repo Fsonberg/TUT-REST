@@ -19,7 +19,6 @@ class ItemController {
     private final CustomerRepository CustomerRepo;
     private final EmployeeRepository empRepo;
     private final IssuedMatchRepository issuedMatchRepo;
-   // private final MatchRepository matchRepo;
 
     ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo,
                    CustomerRepository CustomerRepo, EmployeeRepository empRepo,
@@ -82,8 +81,8 @@ class ItemController {
                     && allLostActive().get(i).isActive()) {
 
                 Match m = new Match();
-                m.setFoundID(savedFoundItem.getFoundItemID());
-                m.setLostID(allLostActive().get(i).getLostItemID());
+                m.setFoundItemID(savedFoundItem.getFoundItemID());
+                m.setLostItemID(allLostActive().get(i).getLostItemID());
                 m.setCustomerID(allLostActive().get(i).getCustomerID());
                 postMatches.add(m);
             }
@@ -222,8 +221,8 @@ class ItemController {
                     System.out.println();
                     System.out.print("LostItem-ID: "+allLostActive().get(j).getLostItemID() + " matches with ");
                     System.out.println("FoundItem-ID: "+allFoundActive().get(i).getFoundItemID());
-                    m.setLostID(allLostActive().get(j).getLostItemID());
-                    m.setFoundID(allFoundActive().get(i).getFoundItemID());
+                    m.setLostItemID(allLostActive().get(j).getLostItemID());
+                    m.setFoundItemID(allFoundActive().get(i).getFoundItemID());
                     m.setCustomerID(allLostActive().get(j).getCustomerID());
                     m.setEmpID(allFoundActive().get(i).getEmpID());
                     getMatches.add(m);
@@ -236,26 +235,26 @@ class ItemController {
 
   */
    @PostMapping ("/issueAMatch")
-    IssuedMatch issueAMatch(@RequestBody IssuedMatch issueAMatch) {
-        IssuedMatch savedIssuedMatch = issueAMatch;
+   Match issueAMatch(@RequestBody Match issueAMatch) {
+        Match savedMatch = issueAMatch;
 
-        savedIssuedMatch.setEmpID(activeEmp);
+        savedMatch.setEmpID(activeEmp);
         for (int i = 0; i < allLostActive().size(); i++) {
-           if (savedIssuedMatch.getLostID().equals(allLostActive().get(i).getLostItemID())) {
+           if (savedMatch.getLostItemID().equals(allLostActive().get(i).getLostItemID())) {
                allLostActive().get(i).setActive(false);
            }
         }
 
         for (int i = 0; i < allFoundActive().size(); i++) {
-           if (savedIssuedMatch.getFoundID().equals(allFoundActive().get(i).getFoundItemID())) {
+           if (savedMatch.getFoundItemID().equals(allFoundActive().get(i).getFoundItemID())) {
                allFoundActive().get(i).setActive(false);
            }
         }
-        return issuedMatchRepo.save(savedIssuedMatch);
+        return issuedMatchRepo.save(savedMatch);
    }
 
    @GetMapping ("/issuedMatches")
-   List<IssuedMatch> issuedMatches() {return issuedMatchRepo.findAll(); }
+   List<Match> issuedMatches() {return issuedMatchRepo.findAll(); }
 
     /*
     ############################################################################################
