@@ -69,10 +69,12 @@ class ItemController {
 
     @PostMapping("/foundItems")
     List newFoundItem(@RequestBody FoundItem newFoundItem) {
+        newFoundItem.setActive(true);
+        newFoundItem.setEmpID(activeEmp);
         FoundItem savedFoundItem = foundRepo.save(newFoundItem);
         ArrayList<Match> postMatches = new ArrayList<>();
-        savedFoundItem.setActive(true);
-        savedFoundItem.setEmpID(activeEmp);
+        //savedFoundItem.setActive(true);
+       // savedFoundItem.setEmpID(activeEmp);
 
         for (int i = 0; i < allFoundActive().size(); i++) {
             if (savedFoundItem.getCategory().equals(allLostActive().get(i).getCategory())
@@ -241,6 +243,7 @@ class ItemController {
         savedMatch.setEmpID(activeEmp);
         for (int i = 0; i < allLostActive().size(); i++) {
            if (savedMatch.getLostItemID().equals(allLostActive().get(i).getLostItemID())) {
+               savedMatch.setCustomerID(allLostActive().get(i).getCustomerID());
                allLostActive().get(i).setActive(false);
            }
         }
@@ -263,19 +266,131 @@ class ItemController {
     ############################################################################################
     ############################################################################################
     */
-    @PutMapping("/items/{id}")
+    @PutMapping("/lostItems/{id}")
     LostItem replaceItem(@RequestBody LostItem newItem, @PathVariable Long id) {
-
+        LostItem tmpItem = lostRepo.findById(id).get();
         return lostRepo.findById(id)
+
                 .map(item -> {
-                    item.setCategory(newItem.getCategory());
-                    item.setBrand(newItem.getBrand());
-                    item.setColor(newItem.getColor());
+                    if (newItem.getCategory() == null) {
+                        item.setCategory(tmpItem.getCategory());
+                    } else {
+                        item.setCategory(newItem.getCategory());
+                    }
+                    if (newItem.getBrand() == null) {
+                        item.setBrand(tmpItem.getBrand());
+                    } else {
+                        item.setBrand(newItem.getBrand());
+                    }
+                    if (newItem.getColor() == null) {
+                        item.setColor(tmpItem.getColor());
+                    } else {
+                        item.setColor(newItem.getColor());
+                    }
+                    if (newItem.getCustomerID() == null) {
+                        item.setCustomerID(tmpItem.getCustomerID());
+                    } else {
+                        item.setCustomerID(newItem.getCustomerID());
+                    }
                     return lostRepo.save(item);
                 })
                 .orElseGet(() -> {
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
                     newItem.setLostItemID(id);
                     return lostRepo.save(newItem);
+                });
+    }
+
+    @PutMapping("/foundItems/{id}")
+    FoundItem replaceItem(@RequestBody FoundItem newItem, @PathVariable Long id) {
+        FoundItem tmpItem = foundRepo.findById(id).get();
+        return foundRepo.findById(id)
+
+                .map(item -> {
+                    if (newItem.getCategory() == null) {
+                        item.setCategory(tmpItem.getCategory());
+                    } else {
+                        item.setCategory(newItem.getCategory());
+                    }
+                    if (newItem.getBrand() == null) {
+                        item.setBrand(tmpItem.getBrand());
+                    } else {
+                        item.setBrand(newItem.getBrand());
+                    }
+                    if (newItem.getColor() == null) {
+                        item.setColor(tmpItem.getColor());
+                    } else {
+                        item.setColor(newItem.getColor());
+                    }
+                    if (newItem.getEmpID() == null) {
+                        item.setEmpID(tmpItem.getEmpID());
+                    } else {
+                        item.setEmpID(newItem.getEmpID());
+                    }
+                    return foundRepo.save(item);
+                })
+                .orElseGet(() -> {
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    newItem.setFoundItemID(id);
+                    return foundRepo.save(newItem);
+                });
+    }
+
+    @PutMapping("/customer/{id}")
+     Customer replaceCustomerInfo(@RequestBody Customer newCustomer, @PathVariable Long id) {
+        Customer tmpCustomer = CustomerRepo.findById(id).get();
+        return CustomerRepo.findById(id)
+
+                .map(customer -> {
+                    if (newCustomer.getFirstName() == null) {
+                        customer.setFirstName(tmpCustomer.getFirstName());
+                    } else {
+                        customer.setFirstName(newCustomer.getFirstName());
+                    }
+                    if (newCustomer.getLastName() == null) {
+                        customer.setLastName(tmpCustomer.getLastName());
+                    } else {
+                        customer.setLastName(newCustomer.getLastName());
+                    }
+                    if (newCustomer.getAddress() == null) {
+                        customer.setAddress(tmpCustomer.getAddress());
+                    } else {
+                        customer.setAddress(newCustomer.getAddress());
+                    }
+                    if (newCustomer.getPhoneNumber() == 0) {
+                        customer.setPhoneNumber(tmpCustomer.getPhoneNumber());
+                    } else {
+                        customer.setPhoneNumber(newCustomer.getPhoneNumber()    );
+                    }
+                    if (newCustomer.getEmail() == null) {
+                        customer.setEmail(tmpCustomer.getEmail());
+                    } {
+                        customer.setEmail(newCustomer.getEmail());
+                    }
+                    return CustomerRepo.save(customer);
+                })
+                .orElseGet(() -> {
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    newCustomer.setCustomerID(id);
+                    return CustomerRepo.save(newCustomer);
                 });
     }
 
