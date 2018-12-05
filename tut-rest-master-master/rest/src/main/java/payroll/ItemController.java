@@ -30,6 +30,18 @@ class ItemController {
         this.issuedMatchRepo = issuedMatchRepo;
 }
 
+
+    /**
+     * phoneNumber as string is a problem because:
+     * By default what ever you pass to the controller is treated as String and converted to respective types.
+     * So even default values need to be set as String.
+     * https://stackoverflow.com/questions/47813925/how-to-give-default-value-as-integer-in-requestparam
+     */
+
+    /**
+     * MISSING EMPLOYEE POST AND GET
+     */
+
     /**
      * Customer Post
      */
@@ -57,7 +69,7 @@ class ItemController {
     List<Customer> oneOrMoreCustomers (@RequestParam(value = "firstName", defaultValue = "%%")String strFirstName,
                                    @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
                                    @RequestParam(value = "address", defaultValue = "%%")String strAddress,
-                                   @RequestParam(value = "phoneNumber", defaultValue = "%%")String strPhoneNumber){
+                                   @RequestParam(value = "phoneNumber", defaultValue = "%%") int strPhoneNumber){
 
         return CustomerRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAllIgnoreCase
                 (strFirstName,strLastName,strAddress,strPhoneNumber);
@@ -391,6 +403,52 @@ class ItemController {
                     //return som exception instead
                     newCustomer.setCustomerID(id);
                     return CustomerRepo.save(newCustomer);
+                });
+    }
+
+    @PutMapping("/employee/{id}")
+    Employee replaceEmployeeInfo(@RequestBody Employee newEmployee, @PathVariable Long id) {
+        Employee tmpEmployee = empRepo.findById(id).get();
+        return empRepo.findById(id)
+
+                .map(employee -> {
+                    if (newEmployee.getFirstName() == null) {
+                        employee.setFirstName(tmpEmployee.getFirstName());
+                    } else {
+                        employee.setFirstName(newEmployee.getFirstName());
+                    }
+                    if (newEmployee.getLastName() == null) {
+                        employee.setLastName(tmpEmployee.getLastName());
+                    } else {
+                        employee.setLastName(newEmployee.getLastName());
+                    }
+                    if (newEmployee.getAddress() == null) {
+                        employee.setAddress(tmpEmployee.getAddress());
+                    } else {
+                        employee.setAddress(newEmployee.getAddress());
+                    }
+                    if (newEmployee.getPhoneNumber() == 0) {
+                        employee.setPhoneNumber(tmpEmployee.getPhoneNumber());
+                    } else {
+                        employee.setPhoneNumber(newEmployee.getPhoneNumber()    );
+                    }
+                    if (newEmployee.getEmail() == null) {
+                        employee.setEmail(tmpEmployee.getEmail());
+                    } {
+                        employee.setEmail(newEmployee.getEmail());
+                    }
+                    return empRepo.save(employee);
+                })
+                .orElseGet(() -> {
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    //return som exception instead
+                    newEmployee.setEmpID(id);
+                    return empRepo.save(newEmployee);
                 });
     }
 
