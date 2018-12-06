@@ -30,7 +30,6 @@ class ItemController {
         this.issuedMatchRepo = issuedMatchRepo;
 }
 
-
     /**
      * phoneNumber as string is a problem because:
      * By default what ever you pass to the controller is treated as String and converted to respective types.
@@ -39,18 +38,54 @@ class ItemController {
      */
 
     /**
-     * MISSING EMPLOYEE POST AND GET
+     * Employee Post
+     * Creates a new employee
      */
+    @PostMapping ("/newEmployee")
+    Employee newEmployee (@RequestBody Employee newEmployee) {return empRepo.save(newEmployee);}
+
+    /**
+     * Employee Gets
+     * 1. get all employees
+     * 2. get a single employee by specifying ID
+     * 3. get all employees that matches a specific search parameter
+     */
+    @GetMapping("/employees")
+    List<Employee> allEmployees() {return empRepo.findAll();}
+
+    @GetMapping ("/employees/{id}")
+    Employee singleEmployeeID (@PathVariable Long id){
+        // FIX EXEPTIONS!!!
+        // FIX EXEPTIONS!!!
+        // FIX EXEPTIONS!!!
+        // FIX EXEPTIONS!!!
+        return empRepo.findById(id).orElseThrow(()-> new LostItemIdNotFoundException(id));
+    }
+
+    @GetMapping("/employees/search")
+    List<Employee> oneOrMoreEmployee (@RequestParam(value = "firstName", defaultValue = "%%")String strFirstName,
+                                      @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
+                                      @RequestParam(value = "address", defaultValue = "%%")String strAddress,
+                                      @RequestParam(value = "phoneNumber", defaultValue = "%%") String strPhoneNumber,
+                                      @RequestParam(value = "email", defaultValue = "%%") String strEmail) {
+
+        return empRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAndEmailLikeAllIgnoreCase
+                (strFirstName,strLastName,strAddress,strPhoneNumber, strEmail);
+    }
 
     /**
      * Customer Post
+     * Creates a new customer
      */
 
-    @PostMapping ("/customer")
+    @PostMapping ("/newCustomer")
     Customer newCustomer (@RequestBody Customer newCustomer) {return CustomerRepo.save(newCustomer);}
 
     /**
      * Customer Get
+     * 1. get all customers
+     * 2. get a single customer by specifying ID
+     * 3. get all customers that matches a specific search parameter
      */
 
     @GetMapping("/customers")
@@ -67,26 +102,26 @@ class ItemController {
 
     @GetMapping("/customers/search")
     List<Customer> oneOrMoreCustomers (@RequestParam(value = "firstName", defaultValue = "%%")String strFirstName,
-                                   @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
-                                   @RequestParam(value = "address", defaultValue = "%%")String strAddress,
-                                   @RequestParam(value = "phoneNumber", defaultValue = "%%") int strPhoneNumber){
+                                    @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
+                                    @RequestParam(value = "address", defaultValue = "%%")String strAddress,
+                                    @RequestParam(value = "phoneNumber", defaultValue = "%%") String strPhoneNumber,
+                                    @RequestParam(value = "email", defaultValue = "%%") String strEmail){
 
-        return CustomerRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAllIgnoreCase
-                (strFirstName,strLastName,strAddress,strPhoneNumber);
+        return CustomerRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAndEmailLikeAllIgnoreCase
+                (strFirstName,strLastName,strAddress,strPhoneNumber, strEmail);
     }
 
     /**
      * FoundItem Post
+     * Creates a new found item, and searches through all found items, label active
      */
 
-    @PostMapping("/foundItems")
+    @PostMapping("/newFoundItem")
     List newFoundItem(@RequestBody FoundItem newFoundItem) {
         newFoundItem.setActive(true);
         newFoundItem.setEmpID(activeEmp);
         FoundItem savedFoundItem = foundRepo.save(newFoundItem);
         ArrayList<Match> postMatches = new ArrayList<>();
-        //savedFoundItem.setActive(true);
-       // savedFoundItem.setEmpID(activeEmp);
 
         for (int i = 0; i < allFoundActive().size(); i++) {
             if (savedFoundItem.getCategory().equals(allLostActive().get(i).getCategory())
@@ -112,6 +147,11 @@ class ItemController {
 
     /**
      * FoundItem Get
+     * 1. get all found items
+     * 2. get all found items labeled active
+     * 3. get all found items labeled disabled
+     * 4. get a single found item by specifying ID
+     * 5. get all found items that matches a specific search parameter
      */
 
     @GetMapping("/foundItems")
@@ -158,9 +198,10 @@ class ItemController {
 
     /**
      * LostItem Post
+     * Creates a new lost item, and labels it as active and sets its customerID to the current user
      */
 
-    @PostMapping("/lostItems")
+    @PostMapping("/newLostItem")
     LostItem newItem(@RequestBody LostItem newItem) {
         newItem.setCustomerID(activeCustomer);
         newItem.setActive(true);
@@ -170,6 +211,11 @@ class ItemController {
 
     /**
      * LostItem Get
+     * 1. get all lost items
+     * 2. get all lost items labeled active
+     * 3. get all lost items labeled disabled
+     * 4. get a single lost item by specifying ID
+     * 5. get all lost items that matches a specific search parameter
      */
 
     @GetMapping("/lostItems")
@@ -217,6 +263,11 @@ class ItemController {
 
     /**
      * Match
+     * 1.   (GetCall) runs though the list of all active found items and checks if there is an exact match of each item
+     *      in the list of all active lost items
+     * 2.   (PostCall) takes a lost item id and a found Item id. - then creates a new match object which stores
+     *      these ID's, the ID of the user who matches the lost item and the ID of the active employee
+     * 3.   (GetCall) get all issued matches
      */
 
     @GetMapping("/match")
@@ -243,7 +294,7 @@ class ItemController {
                 }
             }
         }
-        return getMatches; //
+        return getMatches;
     }
 /*
 
@@ -271,13 +322,29 @@ class ItemController {
    @GetMapping ("/issuedMatches")
    List<Match> issuedMatches() {return issuedMatchRepo.findAll(); }
 
-    /*
-    ############################################################################################
-    ############################################################################################
-    ############################################ FIX EN DAG ####################################
-    ############################################################################################
-    ############################################################################################
-    */
+
+    /**
+     * VIRKER IKKER PGA LONG STRING RELATION
+     */
+
+
+   @GetMapping ("/issuedMatches/search")
+   //findAllByLostItemIDAndFoundItemIDAndCustomerIDAndEmpID
+   List<Match> issuedMatchess  (@RequestParam(value = "foundItemID") Long foundID,
+                                @RequestParam(value = "lostItemID") Long lostID,
+                                @RequestParam(value = "customerID") Long customerID,
+                                @RequestParam(value = "empID") Long empID){
+
+       return issuedMatchRepo.findAllByLostItemIDAndFoundItemIDAndCustomerIDAndEmpID
+               (foundID, lostID, customerID, empID);
+   }
+
+
+    /**
+     * putMapping
+     * allows to change one or more information's associated with the specified ID of a
+     * lost/found item or a customer/employee
+     */
     @PutMapping("/lostItems/{id}")
     LostItem replaceItem(@RequestBody LostItem newItem, @PathVariable Long id) {
         LostItem tmpItem = lostRepo.findById(id).get();
@@ -381,7 +448,7 @@ class ItemController {
                     } else {
                         customer.setAddress(newCustomer.getAddress());
                     }
-                    if (newCustomer.getPhoneNumber() == 0) {
+                    if (newCustomer.getPhoneNumber() == null) {
                         customer.setPhoneNumber(tmpCustomer.getPhoneNumber());
                     } else {
                         customer.setPhoneNumber(newCustomer.getPhoneNumber()    );
@@ -427,10 +494,10 @@ class ItemController {
                     } else {
                         employee.setAddress(newEmployee.getAddress());
                     }
-                    if (newEmployee.getPhoneNumber() == 0) {
+                    if (newEmployee.getPhoneNumber() == null) {
                         employee.setPhoneNumber(tmpEmployee.getPhoneNumber());
                     } else {
-                        employee.setPhoneNumber(newEmployee.getPhoneNumber()    );
+                        employee.setPhoneNumber(newEmployee.getPhoneNumber());
                     }
                     if (newEmployee.getEmail() == null) {
                         employee.setEmail(tmpEmployee.getEmail());
@@ -452,8 +519,28 @@ class ItemController {
                 });
     }
 
-    @DeleteMapping("/items/{id}")
-    void deleteItem(@PathVariable Long id) {
+    /**
+     * allows to delete a lost/found item or a customer/employee,
+     * associated with the specified ID
+     */
+
+    @DeleteMapping("/deleteLostItem/{id}")
+    void deleteLostItem(@PathVariable Long id) {
         lostRepo.deleteById(id);
+    }
+
+    @DeleteMapping("/deleteFoundItem/{id}")
+    void deleteFoundItem(@PathVariable Long id) {
+        foundRepo.deleteById(id);
+    }
+
+    @DeleteMapping("/deleteCustomer/{id}")
+    void deleteCustomer(@PathVariable Long id) {
+        CustomerRepo.deleteById(id);
+    }
+
+    @DeleteMapping("/deleteEmployee/{id}")
+    void deleteEmployee(@PathVariable Long id) {
+        empRepo.deleteById(id);
     }
 }

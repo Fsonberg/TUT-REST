@@ -1,7 +1,6 @@
 package payroll;
 
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +8,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Slf4j
 class LoadDatabase {
+
+    /**
+     * hardcoded database for test purposes when no database is connected to the program
+     */
 
 	@Bean
 	CommandLineRunner initDatabase(LostItemRepository lostRepo, FoundItemRepository foundRepo, CustomerRepository customerRepo) {
@@ -30,8 +33,8 @@ class LoadDatabase {
 			System.out.println("preloading " + foundRepo.save(new FoundItem("Electronics", "Apple", "blue", false)));
 
 			//CUSTOMER REPOSITORY
-			System.out.println("preloading " + customerRepo.save(new Customer("Frederik", "Sonberg", "Ishøj", 50520020, "sonber@tændstik.dk")));
-			System.out.println("preloading " + customerRepo.save(new Customer("Rune", "Riber", "Roskilde", 20944162, "runeriber@gmail.com")));
+			System.out.println("preloading " + customerRepo.save(new Customer("Frederik", "Sonberg", "Ishøj", "50520020", "sonber@tændstik.dk")));
+			System.out.println("preloading " + customerRepo.save(new Customer("Rune", "Riber", "Roskilde", "20944162", "runeriber@gmail.com")));
 		};
 	}
 }

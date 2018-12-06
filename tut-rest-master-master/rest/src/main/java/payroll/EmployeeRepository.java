@@ -1,11 +1,9 @@
 package payroll;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-
     List<Employee> findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAndEmailLikeAllIgnoreCase
-            (String strFirstName, String strLastName, String strAdress, int strPhoneNumber, String strEmail);
+            (String strFirstName, String strLastName, String strAdress, String strPhoneNumber, String strEmail);
 }
