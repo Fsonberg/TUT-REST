@@ -59,7 +59,7 @@ class ItemController {
         // FIX EXEPTIONS!!!
         // FIX EXEPTIONS!!!
         // FIX EXEPTIONS!!!
-        return empRepo.findById(id).orElseThrow(()-> new LostItemIdNotFoundException(id));
+        return empRepo.findById(id).orElseThrow(()-> new EmployeeExceptions(id));
     }
 
     @GetMapping("/employees/search")
@@ -97,7 +97,7 @@ class ItemController {
         // FIX EXEPTIONS!!!
         // FIX EXEPTIONS!!!
         // FIX EXEPTIONS!!!
-        return CustomerRepo.findById(id).orElseThrow(()-> new LostItemIdNotFoundException(id));
+        return CustomerRepo.findById(id).orElseThrow(()-> new CustomerException(id));
     }
 
     @GetMapping("/customers/search")
@@ -181,11 +181,11 @@ class ItemController {
 
     @GetMapping("/foundItems/{id}")
     FoundItem foundOne(@PathVariable Long id){
-        return foundRepo.findById(id).orElseThrow(() -> new LostItemIdNotFoundException(id));
+        return foundRepo.findById(id).orElseThrow(() -> new FoundItemException(id));
     }
 
-    // LAV SØGE MULIGEHEDER I DIABLED OG ACTIVE ITEMS!!
-    // LAV SØGE MULIGEHEDER I DIABLED OG ACTIVE ITEMS!!
+    // LAV SØGE MULIGEHEDER I DISABLED OG ACTIVE ITEMS!!
+    // LAV SØGE MULIGEHEDER I DISABLED OG ACTIVE ITEMS!!
 
     @GetMapping("/foundItems/search")
     List<FoundItem> foundTwo(@RequestParam(value = "brand", defaultValue = "%%") String strFoundBrand,
@@ -249,7 +249,7 @@ class ItemController {
     @GetMapping("/lostItems/{id}")
     LostItem lostOne (@PathVariable Long id) {
         return lostRepo.findById(id)
-                .orElseThrow(() -> new LostItemIdNotFoundException(id));
+                .orElseThrow(() -> new LostItemException(id));
     }
 
     @GetMapping("/lostItems/search")
