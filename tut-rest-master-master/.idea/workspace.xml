@@ -118,75 +118,58 @@
     <session id="-583872659">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="10" />
+          <entry key="java" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="10" />
+          <entry key="JAVA" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="16" />
-          <entry key="java" value="1011" />
+          <entry key="java" value="1423" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1011" />
+          <entry key="JAVA" value="1423" />
           <entry key="PLAIN_TEXT" value="16" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5201342">
+    <splitter split-orientation="horizontal" split-proportion="0.8697112">
       <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="89">
-          <file pinned="false" current-in-tab="false">
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="105">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/ItemController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="136">
-                  <caret line="99" column="79" selection-start-line="99" selection-start-column="62" selection-end-line="99" selection-end-column="79" />
+                <state relative-caret-position="682">
+                  <caret line="108" column="87" selection-start-line="108" selection-start-column="87" selection-end-line="108" selection-end-column="87" />
                   <folding>
-                    <element signature="e#8404#8405#0" expanded="true" />
-                    <element signature="e#8445#8446#0" expanded="true" />
-                    <element signature="e#21320#21321#0" expanded="true" />
-                    <element signature="e#21359#21360#0" expanded="true" />
-                    <element signature="e#21454#21455#0" expanded="true" />
-                    <element signature="e#21494#21495#0" expanded="true" />
+                    <element signature="e#8507#8508#0" expanded="true" />
+                    <element signature="e#8548#8549#0" expanded="true" />
+                    <element signature="e#21413#21414#0" expanded="true" />
+                    <element signature="e#21452#21453#0" expanded="true" />
+                    <element signature="e#21547#21548#0" expanded="true" />
                     <element signature="e#21587#21588#0" expanded="true" />
-                    <element signature="e#21630#21631#0" expanded="true" />
+                    <element signature="e#21680#21681#0" expanded="true" />
                     <element signature="e#21723#21724#0" expanded="true" />
-                    <element signature="e#21761#21762#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/FoundItemException.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="68">
-                  <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-                  <folding>
-                    <element signature="e#108#109#0" expanded="true" />
-                    <element signature="e#174#175#0" expanded="true" />
+                    <element signature="e#21816#21817#0" expanded="true" />
+                    <element signature="e#21854#21855#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/LostItemException.java">
+            <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/EmployeeRepository.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="68">
-                  <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
-                  <folding>
-                    <element signature="e#109#110#0" expanded="true" />
-                    <element signature="e#175#176#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="102">
+                  <caret line="7" column="67" selection-start-line="7" selection-start-column="67" selection-end-line="7" selection-end-column="67" />
                 </state>
               </provider>
             </entry>
@@ -200,28 +183,15 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/CustomerException.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="85">
-                  <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-                  <folding>
-                    <element signature="e#118#119#0" expanded="true" />
-                    <element signature="e#159#160#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="89">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/ExceptionsAdvice.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="418">
-                  <caret line="31" column="4" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
+                  <caret line="31" selection-start-line="31" selection-end-line="31" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#558#559#0" expanded="true" />
@@ -237,14 +207,47 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/EmployeeExceptions.java">
               <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="119">
+                  <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+                  <folding>
+                    <element signature="e#109#110#0" expanded="true" />
+                    <element signature="e#175#176#0" expanded="true" />
+                    <element signature="e#208#209#0" expanded="true" />
+                    <element signature="e#233#234#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/CustomerException.java">
+              <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="68">
-                  <caret line="4" column="57" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="57" />
+                  <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/LostItemException.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="51">
+                  <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/FoundItemException.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="68">
+                  <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
                   <folding>
                     <element signature="e#108#109#0" expanded="true" />
-                    <element signature="e#128#129#0" expanded="true" />
+                    <element signature="e#175#176#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -302,12 +305,13 @@
         <option value="$PROJECT_DIR$/rest/src/main/java/payroll/Exceptions.java" />
         <option value="$PROJECT_DIR$/rest/src/main/java/payroll/EmployeeNotFoundAdvice.java" />
         <option value="$PROJECT_DIR$/rest/src/main/java/payroll/IdNotFoundException.java" />
-        <option value="$PROJECT_DIR$/rest/src/main/java/payroll/EmployeeExceptions.java" />
-        <option value="$PROJECT_DIR$/rest/src/main/java/payroll/ItemController.java" />
         <option value="$PROJECT_DIR$/rest/src/main/java/payroll/CustomerException.java" />
         <option value="$PROJECT_DIR$/rest/src/main/java/payroll/LostItemException.java" />
         <option value="$PROJECT_DIR$/rest/src/main/java/payroll/FoundItemException.java" />
         <option value="$PROJECT_DIR$/rest/src/main/java/payroll/ExceptionsAdvice.java" />
+        <option value="$PROJECT_DIR$/rest/src/main/java/payroll/EmployeeExceptions.java" />
+        <option value="$PROJECT_DIR$/rest/src/main/java/payroll/EmployeeRepository.java" />
+        <option value="$PROJECT_DIR$/rest/src/main/java/payroll/ItemController.java" />
       </list>
     </option>
   </component>
@@ -317,7 +321,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
     <option name="width" value="1615" />
@@ -386,7 +390,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544186348116" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544191302240" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../BranchTest2" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -533,13 +537,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108886000" />
+    <option name="totallyTimeSpent" value="113905000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.17651007" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1147651" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -549,7 +553,7 @@
       <window_info id="Image Layers" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.6028369" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.26666668" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26666668" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -669,13 +673,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/LoadDatabase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/LostItem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -694,13 +691,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/EmployeeRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
@@ -730,13 +720,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/Employee.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/CustomerException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -744,55 +727,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/ItemController.java">
+    <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/LoadDatabase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="99" column="79" selection-start-line="99" selection-start-column="62" selection-end-line="99" selection-end-column="79" />
-          <folding>
-            <element signature="e#8404#8405#0" expanded="true" />
-            <element signature="e#8445#8446#0" expanded="true" />
-            <element signature="e#21320#21321#0" expanded="true" />
-            <element signature="e#21359#21360#0" expanded="true" />
-            <element signature="e#21454#21455#0" expanded="true" />
-            <element signature="e#21494#21495#0" expanded="true" />
-            <element signature="e#21587#21588#0" expanded="true" />
-            <element signature="e#21630#21631#0" expanded="true" />
-            <element signature="e#21723#21724#0" expanded="true" />
-            <element signature="e#21761#21762#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/EmployeeExceptions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="57" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="57" />
-          <folding>
-            <element signature="e#108#109#0" expanded="true" />
-            <element signature="e#128#129#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/CustomerException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-          <folding>
-            <element signature="e#118#119#0" expanded="true" />
-            <element signature="e#159#160#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/LostItemException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
+        <state relative-caret-position="51">
           <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
-          <folding>
-            <element signature="e#109#110#0" expanded="true" />
-            <element signature="e#175#176#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -802,15 +747,22 @@
           <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
           <folding>
             <element signature="e#108#109#0" expanded="true" />
-            <element signature="e#174#175#0" expanded="true" />
+            <element signature="e#175#176#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/CustomerException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/ExceptionsAdvice.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
-          <caret line="31" column="4" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#558#559#0" expanded="true" />
@@ -821,6 +773,52 @@
             <element signature="e#717#718#0" expanded="true" />
             <element signature="e#816#817#0" expanded="true" />
             <element signature="e#845#846#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/EmployeeExceptions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding>
+            <element signature="e#109#110#0" expanded="true" />
+            <element signature="e#175#176#0" expanded="true" />
+            <element signature="e#208#209#0" expanded="true" />
+            <element signature="e#233#234#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/Employee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/EmployeeRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="67" selection-start-line="7" selection-start-column="67" selection-end-line="7" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rest/src/main/java/payroll/ItemController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="108" column="87" selection-start-line="108" selection-start-column="87" selection-end-line="108" selection-end-column="87" />
+          <folding>
+            <element signature="e#8507#8508#0" expanded="true" />
+            <element signature="e#8548#8549#0" expanded="true" />
+            <element signature="e#21413#21414#0" expanded="true" />
+            <element signature="e#21452#21453#0" expanded="true" />
+            <element signature="e#21547#21548#0" expanded="true" />
+            <element signature="e#21587#21588#0" expanded="true" />
+            <element signature="e#21680#21681#0" expanded="true" />
+            <element signature="e#21723#21724#0" expanded="true" />
+            <element signature="e#21816#21817#0" expanded="true" />
+            <element signature="e#21854#21855#0" expanded="true" />
           </folding>
         </state>
       </provider>

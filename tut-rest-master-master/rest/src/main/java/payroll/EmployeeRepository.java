@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAndEmailLikeAllIgnoreCase
-            (String strFirstName, String strLastName, String strAdress, String strPhoneNumber, String strEmail);
+            (String strFirstName, String strLastName, String strAddress, String strPhoneNumber, String strEmail);
 }

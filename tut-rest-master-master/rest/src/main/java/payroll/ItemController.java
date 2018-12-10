@@ -51,7 +51,13 @@ class ItemController {
      * 3. get all employees that matches a specific search parameter
      */
     @GetMapping("/employees")
-    List<Employee> allEmployees() {return empRepo.findAll();}
+    List<Employee> allEmployees() {
+
+        if(empRepo.findAll().size()>0){
+            return empRepo.findAll() ;
+        }
+         throw new EmployeeExceptions();
+    }
 
     @GetMapping ("/employees/{id}")
     Employee singleEmployeeID (@PathVariable Long id){
@@ -62,7 +68,7 @@ class ItemController {
         return empRepo.findById(id).orElseThrow(()-> new EmployeeExceptions(id));
     }
 
-    @GetMapping("/employees/search")
+    @GetMapping("/employees/search") //MAN KAN KUN SØGE HVIS ALLE PARAMETRE ER UDFYLDT!
     List<Employee> oneOrMoreEmployee (@RequestParam(value = "firstName", defaultValue = "%%")String strFirstName,
                                       @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
                                       @RequestParam(value = "address", defaultValue = "%%")String strAddress,
@@ -100,7 +106,7 @@ class ItemController {
         return CustomerRepo.findById(id).orElseThrow(()-> new CustomerException(id));
     }
 
-    @GetMapping("/customers/search")
+    @GetMapping("/customers/search") //MAN KAN KUN SØGE HVIS ALLE PARAMETRE ER UDFYLDT!
     List<Customer> oneOrMoreCustomers (@RequestParam(value = "firstName", defaultValue = "%%")String strFirstName,
                                     @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
                                     @RequestParam(value = "address", defaultValue = "%%")String strAddress,
@@ -110,6 +116,7 @@ class ItemController {
         return CustomerRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAndEmailLikeAllIgnoreCase
                 (strFirstName,strLastName,strAddress,strPhoneNumber, strEmail);
     }
+
 
     /**
      * FoundItem Post
