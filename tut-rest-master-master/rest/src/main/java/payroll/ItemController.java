@@ -16,17 +16,17 @@ class ItemController {
     private Long activeEmp = 18L;
     private final LostItemRepository lostRepo;
     private final FoundItemRepository foundRepo;
-    private final CustomerRepository CustomerRepo;
-    private final EmployeeRepository empRepo;
+    private final CustomerRepository customerRepo;
+    private final EmployeeRepository employeeRepo;
     private final IssuedMatchRepository issuedMatchRepo;
 
     ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo,
-                   CustomerRepository CustomerRepo, EmployeeRepository empRepo,
+                   CustomerRepository customerRepo, EmployeeRepository employeeRepo,
                    IssuedMatchRepository issuedMatchRepo) {
         this.lostRepo = lostRepo;
         this.foundRepo = foundRepo;
-        this.CustomerRepo = CustomerRepo;
-        this.empRepo = empRepo;
+        this.customerRepo = customerRepo;
+        this.employeeRepo = employeeRepo;
         this.issuedMatchRepo = issuedMatchRepo;
 }
 
@@ -42,7 +42,7 @@ class ItemController {
      * Creates a new employee
      */
     @PostMapping ("/newEmployee")
-    Employee newEmployee (@RequestBody Employee newEmployee) {return empRepo.save(newEmployee);}
+    Employee newEmployee (@RequestBody Employee newEmployee) {return employeeRepo.save(newEmployee);}
 
     /**
      * Employee Gets
@@ -53,8 +53,8 @@ class ItemController {
     @GetMapping("/employees")
     List<Employee> allEmployees() {
 
-        if(empRepo.findAll().size()>0){
-            return empRepo.findAll() ;
+        if(employeeRepo.findAll().size()>0){
+            return employeeRepo.findAll() ;
         }
          throw new EmployeeExceptions();
     }
@@ -65,7 +65,7 @@ class ItemController {
         // FIX EXEPTIONS!!!
         // FIX EXEPTIONS!!!
         // FIX EXEPTIONS!!!
-        return empRepo.findById(id).orElseThrow(()-> new EmployeeExceptions(id));
+        return employeeRepo.findById(id).orElseThrow(()-> new EmployeeExceptions(id));
     }
 
     @GetMapping("/employees/search") //MAN KAN KUN SØGE HVIS ALLE PARAMETRE ER UDFYLDT!
@@ -75,7 +75,7 @@ class ItemController {
                                       @RequestParam(value = "phoneNumber", defaultValue = "%%") String strPhoneNumber,
                                       @RequestParam(value = "email", defaultValue = "%%") String strEmail) {
 
-        return empRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAndEmailLikeAllIgnoreCase
+        return employeeRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAndEmailLikeAllIgnoreCase
                 (strFirstName,strLastName,strAddress,strPhoneNumber, strEmail);
     }
 
@@ -85,7 +85,7 @@ class ItemController {
      */
 
     @PostMapping ("/newCustomer")
-    Customer newCustomer (@RequestBody Customer newCustomer) {return CustomerRepo.save(newCustomer);}
+    Customer newCustomer (@RequestBody Customer newCustomer) {return customerRepo.save(newCustomer);}
 
     /**
      * Customer Get
@@ -95,7 +95,7 @@ class ItemController {
      */
 
     @GetMapping("/customers")
-    List<Customer> allCustomers() {return CustomerRepo.findAll();}
+    List<Customer> allCustomers() {return customerRepo.findAll();}
 
     @GetMapping ("/customers/{id}")
     Customer singleCustomerID (@PathVariable Long id){
@@ -103,7 +103,7 @@ class ItemController {
         // FIX EXEPTIONS!!!
         // FIX EXEPTIONS!!!
         // FIX EXEPTIONS!!!
-        return CustomerRepo.findById(id).orElseThrow(()-> new CustomerException(id));
+        return customerRepo.findById(id).orElseThrow(()-> new CustomerException(id));
     }
 
     @GetMapping("/customers/search") //MAN KAN KUN SØGE HVIS ALLE PARAMETRE ER UDFYLDT!
@@ -113,7 +113,7 @@ class ItemController {
                                     @RequestParam(value = "phoneNumber", defaultValue = "%%") String strPhoneNumber,
                                     @RequestParam(value = "email", defaultValue = "%%") String strEmail){
 
-        return CustomerRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAndEmailLikeAllIgnoreCase
+        return customerRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAndEmailLikeAllIgnoreCase
                 (strFirstName,strLastName,strAddress,strPhoneNumber, strEmail);
     }
 
@@ -436,8 +436,8 @@ class ItemController {
 
     @PutMapping("/customer/{id}")
      Customer replaceCustomerInfo(@RequestBody Customer newCustomer, @PathVariable Long id) {
-        Customer tmpCustomer = CustomerRepo.findById(id).get();
-        return CustomerRepo.findById(id)
+        Customer tmpCustomer = customerRepo.findById(id).get();
+        return customerRepo.findById(id)
 
                 .map(customer -> {
                     if (newCustomer.getFirstName() == null) {
@@ -462,10 +462,10 @@ class ItemController {
                     }
                     if (newCustomer.getEmail() == null) {
                         customer.setEmail(tmpCustomer.getEmail());
-                    } {
+                    } else {
                         customer.setEmail(newCustomer.getEmail());
                     }
-                    return CustomerRepo.save(customer);
+                    return customerRepo.save(customer);
                 })
                 .orElseGet(() -> {
                     //return som exception instead
@@ -476,14 +476,14 @@ class ItemController {
                     //return som exception instead
                     //return som exception instead
                     newCustomer.setCustomerID(id);
-                    return CustomerRepo.save(newCustomer);
+                    return customerRepo.save(newCustomer);
                 });
     }
 
     @PutMapping("/employee/{id}")
     Employee replaceEmployeeInfo(@RequestBody Employee newEmployee, @PathVariable Long id) {
-        Employee tmpEmployee = empRepo.findById(id).get();
-        return empRepo.findById(id)
+        Employee tmpEmployee = employeeRepo.findById(id).get();
+        return employeeRepo.findById(id)
 
                 .map(employee -> {
                     if (newEmployee.getFirstName() == null) {
@@ -511,7 +511,7 @@ class ItemController {
                     } {
                         employee.setEmail(newEmployee.getEmail());
                     }
-                    return empRepo.save(employee);
+                    return employeeRepo.save(employee);
                 })
                 .orElseGet(() -> {
                     //return som exception instead
@@ -522,9 +522,11 @@ class ItemController {
                     //return som exception instead
                     //return som exception instead
                     newEmployee.setEmpID(id);
-                    return empRepo.save(newEmployee);
+                    return employeeRepo.save(newEmployee);
                 });
     }
+
+    //Mangler put for match funktion - found/lostitemID
 
     /**
      * allows to delete a lost/found item or a customer/employee,
@@ -532,22 +534,34 @@ class ItemController {
      */
 
     @DeleteMapping("/deleteLostItem/{id}")
-    void deleteLostItem(@PathVariable Long id) {
+    String deleteLostItem(@PathVariable Long id) {
+        LostItem tmpLostItem = lostRepo.findById(id).get();
         lostRepo.deleteById(id);
+        return "Lost item: " + tmpLostItem.getCategory() + ", " + tmpLostItem.getBrand() +
+                ", " + tmpLostItem.getColor() + "; with id " + tmpLostItem.getLostItemID() + " has been deleted";
     }
 
     @DeleteMapping("/deleteFoundItem/{id}")
-    void deleteFoundItem(@PathVariable Long id) {
+    String deleteFoundItem(@PathVariable Long id) {
+        FoundItem tmpFoundItem = foundRepo.findById(id).get();
         foundRepo.deleteById(id);
+        return "Lost item: " + tmpFoundItem.getCategory() + ", " + tmpFoundItem.getBrand() +
+                ", " + tmpFoundItem.getColor() + "; with id " + tmpFoundItem.getFoundItemID() + " has been deleted";
     }
 
     @DeleteMapping("/deleteCustomer/{id}")
-    void deleteCustomer(@PathVariable Long id) {
-        CustomerRepo.deleteById(id);
+    String deleteCustomer(@PathVariable Long id) {
+        Customer tmpCustomer = customerRepo.findById(id).get();
+        customerRepo.deleteById(id);
+        return "Customer " + tmpCustomer.getFirstName()+ " " + tmpCustomer.getLastName()
+                + " with id: " + id + " has been deleted";
     }
 
     @DeleteMapping("/deleteEmployee/{id}")
-    void deleteEmployee(@PathVariable Long id) {
-        empRepo.deleteById(id);
+    String deleteEmployee(@PathVariable Long id) {
+        Employee tmpEmployee = employeeRepo.findById(id).get();
+        employeeRepo.deleteById(id);
+        return "Employee " + tmpEmployee.getFirstName()+ " " + tmpEmployee.getLastName()
+                + " with id: " + id + " has been deleted";
     }
 }

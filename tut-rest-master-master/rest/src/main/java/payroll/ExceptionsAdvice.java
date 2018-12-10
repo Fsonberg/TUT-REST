@@ -36,6 +36,4 @@ class ExceptionsAdvice {
 	String foundItemExceptionHandler(FoundItemException ex){
 		return ex.getMessage();
 	}
-
-
 }
