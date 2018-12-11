@@ -410,10 +410,8 @@ class ItemController {
     @PutMapping("/customer/{id}")
      Customer replaceCustomerInfo(@RequestBody Customer newCustomer, @PathVariable Long id) {
         try {
-
             Customer tmpCustomer = customerRepo.findById(id).get();
             return customerRepo.findById(id)
-
                     .map(customer -> {
                         if (newCustomer.getFirstName() == null) {
                             customer.setFirstName(tmpCustomer.getFirstName());
@@ -441,7 +439,6 @@ class ItemController {
                             customer.setEmail(newCustomer.getEmail());
                         }
                         return customerRepo.save(customer);
-
                     }).orElseThrow(()-> new CustomerException(id));
         } catch (Exception e) {
             throw new CustomerException(id);
@@ -453,7 +450,6 @@ class ItemController {
         try {
             Employee tmpEmployee = employeeRepo.findById(id).get();
             return employeeRepo.findById(id)
-
                     .map(employee -> {
                         if (newEmployee.getFirstName() == null) {
                             employee.setFirstName(tmpEmployee.getFirstName());
