@@ -300,6 +300,8 @@ class ItemController {
         return getMatches;
     }
 
+    // hvis getMatches er en tom liste, så returner en exception i stedet.
+
    @PostMapping ("/issueAMatch")
    Match issueAMatch(@RequestBody Match issueAMatch) {
         Match savedMatch = issueAMatch;

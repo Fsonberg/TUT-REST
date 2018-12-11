@@ -6,6 +6,13 @@
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/evolution/pom.xml" />
+        <option value="$PROJECT_DIR$/links/pom.xml" />
+        <option value="$PROJECT_DIR$/nonrest/pom.xml" />
+      </set>
+    </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_10" default="false" project-jdk-name="10" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/classes" />

@@ -14,7 +14,7 @@ class LoadDatabase {
      */
 
 	@Bean
-	CommandLineRunner initDatabase(LostItemRepository lostRepo, FoundItemRepository foundRepo, CustomerRepository customerRepo) {
+	CommandLineRunner initDatabase(LostItemRepository lostRepo, FoundItemRepository foundRepo, CustomerRepository customerRepo, EmployeeRepository employeeRepo) {
 		return args -> {
 			//LOST REPOSITORY
 			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue",true)));
@@ -35,6 +35,9 @@ class LoadDatabase {
 			//CUSTOMER REPOSITORY
 			System.out.println("preloading " + customerRepo.save(new Customer("Frederik", "Sonberg", "Ishøj", "50520020", "sonber@tændstik.dk")));
 			System.out.println("preloading " + customerRepo.save(new Customer("Rune", "Riber", "Roskilde", "20944162", "runeriber@gmail.com")));
+
+			//EMPLOYEE REPOSITORY
+			System.out.println("preloading " + employeeRepo.save(new Employee("Casper", "Christensen", "Standvejen", "22504140", "madril4life@humus.tihi.com")));
 		};
 	}
 }
