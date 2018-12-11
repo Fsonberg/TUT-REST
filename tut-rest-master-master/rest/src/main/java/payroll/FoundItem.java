@@ -15,7 +15,6 @@ class FoundItem {
     private Long empID;
     private boolean active;
 
-
     FoundItem(String category, String brand, String color, boolean active) {
         this.category = category;
         this.brand = brand;

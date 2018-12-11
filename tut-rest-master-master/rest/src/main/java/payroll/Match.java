@@ -61,5 +61,3 @@ class Match {
         this.empID = empID;
     }
 }
-
-

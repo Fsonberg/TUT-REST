@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.*;
 @ControllerAdvice
 class ExceptionsAdvice {
 	@ResponseBody
-	@ExceptionHandler({ EmployeeExceptions.class})
+	@ExceptionHandler({ EmployeeException.class})
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 
-	String employeeExceptionHandler (EmployeeExceptions ex){
+	String employeeExceptionHandler (EmployeeException ex){
 		return ex.getMessage();
 	}
 

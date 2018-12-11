@@ -56,12 +56,12 @@ class ItemController {
         if(employeeRepo.findAll().size()>0){
             return employeeRepo.findAll() ;
         }
-         throw new EmployeeExceptions();
+         throw new EmployeeException();
     }
 
     @GetMapping ("/employee/{id}")
     Employee singleEmployeeID (@PathVariable Long id){
-        return employeeRepo.findById(id).orElseThrow(()-> new EmployeeExceptions(id));
+        return employeeRepo.findById(id).orElseThrow(()-> new EmployeeException(id));
     }
 
     @GetMapping("/employees/search")
@@ -260,8 +260,12 @@ class ItemController {
                            @RequestParam(value = "category", defaultValue = "%%") String strLostCategory,
                            @RequestParam(value = "color", defaultValue = "%%") String strLostColor){
 
-        return lostRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase
+        List<LostItem> li = new ArrayList<LostItem>();
+
+        li = lostRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase
                 (strLostBrand, strLostCategory, strLostColor);
+
+        return li;
     }
 
     /**
@@ -329,13 +333,20 @@ class ItemController {
 
    @GetMapping ("/issuedMatches/search")
    //findAllByLostItemIDAndFoundItemIDAndCustomerIDAndEmpID
-   List<Match> issuedMatchess  (@RequestParam(value = "foundItemID") Long foundID,
-                                @RequestParam(value = "lostItemID") Long lostID,
-                                @RequestParam(value = "customerID") Long customerID,
-                                @RequestParam(value = "empID") Long empID){
+   List<Match> issuedMatchess  (@RequestParam(value = "foundItemID") String foundID,
+                                @RequestParam(value = "lostItemID") String lostID,
+                                @RequestParam(value = "customerID") String customerID,
+                                @RequestParam(value = "empID") String empID){
 
-       return issuedMatchRepo.findAllByLostItemIDAndFoundItemIDAndCustomerIDAndEmpID
-               (foundID, lostID, customerID, empID);
+        List<Match> im = new ArrayList<Match>();
+        Long fi = Long.parseLong(foundID);
+        Long li = Long.parseLong(lostID);
+        Long ci = Long.parseLong(customerID);
+        Long ei = Long.parseLong(empID);
+
+        im = issuedMatchRepo.findAllByLostItemIDAndFoundItemIDAndCustomerIDAndEmpID
+                (fi, li, ci, ei);
+       return im;
    }
 
     /**
@@ -451,40 +462,26 @@ class ItemController {
 
     @PutMapping("/employee/{id}")
     Employee replaceEmployeeInfo(@RequestBody Employee newEmployee, @PathVariable Long id) {
-        try {
-            Employee tmpEmployee = employeeRepo.findById(id).get();
+
             return employeeRepo.findById(id)
                     .map(employee -> {
-                        if (null == newEmployee.getFirstName()) {
-                            employee.setFirstName(tmpEmployee.getFirstName());
-                        } else {
+                        if (newEmployee.getFirstName() != null ) {
                             employee.setFirstName(newEmployee.getFirstName());
                         }
-                        if (newEmployee.getLastName() == null) {
-                            employee.setLastName(tmpEmployee.getLastName());
-                        } else {
+                        if (newEmployee.getLastName() != null) {
                             employee.setLastName(newEmployee.getLastName());
                         }
-                        if (newEmployee.getAddress() == null) {
-                            employee.setAddress(tmpEmployee.getAddress());
-                        } else {
+                        if (newEmployee.getAddress() != null) {
                             employee.setAddress(newEmployee.getAddress());
                         }
-                        if (newEmployee.getPhoneNumber() == null) {
-                            employee.setPhoneNumber(tmpEmployee.getPhoneNumber());
-                        } else {
+                        if (newEmployee.getPhoneNumber() != null) {
                             employee.setPhoneNumber(newEmployee.getPhoneNumber());
                         }
-                        if (newEmployee.getEmail() == null) {
-                            employee.setEmail(tmpEmployee.getEmail());
-                        } else {
+                        if (newEmployee.getEmail() != null) {
                             employee.setEmail(newEmployee.getEmail());
                         }
                         return employeeRepo.save(employee);
-                    }).orElseThrow(()-> new EmployeeExceptions(id));
-        } catch (Exception e) {
-            throw new EmployeeExceptions(id);
-        }
+                    }).orElseThrow(()-> new EmployeeException(id));
     }
 
     @PutMapping("/issuedMatches/{id}")
@@ -559,7 +556,7 @@ class ItemController {
                     + " with id: " + id + " has been deleted";
 
         } catch (Exception e) {
-            return new EmployeeExceptions().getMessage();
+            return new EmployeeException().getMessage();
         }
     }
 }

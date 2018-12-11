@@ -20,7 +20,6 @@ class LostItem {
 		this.brand = brand;
 		this.color = color;
 		this.active = active;
-
 	}
 
 	public Long getCustomerID() {
