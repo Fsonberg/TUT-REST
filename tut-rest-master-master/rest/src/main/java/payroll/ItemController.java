@@ -297,10 +297,12 @@ class ItemController {
                 }
             }
         }
-        return getMatches;
+        if (getMatches.size() == 0) {
+            throw new MatchException();
+        } else {
+            return getMatches;
+        }
     }
-
-    // hvis getMatches er en tom liste, så returner en exception i stedet.
 
    @PostMapping ("/issueAMatch")
    Match issueAMatch(@RequestBody Match issueAMatch) {
@@ -453,7 +455,7 @@ class ItemController {
             Employee tmpEmployee = employeeRepo.findById(id).get();
             return employeeRepo.findById(id)
                     .map(employee -> {
-                        if (newEmployee.getFirstName() == null) {
+                        if (null == newEmployee.getFirstName()) {
                             employee.setFirstName(tmpEmployee.getFirstName());
                         } else {
                             employee.setFirstName(newEmployee.getFirstName());
@@ -475,7 +477,7 @@ class ItemController {
                         }
                         if (newEmployee.getEmail() == null) {
                             employee.setEmail(tmpEmployee.getEmail());
-                        } {
+                        } else {
                             employee.setEmail(newEmployee.getEmail());
                         }
                         return employeeRepo.save(employee);
@@ -485,7 +487,38 @@ class ItemController {
         }
     }
 
-    //Mangler put for match funktion - found/lostitemID
+    @PutMapping("/issuedMatches/{id}")
+    Match replaceIssuedMatchInfo(@RequestBody Match newMatch, @PathVariable Long id) {
+        try {
+            Match tmpMatch = issuedMatchRepo.findById(id).get();
+            return issuedMatchRepo.findById(id)
+                    .map(match -> {
+                        if (newMatch.getFoundItemID() == null) {
+                            match.setFoundItemID(tmpMatch.getFoundItemID());
+                        } else {
+                            match.setFoundItemID(newMatch.getFoundItemID());
+                        }
+                        if (newMatch.getLostItemID() == null) {
+                            match.setLostItemID(tmpMatch.getLostItemID());
+                        } else {
+                            match.setLostItemID(newMatch.getLostItemID());
+                        }
+                        if (newMatch.getCustomerID() == null) {
+                            match.setCustomerID(tmpMatch.getCustomerID());
+                        } else {
+                            match.setCustomerID(newMatch.getCustomerID());
+                        }
+                        if (newMatch.getEmpID() == null) {
+                            match.setEmpID(tmpMatch.getEmpID());
+                        } else {
+                            match.setEmpID(newMatch.getEmpID());
+                        }
+                        return issuedMatchRepo.save(match);
+                    }).orElseThrow(()-> new MatchException(id));
+        } catch (Exception e) {
+            throw new MatchException(id);
+        }
+    }
 
     /**
      * allows to delete a lost/found item or a customer/employee,
