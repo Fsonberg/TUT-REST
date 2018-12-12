@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface IssuedMatchRepository extends JpaRepository<Match, Long> {
 
-    List<Match> findAllByLostItemIDAndFoundItemIDAndCustomerIDAndEmpID
+    List<Match> findAllByLostItemIDLikeAndFoundItemIDLikeAndCustomerIDLikeAndEmpIDLikeAllIgnoreCase
             (Long lostID, Long foundID, Long customerID, Long empID);
 }

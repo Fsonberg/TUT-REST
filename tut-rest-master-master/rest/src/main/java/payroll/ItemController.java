@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.*;
 
+// When a new entity is created, all entity parameters must be fill (!=null) else throw new exception
+
+
 @EnableJpaRepositories
 class Config{}
 
@@ -52,11 +55,11 @@ class ItemController {
      */
     @GetMapping("/employees")
     List<Employee> allEmployees() {
-
-        if(employeeRepo.findAll().size()>0){
+        if(employeeRepo.findAll().size() > 0){
             return employeeRepo.findAll() ;
+        } else {
+            throw new EmployeeException();
         }
-         throw new EmployeeException();
     }
 
     @GetMapping ("/employee/{id}")
@@ -91,18 +94,20 @@ class ItemController {
      */
 
     @GetMapping("/customers")
-    List<Customer> allCustomers() {return customerRepo.findAll();}
+    List<Customer> allCustomers() {
+        if(customerRepo.findAll().size() > 0){
+            return customerRepo.findAll();
+        } else {
+            throw new CustomerException();
+        }
+    }
 
     @GetMapping ("/customer/{id}")
     Customer singleCustomerID (@PathVariable Long id){
-        // FIX EXEPTIONS!!!
-        // FIX EXEPTIONS!!!
-        // FIX EXEPTIONS!!!
-        // FIX EXEPTIONS!!!
         return customerRepo.findById(id).orElseThrow(()-> new CustomerException(id));
     }
 
-    @GetMapping("/customers/search") //MAN KAN KUN SØGE HVIS ALLE PARAMETRE ER UDFYLDT!
+    @GetMapping("/customers/search")
     List<Customer> oneOrMoreCustomers (@RequestParam(value = "firstName", defaultValue = "%%")String strFirstName,
                                     @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
                                     @RequestParam(value = "address", defaultValue = "%%")String strAddress,
@@ -260,12 +265,8 @@ class ItemController {
                            @RequestParam(value = "category", defaultValue = "%%") String strLostCategory,
                            @RequestParam(value = "color", defaultValue = "%%") String strLostColor){
 
-        List<LostItem> li = new ArrayList<LostItem>();
-
-        li = lostRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase
+        return lostRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase
                 (strLostBrand, strLostCategory, strLostColor);
-
-        return li;
     }
 
     /**
@@ -332,21 +333,20 @@ class ItemController {
    List<Match> issuedMatches() {return issuedMatchRepo.findAll(); }
 
    @GetMapping ("/issuedMatches/search")
-   //findAllByLostItemIDAndFoundItemIDAndCustomerIDAndEmpID
-   List<Match> issuedMatchess  (@RequestParam(value = "foundItemID") String foundID,
-                                @RequestParam(value = "lostItemID") String lostID,
-                                @RequestParam(value = "customerID") String customerID,
-                                @RequestParam(value = "empID") String empID){
+    List<Match> issuedMatches(@RequestParam(value = "foundItemID", defaultValue = "%%") String foundID,
+                             @RequestParam(value = "lostItemID", defaultValue = "%%") String lostID,
+                             @RequestParam(value = "customerID", defaultValue = "%%") String customerID,
+                             @RequestParam(value = "empID", defaultValue = "%%") String empID){
 
-        List<Match> im = new ArrayList<Match>();
-        Long fi = Long.parseLong(foundID);
-        Long li = Long.parseLong(lostID);
-        Long ci = Long.parseLong(customerID);
-        Long ei = Long.parseLong(empID);
+        List<Match> convertedIssuedMatches = new ArrayList<Match>();
+        Long fID = Long.parseLong(foundID);
+        Long lID = Long.parseLong(lostID);
+        Long cID = Long.parseLong(customerID);
+        Long eID = Long.parseLong(empID);
 
-        im = issuedMatchRepo.findAllByLostItemIDAndFoundItemIDAndCustomerIDAndEmpID
-                (fi, li, ci, ei);
-       return im;
+        convertedIssuedMatches = issuedMatchRepo.findAllByLostItemIDLikeAndFoundItemIDLikeAndCustomerIDLikeAndEmpIDLikeAllIgnoreCase
+                (fID, lID, cID, eID);
+       return convertedIssuedMatches;
    }
 
     /**
@@ -524,26 +524,43 @@ class ItemController {
 
     @DeleteMapping("/deleteLostItem/{id}")
     String deleteLostItem(@PathVariable Long id) {
-        LostItem tmpLostItem = lostRepo.findById(id).get();
-        lostRepo.deleteById(id);
-        return "Lost item: " + tmpLostItem.getCategory() + ", " + tmpLostItem.getBrand() +
-                ", " + tmpLostItem.getColor() + "; with id " + tmpLostItem.getLostItemID() + " has been deleted";
+        try {
+
+            LostItem tmpLostItem = lostRepo.findById(id).get();
+            lostRepo.deleteById(id);
+            String s = "Lost item: " + tmpLostItem.getCategory() + ", " + tmpLostItem.getBrand() +
+                    ", " + tmpLostItem.getColor() + "; with id " + tmpLostItem.getLostItemID() + " has been deleted";
+            return s;
+        } catch (Exception e) {
+            return new LostItemException(id).getMessage();
+        }
     }
 
     @DeleteMapping("/deleteFoundItem/{id}")
     String deleteFoundItem(@PathVariable Long id) {
-        FoundItem tmpFoundItem = foundRepo.findById(id).get();
-        foundRepo.deleteById(id);
-        return "Lost item: " + tmpFoundItem.getCategory() + ", " + tmpFoundItem.getBrand() +
-                ", " + tmpFoundItem.getColor() + "; with id " + tmpFoundItem.getFoundItemID() + " has been deleted";
+        try {
+
+            FoundItem tmpFoundItem = foundRepo.findById(id).get();
+            foundRepo.deleteById(id);
+            String s = "Found item: " + tmpFoundItem.getCategory() + ", " + tmpFoundItem.getBrand() +
+                    ", " + tmpFoundItem.getColor() + "; with id " + tmpFoundItem.getFoundItemID() + " has been deleted";
+            return s;
+        } catch (Exception e) {
+            return new FoundItemException(id).getMessage();
+        }
     }
 
     @DeleteMapping("/deleteCustomer/{id}")
     String deleteCustomer(@PathVariable Long id) {
-        Customer tmpCustomer = customerRepo.findById(id).get();
-        customerRepo.deleteById(id);
-        return "Customer " + tmpCustomer.getFirstName()+ " " + tmpCustomer.getLastName()
-                + " with id: " + id + " has been deleted";
+        try {
+            Customer tmpCustomer = customerRepo.findById(id).get();
+            customerRepo.deleteById(id);
+            String s = "Customer " + tmpCustomer.getFirstName()+ " " + tmpCustomer.getLastName()
+                    + " with id: " + id + " has been deleted";
+            return s;
+        } catch (Exception e) {
+            return new CustomerException(id).getMessage();
+        }
     }
 
 
@@ -552,11 +569,12 @@ class ItemController {
         try {
             Employee tmpEmployee = employeeRepo.findById(id).get();
             employeeRepo.deleteById(id);
-            return "Employee " + tmpEmployee.getFirstName() + " " + tmpEmployee.getLastName()
+            String s = "Employee " + tmpEmployee.getFirstName() + " " + tmpEmployee.getLastName()
                     + " with id: " + id + " has been deleted";
+            return s;
 
         } catch (Exception e) {
-            return new EmployeeException().getMessage();
+            return new EmployeeException(id).getMessage();
         }
     }
 }
