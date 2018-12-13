@@ -2,15 +2,11 @@ package payroll;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.*;
 
+//
 // When a new entity is created, all entity parameters must be fill (!=null) else throw new exception
-
-
-@EnableJpaRepositories
-class Config{}
+//
 
 @RestController
 class ItemController {
@@ -192,9 +188,6 @@ class ItemController {
         return foundRepo.findById(id).orElseThrow(() -> new FoundItemException(id));
     }
 
-    // LAV SØGE MULIGEHEDER I DISABLED OG ACTIVE ITEMS!!
-    // LAV SØGE MULIGEHEDER I DISABLED OG ACTIVE ITEMS!!
-
     @GetMapping("/foundItems/search")
     List<FoundItem> foundTwo(@RequestParam(value = "brand", defaultValue = "%%") String strFoundBrand,
                              @RequestParam(value = "category", defaultValue = "%%") String strFoundCategory,
@@ -252,7 +245,6 @@ class ItemController {
         }
         return ald;
     }
-
 
     @GetMapping("/lostItem/{id}")
     LostItem lostOne (@PathVariable Long id) {
@@ -344,7 +336,8 @@ class ItemController {
         Long cID = Long.parseLong(customerID);
         Long eID = Long.parseLong(empID);
 
-        convertedIssuedMatches = issuedMatchRepo.findAllByLostItemIDLikeAndFoundItemIDLikeAndCustomerIDLikeAndEmpIDLikeAllIgnoreCase
+        convertedIssuedMatches = issuedMatchRepo
+                .findAllByLostItemIDLikeAndFoundItemIDLikeAndCustomerIDLikeAndEmpIDLikeAllIgnoreCase
                 (fID, lID, cID, eID);
        return convertedIssuedMatches;
    }
@@ -356,108 +349,67 @@ class ItemController {
      */
     @PutMapping("/lostItem/{id}")
     LostItem replaceItem(@RequestBody LostItem newItem, @PathVariable Long id) {
-        try {
-            LostItem tmpItem = lostRepo.findById(id).get();
-            return lostRepo.findById(id)
+        return lostRepo.findById(id)
 
-                    .map(item -> {
-                        if (newItem.getCategory() == null) {
-                            item.setCategory(tmpItem.getCategory());
-                        } else {
-                            item.setCategory(newItem.getCategory());
-                        }
-                        if (newItem.getBrand() == null) {
-                            item.setBrand(tmpItem.getBrand());
-                        } else {
-                            item.setBrand(newItem.getBrand());
-                        }
-                        if (newItem.getColor() == null) {
-                            item.setColor(tmpItem.getColor());
-                        } else {
-                            item.setColor(newItem.getColor());
-                        }
-                        if (newItem.getCustomerID() == null) {
-                            item.setCustomerID(tmpItem.getCustomerID());
-                        } else {
-                            item.setCustomerID(newItem.getCustomerID());
-                        }
-                        return lostRepo.save(item);
-                    }).orElseThrow(()-> new LostItemException(id));
-        } catch (Exception e) {
-            throw new LostItemException(id);
-        }
+                .map(item -> {
+                    if (newItem.getCategory() != null) {
+                        item.setCategory(newItem.getCategory());
+                    }
+                    if (newItem.getBrand() != null) {
+                        item.setBrand(newItem.getBrand());
+                    }
+                    if (newItem.getColor() != null) {
+                        item.setColor(newItem.getColor());
+                    }
+                    if (newItem.getCustomerID() != null) {
+                        item.setCustomerID(newItem.getCustomerID());
+                    }
+                    return lostRepo.save(item);
+                }).orElseThrow(()-> new LostItemException(id));
     }
 
     @PutMapping("/foundItem/{id}")
     FoundItem replaceItem(@RequestBody FoundItem newItem, @PathVariable Long id) {
-        try {
-            FoundItem tmpItem = foundRepo.findById(id).get();
-            return foundRepo.findById(id)
+        return foundRepo.findById(id)
 
-                    .map(item -> {
-                        if (newItem.getCategory() == null) {
-                            item.setCategory(tmpItem.getCategory());
-                        } else {
-                            item.setCategory(newItem.getCategory());
-                        }
-                        if (newItem.getBrand() == null) {
-                            item.setBrand(tmpItem.getBrand());
-                        } else {
-                            item.setBrand(newItem.getBrand());
-                        }
-                        if (newItem.getColor() == null) {
-                            item.setColor(tmpItem.getColor());
-                        } else {
-                            item.setColor(newItem.getColor());
-                        }
-                        if (newItem.getEmpID() == null) {
-                            item.setEmpID(tmpItem.getEmpID());
-                        } else {
-                            item.setEmpID(newItem.getEmpID());
-                        }
-                        return foundRepo.save(item);
-                    }).orElseThrow(()-> new FoundItemException(id));
-        } catch (Exception e) {
-            throw new FoundItemException(id);
-        }
+                .map(item -> {
+                    if (newItem.getCategory() != null) {
+                        item.setCategory(newItem.getCategory());
+                    }
+                    if (newItem.getBrand() != null) {
+                        item.setBrand(newItem.getBrand());
+                    }
+                    if (newItem.getColor() != null) {
+                        item.setColor(newItem.getColor());
+                    }
+                    if (newItem.getEmpID() != null) {
+                        item.setEmpID(newItem.getEmpID());
+                    }
+                    return foundRepo.save(item);
+                }).orElseThrow(()-> new FoundItemException(id));
     }
 
     @PutMapping("/customer/{id}")
      Customer replaceCustomerInfo(@RequestBody Customer newCustomer, @PathVariable Long id) {
-        try {
-            Customer tmpCustomer = customerRepo.findById(id).get();
-            return customerRepo.findById(id)
-                    .map(customer -> {
-                        if (newCustomer.getFirstName() == null) {
-                            customer.setFirstName(tmpCustomer.getFirstName());
-                        } else {
-                            customer.setFirstName(newCustomer.getFirstName());
-                        }
-                        if (newCustomer.getLastName() == null) {
-                            customer.setLastName(tmpCustomer.getLastName());
-                        } else {
-                            customer.setLastName(newCustomer.getLastName());
-                        }
-                        if (newCustomer.getAddress() == null) {
-                            customer.setAddress(tmpCustomer.getAddress());
-                        } else {
-                            customer.setAddress(newCustomer.getAddress());
-                        }
-                        if (newCustomer.getPhoneNumber() == null) {
-                            customer.setPhoneNumber(tmpCustomer.getPhoneNumber());
-                        } else {
-                            customer.setPhoneNumber(newCustomer.getPhoneNumber());
-                        }
-                        if (newCustomer.getEmail() == null) {
-                            customer.setEmail(tmpCustomer.getEmail());
-                        } else {
-                            customer.setEmail(newCustomer.getEmail());
-                        }
-                        return customerRepo.save(customer);
-                    }).orElseThrow(()-> new CustomerException(id));
-        } catch (Exception e) {
-            throw new CustomerException(id);
-        }
+        return customerRepo.findById(id)
+                .map(customer -> {
+                    if (newCustomer.getFirstName() != null) {
+                        customer.setFirstName(newCustomer.getFirstName());
+                    }
+                    if (newCustomer.getLastName() != null) {
+                        customer.setLastName(newCustomer.getLastName());
+                    }
+                    if (newCustomer.getAddress() != null) {
+                        customer.setAddress(newCustomer.getAddress());
+                    }
+                    if (newCustomer.getPhoneNumber() != null) {
+                        customer.setPhoneNumber(newCustomer.getPhoneNumber());
+                    }
+                    if (newCustomer.getEmail() != null) {
+                        customer.setEmail(newCustomer.getEmail());
+                    }
+                    return customerRepo.save(customer);
+                }).orElseThrow(()-> new CustomerException(id));
     }
 
     @PutMapping("/employee/{id}")
@@ -486,35 +438,22 @@ class ItemController {
 
     @PutMapping("/issuedMatches/{id}")
     Match replaceIssuedMatchInfo(@RequestBody Match newMatch, @PathVariable Long id) {
-        try {
-            Match tmpMatch = issuedMatchRepo.findById(id).get();
-            return issuedMatchRepo.findById(id)
-                    .map(match -> {
-                        if (newMatch.getFoundItemID() == null) {
-                            match.setFoundItemID(tmpMatch.getFoundItemID());
-                        } else {
-                            match.setFoundItemID(newMatch.getFoundItemID());
-                        }
-                        if (newMatch.getLostItemID() == null) {
-                            match.setLostItemID(tmpMatch.getLostItemID());
-                        } else {
-                            match.setLostItemID(newMatch.getLostItemID());
-                        }
-                        if (newMatch.getCustomerID() == null) {
-                            match.setCustomerID(tmpMatch.getCustomerID());
-                        } else {
-                            match.setCustomerID(newMatch.getCustomerID());
-                        }
-                        if (newMatch.getEmpID() == null) {
-                            match.setEmpID(tmpMatch.getEmpID());
-                        } else {
-                            match.setEmpID(newMatch.getEmpID());
-                        }
-                        return issuedMatchRepo.save(match);
-                    }).orElseThrow(()-> new MatchException(id));
-        } catch (Exception e) {
-            throw new MatchException(id);
-        }
+        return issuedMatchRepo.findById(id)
+                .map(match -> {
+                    if (newMatch.getFoundItemID() != null) {
+                        match.setFoundItemID(newMatch.getFoundItemID());
+                    }
+                    if (newMatch.getLostItemID() != null) {
+                        match.setLostItemID(newMatch.getLostItemID());
+                    }
+                    if (newMatch.getCustomerID() != null) {
+                        match.setCustomerID(newMatch.getCustomerID());
+                    }
+                    if (newMatch.getEmpID() != null) {
+                        match.setEmpID(newMatch.getEmpID());
+                    }
+                    return issuedMatchRepo.save(match);
+                }).orElseThrow(()-> new MatchException(id));
     }
 
     /**

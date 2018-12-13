@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 class LoadDatabase {
 
     /**
-     * hardcoded database for test purposes when no database is connected to the program
+     * hardcoded database for development- & test-purposes when no database is connected to the program
      */
 
 	@Bean
