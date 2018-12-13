@@ -140,6 +140,7 @@ class ItemController {
                 postMatches.add(m);
             }
         }
+
         if (postMatches.size() == 0) {
             ArrayList postedItemNoMatch = new ArrayList();
             postedItemNoMatch.add(savedFoundItem);
