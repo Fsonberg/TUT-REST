@@ -105,10 +105,10 @@ class ItemController {
 
     @GetMapping("/customers/search")
     List<Customer> oneOrMoreCustomers (@RequestParam(value = "firstName", defaultValue = "%%")String strFirstName,
-                                    @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
-                                    @RequestParam(value = "address", defaultValue = "%%")String strAddress,
-                                    @RequestParam(value = "phoneNumber", defaultValue = "%%") String strPhoneNumber,
-                                    @RequestParam(value = "email", defaultValue = "%%") String strEmail){
+                                       @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
+                                       @RequestParam(value = "address", defaultValue = "%%")String strAddress,
+                                       @RequestParam(value = "phoneNumber", defaultValue = "%%") String strPhoneNumber,
+                                       @RequestParam(value = "email", defaultValue = "%%") String strEmail){
 
         return customerRepo.findAllByFirstNameLikeAndLastNameLikeAndAddressLikeAndPhoneNumberLikeAndEmailLikeAllIgnoreCase
                 (strFirstName,strLastName,strAddress,strPhoneNumber, strEmail);
@@ -133,10 +133,10 @@ class ItemController {
                     && savedFoundItem.getColor().equals(allLostActive().get(i).getColor())
                     && allLostActive().get(i).isActive()) {
 
-                Match m = new Match();
-                m.setFoundItemID(savedFoundItem.getFoundItemID());
-                m.setLostItemID(allLostActive().get(i).getLostItemID());
-                m.setCustomerID(allLostActive().get(i).getCustomerID());
+                Match m = new Match(savedFoundItem.getFoundItemID(),
+                        allLostActive().get(i).getLostItemID(),
+                        allLostActive().get(i).getCustomerID(),
+                        activeEmp);
                 postMatches.add(m);
             }
         }
@@ -184,14 +184,14 @@ class ItemController {
     }
 
     @GetMapping("/foundItem/{id}")
-    FoundItem foundOne(@PathVariable Long id){
+    FoundItem foundItemID(@PathVariable Long id){
         return foundRepo.findById(id).orElseThrow(() -> new FoundItemException(id));
     }
 
     @GetMapping("/foundItems/search")
-    List<FoundItem> foundTwo(@RequestParam(value = "brand", defaultValue = "%%") String strFoundBrand,
-                             @RequestParam(value = "category", defaultValue = "%%") String strFoundCategory,
-                             @RequestParam(value = "color", defaultValue = "%%") String strFoundColor){
+    List<FoundItem> foundItemSearch(@RequestParam(value = "brand", defaultValue = "%%") String strFoundBrand,
+                                    @RequestParam(value = "category", defaultValue = "%%") String strFoundCategory,
+                                    @RequestParam(value = "color", defaultValue = "%%") String strFoundColor){
 
         return foundRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase
                 (strFoundBrand, strFoundCategory,strFoundColor);
@@ -247,15 +247,15 @@ class ItemController {
     }
 
     @GetMapping("/lostItem/{id}")
-    LostItem lostOne (@PathVariable Long id) {
+    LostItem lostItemID (@PathVariable Long id) {
         return lostRepo.findById(id)
                 .orElseThrow(() -> new LostItemException(id));
     }
 
     @GetMapping("/lostItems/search")
-    List<LostItem> lostTwo(@RequestParam(value = "brand", defaultValue = "%%") String strLostBrand,
-                           @RequestParam(value = "category", defaultValue = "%%") String strLostCategory,
-                           @RequestParam(value = "color", defaultValue = "%%") String strLostColor){
+    List<LostItem> lostItemSearch(@RequestParam(value = "brand", defaultValue = "%%") String strLostBrand,
+                                  @RequestParam(value = "category", defaultValue = "%%") String strLostCategory,
+                                  @RequestParam(value = "color", defaultValue = "%%") String strLostColor){
 
         return lostRepo.findAllByBrandLikeAndCategoryLikeAndColorLikeAllIgnoreCase
                 (strLostBrand, strLostCategory, strLostColor);
@@ -282,14 +282,14 @@ class ItemController {
                         && allFoundActive().get(i).isActive()
                         && allLostActive().get(j).isActive()){
 
-                    Match m = new Match();
+                    Match m = new Match(allFoundActive().get(i).getFoundItemID(),
+                            allLostActive().get(j).getLostItemID(),
+                            allLostActive().get(j).getCustomerID(),
+                            allFoundActive().get(i).getEmpID());
                     System.out.println();
                     System.out.print("LostItem-ID: "+allLostActive().get(j).getLostItemID() + " matches with ");
                     System.out.println("FoundItem-ID: "+allFoundActive().get(i).getFoundItemID());
-                    m.setLostItemID(allLostActive().get(j).getLostItemID());
-                    m.setFoundItemID(allFoundActive().get(i).getFoundItemID());
-                    m.setCustomerID(allLostActive().get(j).getCustomerID());
-                    m.setEmpID(allFoundActive().get(i).getEmpID());
+
                     getMatches.add(m);
                 }
             }
@@ -325,10 +325,10 @@ class ItemController {
    List<Match> issuedMatches() {return issuedMatchRepo.findAll(); }
 
    @GetMapping ("/issuedMatches/search")
-    List<Match> issuedMatches(@RequestParam(value = "foundItemID", defaultValue = "%%") String foundID,
-                             @RequestParam(value = "lostItemID", defaultValue = "%%") String lostID,
-                             @RequestParam(value = "customerID", defaultValue = "%%") String customerID,
-                             @RequestParam(value = "empID", defaultValue = "%%") String empID){
+    List<Match> issuedMatchesSearch(@RequestParam(value = "foundItemID", defaultValue = "%%") String foundID,
+                                    @RequestParam(value = "lostItemID", defaultValue = "%%") String lostID,
+                                    @RequestParam(value = "customerID", defaultValue = "%%") String customerID,
+                                    @RequestParam(value = "empID", defaultValue = "%%") String empID){
 
         List<Match> convertedIssuedMatches = new ArrayList<Match>();
         Long fID = Long.parseLong(foundID);
@@ -348,7 +348,7 @@ class ItemController {
      * lost/found item or a customer/employee
      */
     @PutMapping("/lostItem/{id}")
-    LostItem replaceItem(@RequestBody LostItem newItem, @PathVariable Long id) {
+    LostItem replaceLostItem(@RequestBody LostItem newItem, @PathVariable Long id) {
         return lostRepo.findById(id)
 
                 .map(item -> {
@@ -369,7 +369,7 @@ class ItemController {
     }
 
     @PutMapping("/foundItem/{id}")
-    FoundItem replaceItem(@RequestBody FoundItem newItem, @PathVariable Long id) {
+    FoundItem replaceFoundItem(@RequestBody FoundItem newItem, @PathVariable Long id) {
         return foundRepo.findById(id)
 
                 .map(item -> {

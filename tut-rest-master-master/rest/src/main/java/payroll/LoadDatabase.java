@@ -14,10 +14,10 @@ class LoadDatabase {
      */
 
 	@Bean
-	CommandLineRunner initDatabase(LostItemRepository lostRepo, FoundItemRepository foundRepo, CustomerRepository customerRepo, EmployeeRepository employeeRepo) {
+	CommandLineRunner initDatabase(LostItemRepository lostRepo, FoundItemRepository foundRepo, CustomerRepository customerRepo, EmployeeRepository employeeRepo, IssuedMatchRepository issuedMatchRepo) {
 		return args -> {
 			//LOST REPOSITORY
-			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue",true)));
+			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue",false)));
 			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue",true)));
 			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue",true)));
 			System.out.println("Preloading " + lostRepo.save(new LostItem("Electronics", "Apple", "blue", true)));
@@ -38,6 +38,9 @@ class LoadDatabase {
 
 			//EMPLOYEE REPOSITORY
 			System.out.println("preloading " + employeeRepo.save(new Employee("Casper", "Christensen", "Standvejen", "22504140", "madril4life@humus.tihi.com")));
+
+			//ISSUEDMATCH REPOSITORY
+			System.out.println("preloading " + issuedMatchRepo.save(new Match(12l, 1l, 13l, 15l)));
 		};
 	}
 }

@@ -14,7 +14,7 @@ class Match {
     private Long customerID;
     private Long empID;
 
-    public Match() {
+    public Match(Long foundItemID, Long lostItemID, Long customerID, Long empID) {
         this.foundItemID = foundItemID;
         this.lostItemID = lostItemID;
         this.customerID = customerID;
