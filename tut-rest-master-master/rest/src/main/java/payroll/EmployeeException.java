@@ -5,6 +5,6 @@ public class EmployeeException extends RuntimeException {
         super("Employee ID " + id + " could not be found");
     }
     EmployeeException(){
-        super("No employeesList");
+        super("No employees");
     }
 }
