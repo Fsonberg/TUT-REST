@@ -63,12 +63,12 @@
     <session id="-744403059">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="9281" />
+          <entry key="java" value="9933" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="9281" />
+          <entry key="JAVA" value="9933" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -91,28 +91,28 @@
           <entry key="LostItem" value="2" />
           <entry key="class" value="3" />
           <entry key="groovy" value="1" />
-          <entry key="java" value="29" />
+          <entry key="java" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="3" />
           <entry key="Groovy" value="1" />
-          <entry key="JAVA" value="29" />
+          <entry key="JAVA" value="31" />
           <entry key="UML" value="12" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.42590618">
+    <splitter split-orientation="horizontal" split-proportion="0.59914714">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="706">
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/payroll/ItemController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="212">
-                  <caret line="206" column="13" selection-start-line="206" selection-start-column="13" selection-end-line="206" selection-end-column="13" />
+                <state relative-caret-position="85">
+                  <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -169,7 +169,7 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/payroll/CustomerRepository.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="34">
@@ -193,8 +193,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/payroll/EmployeeRepository.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
-                  <caret line="9" selection-start-line="9" selection-end-line="9" />
+                <state relative-caret-position="85">
+                  <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -251,11 +251,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/payroll/CustomerTest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="419">
-                  <caret line="130" column="35" selection-start-line="130" selection-start-column="27" selection-end-line="130" selection-end-column="35" />
+                <state relative-caret-position="1887">
+                  <caret line="127" selection-start-line="127" selection-end-line="127" />
                 </state>
               </provider>
             </entry>
@@ -281,7 +281,7 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/payroll/ExceptionsAdvice.java">
               <provider selected="true" editor-type-id="text-editor" />
             </entry>
@@ -338,12 +338,12 @@
         <option value="$PROJECT_DIR$/src/main/java/payroll/MatchException.java" />
         <option value="$PROJECT_DIR$/src/main/java/payroll/Match.java" />
         <option value="$PROJECT_DIR$/src/main/java/payroll/LoadDatabase.java" />
-        <option value="$PROJECT_DIR$/src/main/java/payroll/ItemController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/payroll/ItemControllerTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/payroll/CustomerTest.groovy" />
         <option value="$PROJECT_DIR$/src/main/java/payroll/EmployeeTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/payroll/LostItem.java" />
         <option value="$PROJECT_DIR$/src/main/java/payroll/CustomerTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/payroll/ItemControllerTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/payroll/ItemController.java" />
       </list>
     </option>
   </component>
@@ -440,13 +440,14 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544873225798" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544875442515" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Arquillian JUnit4" value="" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Groovy JUnit" value="" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3" value="" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="true" />
     <property name="create.test.in.the.same.root" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/eksamen1.2" />
     <property name="project.structure.last.edited" value="Project" />
@@ -474,7 +475,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CustomerTest">
+  <component name="RunManager" selected="JUnit.ItemControllerTest">
     <configuration name="CustomerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="rest" />
       <extension name="coverage">
@@ -534,9 +535,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ItemControllerTest" />
         <item itemvalue="JUnit.CustomerTest" />
         <item itemvalue="JUnit.CustomerTest.getEmail" />
-        <item itemvalue="JUnit.ItemControllerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -562,44 +563,44 @@
       <workItem from="1544780604223" duration="311000" />
       <workItem from="1544783299535" duration="2229000" />
       <workItem from="1544796876117" duration="6202000" />
-      <workItem from="1544867403486" duration="5155000" />
+      <workItem from="1544867403486" duration="7424000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CustomerTest - 2018.12.15 at 12h 09m 41s.xml">
-      <configuration name="CustomerTest" configurationId="JUnit" />
+    <history-entry file="ItemControllerTest - 2018.12.15 at 12h 48m 28s.xml">
+      <configuration name="ItemControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CustomerTest - 2018.12.15 at 12h 09m 54s.xml">
-      <configuration name="CustomerTest" configurationId="JUnit" />
+    <history-entry file="ItemControllerTest - 2018.12.15 at 12h 50m 00s.xml">
+      <configuration name="ItemControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CustomerTest - 2018.12.15 at 12h 12m 17s.xml">
-      <configuration name="CustomerTest" configurationId="JUnit" />
+    <history-entry file="ItemControllerTest - 2018.12.15 at 12h 50m 12s.xml">
+      <configuration name="ItemControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CustomerTest - 2018.12.15 at 12h 14m 10s.xml">
-      <configuration name="CustomerTest" configurationId="JUnit" />
+    <history-entry file="ItemControllerTest - 2018.12.15 at 12h 50m 49s.xml">
+      <configuration name="ItemControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CustomerTest - 2018.12.15 at 12h 14m 53s.xml">
-      <configuration name="CustomerTest" configurationId="JUnit" />
+    <history-entry file="ItemControllerTest - 2018.12.15 at 12h 52m 58s.xml">
+      <configuration name="ItemControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CustomerTest - 2018.12.15 at 12h 15m 50s.xml">
-      <configuration name="CustomerTest" configurationId="JUnit" />
+    <history-entry file="ItemControllerTest - 2018.12.15 at 12h 53m 06s.xml">
+      <configuration name="ItemControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CustomerTest - 2018.12.15 at 12h 17m 03s.xml">
-      <configuration name="CustomerTest" configurationId="JUnit" />
+    <history-entry file="ItemControllerTest - 2018.12.15 at 12h 59m 43s.xml">
+      <configuration name="ItemControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CustomerTest - 2018.12.15 at 12h 17m 36s.xml">
-      <configuration name="CustomerTest" configurationId="JUnit" />
+    <history-entry file="ItemControllerTest - 2018.12.15 at 13h 00m 02s.xml">
+      <configuration name="ItemControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CustomerTest - 2018.12.15 at 12h 17m 40s.xml">
-      <configuration name="CustomerTest" configurationId="JUnit" />
+    <history-entry file="ItemControllerTest - 2018.12.15 at 13h 00m 32s.xml">
+      <configuration name="ItemControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CustomerTest - 2018.12.15 at 12h 18m 16s.xml">
-      <configuration name="CustomerTest" configurationId="JUnit" />
+    <history-entry file="ItemControllerTest - 2018.12.15 at 13h 03m 08s.xml">
+      <configuration name="ItemControllerTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75931000" />
+    <option name="totallyTimeSpent" value="78200000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -615,7 +616,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4099783" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.4989154" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1215,7 +1216,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/payroll/ItemControllerTest.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/junit/framework/TestCase.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="241">
@@ -1307,29 +1307,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/payroll/ExceptionsAdvice.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/payroll/ItemController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="206" column="13" selection-start-line="206" selection-start-column="13" selection-end-line="206" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/payroll/EmployeeRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/payroll/CustomerRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -1367,10 +1344,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/payroll/EmployeeRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/payroll/CustomerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="130" column="35" selection-start-line="130" selection-start-column="27" selection-end-line="130" selection-end-column="35" />
+        <state relative-caret-position="1887">
+          <caret line="127" selection-start-line="127" selection-end-line="127" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/payroll/ItemControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/payroll/ExceptionsAdvice.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/payroll/ItemController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

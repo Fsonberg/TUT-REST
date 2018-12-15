@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
-//
-// When a new entity is created, all entity parameters must be fill (!=null) else throw new exception
-//
-
 @RestController
 class ItemController {
 
@@ -45,11 +41,11 @@ class ItemController {
 
     /**
      * Employee Gets
-     * 1. get all employees
+     * 1. get all employeesList
      * 2. get a single employee by specifying ID
-     * 3. get all employees that matches a specific search parameter
+     * 3. get all employeesList that matches a specific search parameter
      */
-    @GetMapping("/employees")
+    @GetMapping("/employeesList")
     List<Employee> allEmployees() {
         if(employeeRepo.findAll().size() > 0){
             return employeeRepo.findAll() ;
@@ -63,7 +59,7 @@ class ItemController {
         return employeeRepo.findById(id).orElseThrow(()-> new EmployeeException(id));
     }
 
-    @GetMapping("/employees/search")
+    @GetMapping("/employeesList/search")
     List<Employee> oneOrMoreEmployee (@RequestParam(value = "firstName", defaultValue = "%%")String strFirstName,
                                       @RequestParam(value = "lastName", defaultValue = "%%")String strLastName,
                                       @RequestParam(value = "address", defaultValue = "%%")String strAddress,
