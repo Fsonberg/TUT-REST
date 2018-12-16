@@ -440,7 +440,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544873225798" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544951779589" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Arquillian JUnit4" value="" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Groovy JUnit" value="" />
@@ -474,7 +474,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CustomerTest">
+  <component name="RunManager" selected="JUnit.LostItemTest">
     <configuration name="CustomerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="rest" />
       <extension name="coverage">
@@ -519,6 +519,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="LostItemTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="rest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="payroll.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="payroll" />
+      <option name="MAIN_CLASS_NAME" value="payroll.LostItemTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ItemApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="rest" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="payroll.ItemApplication" />
@@ -527,13 +541,15 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Spring Boot.ItemApplication" />
       <item itemvalue="JUnit.ItemControllerTest" />
       <item itemvalue="JUnit.CustomerTest" />
       <item itemvalue="JUnit.CustomerTest.getEmail" />
+      <item itemvalue="Spring Boot.ItemApplication" />
+      <item itemvalue="JUnit.LostItemTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.LostItemTest" />
         <item itemvalue="JUnit.CustomerTest" />
         <item itemvalue="JUnit.CustomerTest.getEmail" />
         <item itemvalue="JUnit.ItemControllerTest" />
