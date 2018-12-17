@@ -6,54 +6,33 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class CustomerTest {
-    Customer c = new Customer(
-            "test",
-            "testensen",
-            "testVille",
-            "11223344",
-            "testTestensen@check.tst"
-    );
+public class EmployeeTest {
+    Employee e = new Employee("empTest",
+            "empTestensen",
+            "empTstAddresss",
+            "12233456",
+            "empEmail@testing.tst");
 
     @Before
     public void setUp() throws Exception {
-
-        c.setCustomerID(1L);
+        e.setEmpID(1L);
     }
 
     @Test
-    public void getEmail() {
-        String expected = "testTestensen@check.tst";
-        String actual = c.getEmail();
-        Assert.assertEquals(expected,actual);
-        System.out.println("Testing that " + expected + " -> " + actual);
-        System.out.println();
-    }
-
-    @Test
-    public void setEmail() {
-        c.setEmail("testing_set_email");
-        String expected = "testing_set_email";
-        String actual = c.getEmail();
-        Assert.assertEquals(expected,actual);
-        System.out.println("Testing that " + expected + " -> " + actual);
-        System.out.println();
-    }
-
-    @Test
-    public void getCustomerID() {
+    public void getEmpID() {
         Long expected = 1L;
-        Long actual = c.getCustomerID();
+        Long actual = e.getEmpID();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that " + expected + " -> " + actual);
         System.out.println();
+
     }
 
     @Test
-    public void setCustomerID() {
-        c.setCustomerID(3L);
+    public void setEmpID() {
+        e.setEmpID(3L);
         Long expected = 3L;
-        Long actual = c.getCustomerID();
+        Long actual = e.getEmpID();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that " + expected + " -> " + actual);
         System.out.println();
@@ -61,8 +40,8 @@ public class CustomerTest {
 
     @Test
     public void getFirstName() {
-        String expected = "test";
-        String actual = c.getFirstName();
+        String expected = "empTest";
+        String actual = e.getFirstName();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that " + expected + " -> " + actual);
         System.out.println();
@@ -70,9 +49,9 @@ public class CustomerTest {
 
     @Test
     public void setFirstName() {
-        c.setFirstName("doubleCheck");
-        String expected = "doubleCheck";
-        String actual = c.getFirstName();
+        e.setFirstName("empNametst");
+        String expected = "empNametst";
+        String actual = e.getFirstName();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that " + expected + " -> " + actual);
         System.out.println();
@@ -80,8 +59,8 @@ public class CustomerTest {
 
     @Test
     public void getLastName() {
-        String expected = "testensen";
-        String actual = c.getLastName();
+        String expected = "empTestensen";
+        String actual = e.getLastName();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that " + expected + " -> " + actual);
         System.out.println();
@@ -89,9 +68,9 @@ public class CustomerTest {
 
     @Test
     public void setLastName() {
-        c.setLastName("trippleCheck");
-        String expected = "trippleCheck";
-        String actual = c.getLastName();
+        e.setLastName("empLnTst");
+        String expected = "empLnTst";
+        String actual = e.getLastName();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that " + expected + " -> " + actual);
         System.out.println();
@@ -99,8 +78,8 @@ public class CustomerTest {
 
     @Test
     public void getAddress() {
-        String expected = "testVille";
-        String actual = c.getAddress();
+        String expected = "empTstAddresss";
+        String actual = e.getAddress();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that " + expected + " -> " + actual);
         System.out.println();
@@ -108,28 +87,49 @@ public class CustomerTest {
 
     @Test
     public void setAddress() {
-        c.setAddress("checkTestVille");
-        String expected = "checkTestVille";
-        String actual = c.getAddress();
+        e.setAddress("checkemptstAdd");
+        String expected = "checkemptstAdd";
+        String actual = e.getAddress();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that " + expected + " -> " + actual);
         System.out.println();
+
     }
 
     @Test
     public void getPhoneNumber() {
-        String expected = "11223344";
-        String actual = c.getPhoneNumber();
+        String expected = "12233456";
+        String actual = e.getPhoneNumber();
+        Assert.assertEquals(expected,actual);
+        System.out.println("Testing that " + expected + " -> " + actual);
+        System.out.println();
+
+    }
+
+    @Test
+    public void setPhoneNumber() {
+        e.setPhoneNumber("973-409-3252");
+        String expected = "973-409-3252";
+        String actual = e.getPhoneNumber();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that " + expected + " -> " + actual);
         System.out.println();
     }
 
     @Test
-    public void setPhoneNumber() {
-        c.setPhoneNumber("973-409-3313");
-        String expected = "973-409-3313";
-        String actual = c.getPhoneNumber();
+    public void getEmail() {
+        String expected = "empEmail@testing.tst";
+        String actual = e.getEmail();
+        Assert.assertEquals(expected,actual);
+        System.out.println("Testing that " + expected + " -> " + actual);
+        System.out.println();
+    }
+
+    @Test
+    public void setEmail() {
+        e.setEmail("empEmailTest");
+        String expected = "empEmailTest";
+        String actual = e.getEmail();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that " + expected + " -> " + actual);
         System.out.println();

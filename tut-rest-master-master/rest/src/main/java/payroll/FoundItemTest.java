@@ -4,35 +4,37 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LostItemTest {
+import static org.junit.Assert.*;
 
-    LostItem l = new LostItem(
-            "test",
-            "testB",
-            "TestC",
-            true
+public class FoundItemTest {
+
+    FoundItem f = new FoundItem(
+            "testD",
+            "testE",
+            "testF",
+            false
     );
 
     @Before
     public void setUp() throws Exception {
-        l.setCustomerID(1L);
-        l.setLostItemID(2L);
+        f.setEmpID(3L);
+        f.setFoundItemID(4L);
     }
 
     @Test
-    public void getCustomerID() {
-        Long expected = 1L;
-        Long actual = l.getCustomerID();
+    public void getEmpID() {
+        Long expected = 3L;
+        Long actual = f.getEmpID();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that CustomerID " + expected + " -> CustomerID " + actual);
         System.out.println();
     }
 
     @Test
-    public void setCustomerID() {
-        l.setCustomerID(3L);
-        Long expected = 3L;
-        Long actual = l.getCustomerID();
+    public void setEmpID() {
+        f.setEmpID(1L);
+        Long expected = 1L;
+        Long actual = f.getEmpID();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that CustomerID " + expected + " -> CustomerID " + actual);
         System.out.println();
@@ -40,8 +42,8 @@ public class LostItemTest {
 
     @Test
     public void isActive() {
-        boolean expected = true;
-        boolean actual = l.isActive();
+        boolean expected = false;
+        boolean actual = f.isActive();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that Active " + expected + " -> Active " + actual);
         System.out.println();
@@ -49,28 +51,28 @@ public class LostItemTest {
 
     @Test
     public void setActive() {
-        l.setActive(false);
-        boolean expected = false;
-        boolean actual = l.isActive();
+        f.setActive(true);
+        boolean expected = true;
+        boolean actual = f.isActive();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that Active " + expected + " -> Active " + actual);
         System.out.println();
     }
 
     @Test
-    public void getLostItemID() {
-        Long expected = 2L;
-        Long actual = l.getLostItemID();
+    public void getFoundItemID() {
+        Long expected = 4L;
+        Long actual = f.getFoundItemID();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that LostItemID " + expected + " -> LostItemID " + actual);
         System.out.println();
     }
 
     @Test
-    public void setLostItemID() {
-        l.setLostItemID(4L);
-        Long expected = 4L;
-        Long actual = l.getLostItemID();
+    public void setFoundItemID() {
+        f.setFoundItemID(22L);
+        Long expected = 22L;
+        Long actual = f.getFoundItemID();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that LostItemID " + expected + " -> LostItemID " + actual);
         System.out.println();
@@ -78,8 +80,8 @@ public class LostItemTest {
 
     @Test
     public void getCategory() {
-        String expected = "test";
-        String actual = l.getCategory();
+        String expected = "testD";
+        String actual = f.getCategory();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that Category " + expected + " -> Category " + actual);
         System.out.println();
@@ -87,9 +89,9 @@ public class LostItemTest {
 
     @Test
     public void setCategory() {
-        l.setCategory("testingCategory");
-        String expected = "testingCategory";
-        String actual = l.getCategory();
+        f.setCategory("categoryTst");
+        String expected = "categoryTst";
+        String actual = f.getCategory();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that Category " + expected + " -> Category " + actual);
         System.out.println();
@@ -97,8 +99,8 @@ public class LostItemTest {
 
     @Test
     public void getBrand() {
-        String expected = "testB";
-        String actual = l.getBrand();
+        String expected = "testE";
+        String actual = f.getBrand();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that Brand " + expected + " -> Brand " + actual);
         System.out.println();
@@ -106,28 +108,29 @@ public class LostItemTest {
 
     @Test
     public void setBrand() {
-        l.setBrand("testingBrand");
-        String expected = "testingBrand";
-        String actual = l.getBrand();
+        f.setBrand("brdTst");
+        String expected = "brdTst";
+        String actual = f.getBrand();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that Brand " + expected + " -> Brand " + actual);
         System.out.println();
     }
 
     @Test
-    public void getColor() {
-        String expected = "TestC";
-        String actual = l.getColor();
+    public void setColor() {
+        f.setColor("clrTst");
+        String expected = "clrTst";
+        String actual = f.getColor();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that Color " + expected + " -> Color " + actual);
         System.out.println();
+
     }
 
     @Test
-    public void setColor() {
-        l.setColor("testingColor");
-        String expected = "testingColor";
-        String actual = l.getColor();
+    public void getColor() {
+        String expected = "testF";
+        String actual = f.getColor();
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that Color " + expected + " -> Color " + actual);
         System.out.println();
