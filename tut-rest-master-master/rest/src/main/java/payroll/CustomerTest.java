@@ -17,7 +17,6 @@ public class CustomerTest {
 
     @Before
     public void setUp() throws Exception {
-
         c.setCustomerID(1L);
     }
 

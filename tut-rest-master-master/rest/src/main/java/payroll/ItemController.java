@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
-//
-// When a new entity is created, all entity parameters must be fill (!=null) else throw new exception
-//
-
 @RestController
 class ItemController {
 
@@ -28,14 +24,6 @@ class ItemController {
         this.employeeRepo = employeeRepo;
         this.issuedMatchRepo = issuedMatchRepo;
 }
-
-    /**
-     * phoneNumber as string is a problem because:
-     * By default what ever you pass to the controller is treated as String and converted to respective types.
-     * So even default values need to be set as String.
-     * https://stackoverflow.com/questions/47813925/how-to-give-default-value-as-integer-in-requestparam
-     */
-
     /**
      * Employee Post
      * Creates a new employee
@@ -78,7 +66,6 @@ class ItemController {
      * Customer Post
      * Creates a new customer
      */
-
     @PostMapping ("/newCustomer")
     Customer newCustomer (@RequestBody Customer newCustomer) {return customerRepo.save(newCustomer);}
 
@@ -88,7 +75,6 @@ class ItemController {
      * 2. get a single customer by specifying ID
      * 3. get all customers that matches a specific search parameter
      */
-
     @GetMapping("/customers")
     List<Customer> allCustomers() {
         if(customerRepo.findAll().size() > 0){
@@ -119,7 +105,6 @@ class ItemController {
      * FoundItem Post
      * Creates a new found item, and searches through all found items, label active
      */
-
     @PostMapping("/newFoundItem")
     List newFoundItem(@RequestBody FoundItem newFoundItem) {
         newFoundItem.setActive(true);
@@ -127,7 +112,7 @@ class ItemController {
         FoundItem savedFoundItem = foundRepo.save(newFoundItem);
         ArrayList<Match> postMatches = new ArrayList<>();
 
-        for (int i = 0; i < allFoundActive().size(); i++) {
+        for (int i = 0; i < allLostActive().size(); i++) {
             if (savedFoundItem.getCategory().equals(allLostActive().get(i).getCategory())
                     && savedFoundItem.getBrand().equals(allLostActive().get(i).getBrand())
                     && savedFoundItem.getColor().equals(allLostActive().get(i).getColor())
@@ -158,7 +143,6 @@ class ItemController {
      * 4. get a single found item by specifying ID
      * 5. get all found items that matches a specific search parameter
      */
-
     @GetMapping("/foundItems")
     List<FoundItem> allFound(){return foundRepo.findAll();}
 
@@ -202,7 +186,6 @@ class ItemController {
      * LostItem Post
      * Creates a new lost item, and labels it as active and sets its customerID to the current user
      */
-
     @PostMapping("/newLostItem")
     LostItem newItem(@RequestBody LostItem newItem) {
         newItem.setCustomerID(activeCustomer);
@@ -219,7 +202,6 @@ class ItemController {
      * 4. get a single lost item by specifying ID
      * 5. get all lost items that matches a specific search parameter
      */
-
     @GetMapping("/lostItems")
     List<LostItem> allLost() {
         return lostRepo.findAll();
@@ -270,7 +252,6 @@ class ItemController {
      *      these ID's, the ID of the user who matches the lost item and the ID of the active employee
      * 3.   (GetCall) get all issued matches
      */
-
     @GetMapping("/match")
     List<Match> matchLostFound(){
         ArrayList<Match> getMatches = new ArrayList<>();
@@ -351,7 +332,6 @@ class ItemController {
     @PutMapping("/lostItem/{id}")
     LostItem replaceLostItem(@RequestBody LostItem newItem, @PathVariable Long id) {
         return lostRepo.findById(id)
-
                 .map(item -> {
                     if (newItem.getCategory() != null) {
                         item.setCategory(newItem.getCategory());
@@ -372,7 +352,6 @@ class ItemController {
     @PutMapping("/foundItem/{id}")
     FoundItem replaceFoundItem(@RequestBody FoundItem newItem, @PathVariable Long id) {
         return foundRepo.findById(id)
-
                 .map(item -> {
                     if (newItem.getCategory() != null) {
                         item.setCategory(newItem.getCategory());
@@ -415,7 +394,6 @@ class ItemController {
 
     @PutMapping("/employee/{id}")
     Employee replaceEmployeeInfo(@RequestBody Employee newEmployee, @PathVariable Long id) {
-
             return employeeRepo.findById(id)
                     .map(employee -> {
                         if (newEmployee.getFirstName() != null ) {
@@ -461,11 +439,9 @@ class ItemController {
      * allows to delete a lost/found item or a customer/employee,
      * associated with the specified ID
      */
-
     @DeleteMapping("/deleteLostItem/{id}")
     String deleteLostItem(@PathVariable Long id) {
         try {
-
             LostItem tmpLostItem = lostRepo.findById(id).get();
             lostRepo.deleteById(id);
             String s = "Lost item: " + tmpLostItem.getCategory() + ", " + tmpLostItem.getBrand() +
@@ -479,7 +455,6 @@ class ItemController {
     @DeleteMapping("/deleteFoundItem/{id}")
     String deleteFoundItem(@PathVariable Long id) {
         try {
-
             FoundItem tmpFoundItem = foundRepo.findById(id).get();
             foundRepo.deleteById(id);
             String s = "Found item: " + tmpFoundItem.getCategory() + ", " + tmpFoundItem.getBrand() +

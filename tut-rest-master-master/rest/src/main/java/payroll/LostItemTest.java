@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class LostItemTest {
-
     LostItem l = new LostItem(
             "test",
             "testB",

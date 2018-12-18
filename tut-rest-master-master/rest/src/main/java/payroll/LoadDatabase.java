@@ -12,7 +12,6 @@ class LoadDatabase {
     /**
      * hardcoded database for development- & test-purposes when no database is connected to the program
      */
-
 	@Bean
 	CommandLineRunner initDatabase(LostItemRepository lostRepo, FoundItemRepository foundRepo, CustomerRepository customerRepo, EmployeeRepository employeeRepo, IssuedMatchRepository issuedMatchRepo) {
 		return args -> {

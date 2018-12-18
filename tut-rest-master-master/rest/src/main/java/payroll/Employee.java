@@ -21,12 +21,11 @@ public class Employee {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
-
     }
+
     public Long getEmpID() {
         return empID;
     }
-
     public void setEmpID(Long empID) {
         this.empID = empID;
     }
@@ -34,7 +33,6 @@ public class Employee {
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -42,7 +40,6 @@ public class Employee {
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -50,7 +47,6 @@ public class Employee {
     public String getAddress() {
         return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
@@ -58,7 +54,6 @@ public class Employee {
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
@@ -66,7 +61,6 @@ public class Employee {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }

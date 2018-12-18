@@ -25,7 +25,6 @@ class FoundItem {
     public Long getEmpID() {
         return empID;
     }
-
     public void setEmpID(Long empID) {
         this.empID = empID;
     }
@@ -33,7 +32,6 @@ class FoundItem {
     public boolean isActive() {
         return active;
     }
-
     public void setActive(boolean active) {
         this.active = active;
     }
@@ -41,7 +39,6 @@ class FoundItem {
     public Long getFoundItemID() {
         return foundItemID;
     }
-
     public void setFoundItemID(Long foundItemID) {
         this.foundItemID = foundItemID;
     }
@@ -49,7 +46,6 @@ class FoundItem {
     public String getCategory() {
         return category;
     }
-
     public void setCategory(String category) {
         this.category = category;
     }
@@ -57,7 +53,6 @@ class FoundItem {
     public String getBrand() {
         return brand;
     }
-
     public void setBrand(String brand) {
         this.brand = brand;
     }
@@ -65,7 +60,6 @@ class FoundItem {
     public void setColor(String color) {
         this.color = color;
     }
-
     public String getColor() {
         return color;
     }

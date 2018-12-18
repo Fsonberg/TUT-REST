@@ -25,7 +25,6 @@ public class EmployeeTest {
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that " + expected + " -> " + actual);
         System.out.println();
-
     }
 
     @Test
@@ -93,7 +92,6 @@ public class EmployeeTest {
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that " + expected + " -> " + actual);
         System.out.println();
-
     }
 
     @Test
@@ -103,7 +101,6 @@ public class EmployeeTest {
         Assert.assertEquals(expected,actual);
         System.out.println("Testing that " + expected + " -> " + actual);
         System.out.println();
-
     }
 
     @Test

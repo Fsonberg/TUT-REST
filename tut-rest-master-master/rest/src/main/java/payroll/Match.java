@@ -24,7 +24,6 @@ class Match {
     public Long getIssuedMatchID() {
         return issuedMatchID;
     }
-
     public void setIssuedMatchID(Long issuedMatchID) {
         this.issuedMatchID = issuedMatchID;
     }
@@ -32,7 +31,6 @@ class Match {
     public Long getFoundItemID() {
         return foundItemID;
     }
-
     public void setFoundItemID(Long foundItemID) {
         this.foundItemID = foundItemID;
     }
@@ -40,7 +38,6 @@ class Match {
     public Long getLostItemID() {
         return lostItemID;
     }
-
     public void setLostItemID(Long lostItemID) {
         this.lostItemID = lostItemID;
     }
@@ -48,7 +45,6 @@ class Match {
     public Long getCustomerID() {
         return customerID;
     }
-
     public void setCustomerID(Long customerID) {
         this.customerID = customerID;
     }
@@ -56,7 +52,6 @@ class Match {
     public Long getEmpID() {
         return empID;
     }
-
     public void setEmpID(Long empID) {
         this.empID = empID;
     }
