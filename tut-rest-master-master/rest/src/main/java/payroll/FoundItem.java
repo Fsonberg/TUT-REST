@@ -15,10 +15,11 @@ class FoundItem {
     private Long empID;
     private boolean active;
 
-    FoundItem(String category, String brand, String color, boolean active) {
+    FoundItem(String category, String brand, String color, Long empID, boolean active) {
         this.category = category;
         this.brand = brand;
         this.color = color;
+        this.empID = empID;
         this.active = active;
     }
 

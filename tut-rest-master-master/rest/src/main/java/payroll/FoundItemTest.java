@@ -9,6 +9,7 @@ public class FoundItemTest {
             "testD",
             "testE",
             "testF",
+            19l,
             false
     );
 

@@ -9,6 +9,7 @@ public class LostItemTest {
             "test",
             "testB",
             "TestC",
+            13l,
             true
     );
 

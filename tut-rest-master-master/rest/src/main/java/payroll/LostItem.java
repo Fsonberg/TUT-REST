@@ -15,10 +15,11 @@ class LostItem {
 	private Long customerID;
 	private boolean active;
 
-	LostItem(String category, String brand, String color, boolean active) {
+	LostItem(String category, String brand, String color, Long customerID, boolean active) {
 		this.category = category;
 		this.brand = brand;
 		this.color = color;
+		this.customerID = customerID;
 		this.active = active;
 	}
 

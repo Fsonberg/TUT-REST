@@ -15,6 +15,8 @@ class ItemController {
     private final EmployeeRepository employeeRepo;
     private final IssuedMatchRepository issuedMatchRepo;
 
+
+
     ItemController(LostItemRepository lostRepo, FoundItemRepository foundRepo,
                    CustomerRepository customerRepo, EmployeeRepository employeeRepo,
                    IssuedMatchRepository issuedMatchRepo) {
@@ -24,6 +26,7 @@ class ItemController {
         this.employeeRepo = employeeRepo;
         this.issuedMatchRepo = issuedMatchRepo;
 }
+
     /**
      * Employee Post
      * Creates a new employee
@@ -86,6 +89,8 @@ class ItemController {
 
     @GetMapping ("/customer/{id}")
     Customer singleCustomerID (@PathVariable Long id){
+
+
         return customerRepo.findById(id).orElseThrow(()-> new CustomerException(id));
     }
 
@@ -191,6 +196,8 @@ class ItemController {
         newItem.setCustomerID(activeCustomer);
         newItem.setActive(true);
 
+
+
         return lostRepo.save(newItem);
     }
 
@@ -260,9 +267,7 @@ class ItemController {
             for (int j = 0; j <allLostActive().size() ; j++) {
                 if(allFoundActive().get(i).getCategory().equals(allLostActive().get(j).getCategory())
                         && allFoundActive().get(i).getBrand().equals(allLostActive().get(j).getBrand())
-                        && allFoundActive().get(i).getColor().equals(allLostActive().get(j).getColor())
-                        && allFoundActive().get(i).isActive()
-                        && allLostActive().get(j).isActive()){
+                        && allFoundActive().get(i).getColor().equals(allLostActive().get(j).getColor())){
 
                     Match m = new Match(allFoundActive().get(i).getFoundItemID(),
                             allLostActive().get(j).getLostItemID(),
